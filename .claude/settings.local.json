@@ -34,7 +34,8 @@
       "Bash(cat:*)",
       "mcp__playwright__browser_snapshot",
       "Bash(git init:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []
