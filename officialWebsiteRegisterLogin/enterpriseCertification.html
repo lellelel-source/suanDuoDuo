@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业认证 - 算力多多</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="../managementBackendSystem/component/returnbtn.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div class="container mx-auto p-8">
+        <!-- Header -->
+        <div class="flex items-center justify-between pb-4 border-b">
+            <div id="return-button-container"></div>
+            <div class="flex items-center space-x-4">
+                <h1 class="text-2xl font-bold text-gray-800">证件认证</h1>
+            </div>
+            <a href="../customerSystem/console/index.html" class="text-gray-600 hover:text-gray-800">跳过</a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="bg-white mt-8 p-8 rounded-lg shadow-md">
+            <!-- User Info -->
+            <div class="space-y-4">
+                <div class="flex items-center">
+                    <span class="w-32 text-gray-500">用户类型</span>
+                    <span class="text-gray-800 font-semibold">企业用户</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="w-32 text-gray-500">认证状态</span>
+                    <span class="flex items-center text-red-500 font-semibold">
+                        <span class="h-2 w-2 bg-red-500 rounded-full mr-2"></span>
+                        未认证
+                    </span>
+                </div>
+            </div>
+
+            <form id="certification-form" class="mt-8 space-y-8" action="#" method="POST">
+                
+                <!-- Business License Upload -->
+                <div class="upload-section">
+                    <label class="block text-sm font-medium text-gray-700">营业执照</label>
+                    <div class="mt-2 flex space-x-4">
+                        <button type="button" class="scan-btn px-4 py-2 text-sm font-medium text-teal-600 bg-white border border-teal-600 rounded-md">扫码上传</button>
+                        <button type="button" class="local-btn px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md">本地上传</button>
+                    </div>
+                    <div class="scan-content mt-4 p-4 border rounded-md text-center">
+                        <img src="https://via.placeholder.com/150" alt="QR Code" class="mx-auto">
+                        <p class="text-sm text-gray-500 mt-2">请使用微信扫一扫上传 <a href="#" class="text-teal-600">刷新</a></p>
+                    </div>
+                    <div class="local-content mt-4 p-4 border rounded-md text-center hidden">
+                        <p>本地上传功能开发中</p>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">支持图片格式JPG、JPEG和PNG；上传的图片需清晰完整；图片大小不得超过4M</p>
+                </div>
+
+                <!-- Company Info -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="company-name" class="block text-sm font-medium text-gray-700">企业名称</label>
+                        <input id="company-name" name="company-name" type="text" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500" placeholder="请输入企业名称">
+                    </div>
+                    <div>
+                        <label for="credit-code" class="block text-sm font-medium text-gray-700">机构代码</label>
+                        <input id="credit-code" name="credit-code" type="text" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500" placeholder="请输入证件照上的统一社会信用代码">
+                    </div>
+                </div>
+
+                <!-- Legal Person Type -->
+                <div class="flex space-x-4">
+                    <button type="button" class="px-4 py-2 text-sm font-medium text-teal-600 bg-white border border-teal-600 rounded-md">我是法人</button>
+                    <button type="button" class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md">我是法人指定联系人</button>
+                </div>
+
+                <!-- ID Photos Upload -->
+                <div class="upload-section">
+                    <label class="block text-sm font-medium text-gray-700">证件人像面</label>
+                     <div class="mt-2 flex space-x-4">
+                        <button type="button" class="scan-btn px-4 py-2 text-sm font-medium text-teal-600 bg-white border border-teal-600 rounded-md">扫码上传</button>
+                        <button type="button" class="local-btn px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md">本地上传</button>
+                    </div>
+                    <div class="scan-content mt-4 p-4 border rounded-md text-center">
+                        <img src="https://via.placeholder.com/150" alt="QR Code" class="mx-auto">
+                        <p class="text-sm text-gray-500 mt-2">请使用微信扫一扫上传 <a href="#" class="text-teal-600">刷新</a></p>
+                    </div>
+                    <div class="local-content mt-4 p-4 border rounded-md text-center hidden">
+                        <p>本地上传功能开发中</p>
+                    </div>
+                </div>
+                 <div class="upload-section">
+                    <label class="block text-sm font-medium text-gray-700">证件国徽面</label>
+                     <div class="mt-2 flex space-x-4">
+                        <button type="button" class="scan-btn px-4 py-2 text-sm font-medium text-teal-600 bg-white border border-teal-600 rounded-md">扫码上传</button>
+                        <button type="button" class="local-btn px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md">本地上传</button>
+                    </div>
+                    <div class="scan-content mt-4 p-4 border rounded-md text-center">
+                        <img src="https://via.placeholder.com/150" alt="QR Code" class="mx-auto">
+                        <p class="text-sm text-gray-500 mt-2">请使用微信扫一扫上传 <a href="#" class="text-teal-600">刷新</a></p>
+                    </div>
+                    <div class="local-content mt-4 p-4 border rounded-md text-center hidden">
+                        <p>本地上传功能开发中</p>
+                    </div>
+                </div>
+
+                <!-- Legal Person Info -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="legal-name" class="block text-sm font-medium text-gray-700">法人姓名</label>
+                        <input id="legal-name" name="legal-name" type="text" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500" placeholder="请输入法人证件上的真实姓名">
+                    </div>
+                    <div>
+                        <label for="legal-id" class="block text-sm font-medium text-gray-700">法人证件号</label>
+                        <input id="legal-id" name="legal-id" type="text" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500" placeholder="请输入法人身份证号或其他证件号">
+                    </div>
+                    <div>
+                        <label for="nationality" class="block text-sm font-medium text-gray-700">国籍</label>
+                        <select id="nationality" name="nationality" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
+                            <option>China (中国)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="address" class="block text-sm font-medium text-gray-700">地址</label>
+                        <input id="address" name="address" type="text" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500" placeholder="请输入详细地址">
+                    </div>
+                     <div>
+                        <label for="phone" class="block text-sm font-medium text-gray-700">手机号码</label>
+                        <div class="flex items-center">
+                           <input id="phone" name="phone" type="text" value="86-13520841021" readonly class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100">
+                           <button type="button" class="ml-2 px-4 py-2 text-sm font-medium text-teal-600">修改</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Headshot Upload -->
+                <div class="upload-section">
+                    <label class="block text-sm font-medium text-gray-700">法人大头照</label>
+                     <div class="mt-2 flex space-x-4">
+                        <button type="button" class="scan-btn px-4 py-2 text-sm font-medium text-teal-600 bg-white border border-teal-600 rounded-md">扫码上传</button>
+                        <button type="button" class="local-btn px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md">本地上传</button>
+                    </div>
+                    <div class="scan-content mt-4 p-4 border rounded-md text-center">
+                        <img src="https://via.placeholder.com/150" alt="QR Code" class="mx-auto">
+                        <p class="text-sm text-gray-500 mt-2">请使用微信扫一扫上传 <a href="#" class="text-teal-600">刷新</a></p>
+                    </div>
+                    <div class="local-content mt-4 p-4 border rounded-md text-center hidden">
+                        <p>本地上传功能开发中</p>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="flex justify-end">
+                    <button type="submit" class="px-6 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
+                        提交
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Tab switching for upload options
+            const uploadSections = document.querySelectorAll('.upload-section');
+            uploadSections.forEach(section => {
+                const scanBtn = section.querySelector('.scan-btn');
+                const localBtn = section.querySelector('.local-btn');
+                const scanContent = section.querySelector('.scan-content');
+                const localContent = section.querySelector('.local-content');
+
+                scanBtn.addEventListener('click', () => {
+                    scanContent.style.display = 'block';
+                    localContent.style.display = 'none';
+                    scanBtn.classList.add('bg-teal-50', 'text-teal-600');
+                    localBtn.classList.remove('bg-teal-50', 'text-teal-600');
+                });
+
+                localBtn.addEventListener('click', () => {
+                    scanContent.style.display = 'none';
+                    localContent.style.display = 'block';
+                    localBtn.classList.add('bg-teal-50', 'text-teal-600');
+                    scanBtn.classList.remove('bg-teal-50', 'text-teal-600');
+                });
+            });
+
+            // Form submission
+            const form = document.getElementById('certification-form');
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                // Add your form submission logic here
+                alert('表单已提交!');
+            });
+
+            const returnButton = new ReturnButton({
+                text: '返回',
+                href: '../customerSystem/console/index.html'
+            });
+            document.getElementById('return-button-container').innerHTML = returnButton.render();
+        });
+    </script>
+</body>
+</html>

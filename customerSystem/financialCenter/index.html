@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>财务中心 - 算力多多</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        // Custom color configuration for Tailwind CSS
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#2979FF', // Main color
+                        'primary-dark': '#1e66e6',
+                        'primary-light': '#e3f2fd',
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="../component/navigation.js"></script>
+    <script src="../component/top.js"></script>
+    <script src="../component/returnbtn.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', 'sans-serif';
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Style for the active navigation link */
+        .nav-active {
+            background-color: #2979FF; /* primary */
+            color: white;
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-100">
+
+    <div id="app-container" class="h-screen flex flex-col bg-slate-100">
+        <!-- Header and Navigation will be populated by JavaScript -->
+        <div class="flex flex-1 overflow-hidden">
+            <!-- Main Content -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto p-6">
+
+                <!-- Billing Page -->
+                <section id="billing-page" class="page-content">
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                            <h3 class="text-xl font-semibold text-slate-800">财务中心</h3>
+                            <div class="mt-4 md:mt-0 flex space-x-2">
+                                <button id="invoice-btn" class="bg-slate-200 text-slate-700 font-semibold px-4 py-2 rounded-lg text-sm hover:bg-slate-300 transition-colors">发票管理</button>
+                                <a href="topUp.html" class="bg-primary text-white font-semibold px-4 py-2 rounded-lg text-sm hover:bg-primary-dark transition-colors inline-block">充值</a>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 border-t pt-6">
+                            <div class="bg-slate-50 p-4 rounded-lg">
+                                <p class="text-sm text-slate-500">账户余额</p>
+                                <p class="text-2xl font-bold text-slate-800 mt-2">¥ 1,234.56</p>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-lg">
+                                <p class="text-sm text-slate-500">优惠券</p>
+                                <p class="text-2xl font-bold text-slate-800 mt-2">3 <span class="text-base font-normal">张</span></p>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-lg">
+                                <p class="text-sm text-slate-500">本月消费</p>
+                                <p class="text-2xl font-bold text-slate-800 mt-2">¥ 588.00</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-8">
+                            <h4 class="text-lg font-semibold text-slate-800">消费明细</h4>
+                            <div class="flex flex-wrap gap-4 mt-4">
+                                <input type="date" class="border border-slate-300 rounded-md px-3 py-2 text-sm">
+                                <select class="border border-slate-300 rounded-md px-3 py-2 text-sm">
+                                    <option>全部交易类型</option>
+                                    <option>充值</option>
+                                    <option>消费</option>
+                                    <option>退款</option>
+                                </select>
+                                <button class="bg-slate-200 text-slate-700 font-semibold px-4 py-2 rounded-lg text-sm hover:bg-slate-300">查询</button>
+                            </div>
+                        </div>
+
+                        <div class="overflow-x-auto mt-4">
+                            <table class="w-full text-sm text-left text-slate-500">
+                                <thead class="text-xs text-slate-700 uppercase bg-slate-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3">交易时间</th>
+                                        <th scope="col" class="px-6 py-3">交易类型</th>
+                                        <th scope="col" class="px-6 py-3">金额</th>
+                                        <th scope="col" class="px-6 py-3">状态</th>
+                                        <th scope="col" class="px-6 py-3">备注</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="bg-white border-b hover:bg-slate-50">
+                                        <td class="px-6 py-4">2025-08-28 14:30</td>
+                                        <td class="px-6 py-4">消费</td>
+                                        <td class="px-6 py-4 font-semibold text-red-600">- ¥1.79</td>
+                                        <td class="px-6 py-4">成功</td>
+                                        <td class="px-6 py-4">购买实例 (ID: ins-xxxxx)</td>
+                                    </tr>
+                                     <tr class="bg-white border-b hover:bg-slate-50">
+                                        <td class="px-6 py-4">2025-08-27 10:00</td>
+                                        <td class="px-6 py-4">充值</td>
+                                        <td class="px-6 py-4 font-semibold text-green-600">+ ¥1000.00</td>
+                                        <td class="px-6 py-4">成功</td>
+                                        <td class="px-6 py-4">支付宝充值</td>
+                                    </tr>
+                                    <tr class="bg-white border-b hover:bg-slate-50">
+                                        <td class="px-6 py-4">2025-08-26 18:00</td>
+                                        <td class="px-6 py-4">退款</td>
+                                        <td class="px-6 py-4 font-semibold text-green-600">+ ¥50.00</td>
+                                        <td class="px-6 py-4">已到账</td>
+                                        <td class="px-6 py-4">实例释放退款 (ID: ins-yyyyy)</td>
+                                    </tr>
+                                    <tr class="bg-white border-b hover:bg-slate-50">
+                                        <td class="px-6 py-4">2025-08-25 09:15</td>
+                                        <td class="px-6 py-4">消费</td>
+                                        <td class="px-6 py-4 font-semibold text-red-600">- ¥300.00</td>
+                                        <td class="px-6 py-4">成功</td>
+                                        <td class="px-6 py-4">包月实例续费 (ID: ins-zzzzz)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                         <!-- Pagination -->
+                            <div class="mt-6 flex items-center justify-between">
+                                <div class="text-sm text-slate-600">
+                                    显示 <span class="font-medium">1</span> 到 <span class="font-medium">4</span> of <span class="font-medium">4</span> 条结果
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <button class="px-3 py-1 border border-slate-300 rounded-md text-sm text-slate-600 hover:bg-slate-50 disabled:opacity-50" disabled>上一页</button>
+                                    <button class="px-3 py-1 border border-slate-300 rounded-md text-sm text-slate-600 hover:bg-slate-50 disabled:opacity-50" disabled>下一页</button>
+                                </div>
+                            </div>
+                    </div>
+                </section>
+
+                <!-- Invoice Management Section -->
+                <section id="invoice-page" class="page-content hidden">
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                            <div>
+                                <div id="return-button-container"></div>
+                                <h3 class="text-xl font-semibold text-slate-800">发票管理</h3>
+                            </div>
+                            <div class="mt-4 md:mt-0 flex space-x-2">
+                                <button class="bg-primary text-white font-semibold px-4 py-2 rounded-lg text-sm hover:bg-primary-dark transition-colors">申请发票</button>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 border-t pt-6">
+                            <div class="bg-slate-50 p-4 rounded-lg">
+                                <p class="text-sm text-slate-500">已开票金额</p>
+                                <p class="text-2xl font-bold text-slate-800 mt-2">¥ 800.00</p>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-lg">
+                                <p class="text-sm text-slate-500">待开票金额</p>
+                                <p class="text-2xl font-bold text-slate-800 mt-2">¥ 434.56</p>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-lg">
+                                <p class="text-sm text-slate-500">发票张数</p>
+                                <p class="text-2xl font-bold text-slate-800 mt-2">5 <span class="text-base font-normal">张</span></p>
+                            </div>
+                        </div>
+
+                        <div class="mt-8">
+                            <h4 class="text-lg font-semibold text-slate-800">发票记录</h4>
+                            <div class="flex flex-wrap gap-4 mt-4">
+                                <input type="date" class="border border-slate-300 rounded-md px-3 py-2 text-sm">
+                                <select class="border border-slate-300 rounded-md px-3 py-2 text-sm">
+                                    <option>全部状态</option>
+                                    <option>已开票</option>
+                                    <option>开票中</option>
+                                    <option>已拒绝</option>
+                                </select>
+                                <button class="bg-slate-200 text-slate-700 font-semibold px-4 py-2 rounded-lg text-sm hover:bg-slate-300">查询</button>
+                            </div>
+                        </div>
+
+                        <div class="overflow-x-auto mt-4">
+                            <table class="w-full text-sm text-left text-slate-500">
+                                <thead class="text-xs text-slate-700 uppercase bg-slate-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3">申请时间</th>
+                                        <th scope="col" class="px-6 py-3">发票类型</th>
+                                        <th scope="col" class="px-6 py-3">发票金额</th>
+                                        <th scope="col" class="px-6 py-3">状态</th>
+                                        <th scope="col" class="px-6 py-3">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="bg-white border-b hover:bg-slate-50">
+                                        <td class="px-6 py-4">2025-08-25 09:15</td>
+                                        <td class="px-6 py-4">增值税普通发票</td>
+                                        <td class="px-6 py-4 font-semibold">¥300.00</td>
+                                        <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">已开票</span></td>
+                                        <td class="px-6 py-4"><a href="#" class="text-primary hover:underline">下载</a></td>
+                                    </tr>
+                                    <tr class="bg-white border-b hover:bg-slate-50">
+                                        <td class="px-6 py-4">2025-08-20 16:30</td>
+                                        <td class="px-6 py-4">增值税普通发票</td>
+                                        <td class="px-6 py-4 font-semibold">¥500.00</td>
+                                        <td class="px-6 py-4"><span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">开票中</span></td>
+                                        <td class="px-6 py-4">-</td>
+                                    </tr>
+                                    <tr class="bg-white border-b hover:bg-slate-50">
+                                        <td class="px-6 py-4">2025-08-15 11:00</td>
+                                        <td class="px-6 py-4">增值税专用发票</td>
+                                        <td class="px-6 py-4 font-semibold">¥1000.00</td>
+                                        <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">已开票</span></td>
+                                        <td class="px-6 py-4"><a href="#" class="text-primary hover:underline">下载</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Pagination -->
+                        <div class="mt-6 flex items-center justify-between">
+                            <div class="text-sm text-slate-600">
+                                显示 <span class="font-medium">1</span> 到 <span class="font-medium">3</span> of <span class="font-medium">3</span> 条结果
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button class="px-3 py-1 border border-slate-300 rounded-md text-sm text-slate-600 hover:bg-slate-50 disabled:opacity-50" disabled>上一页</button>
+                                <button class="px-3 py-1 border border-slate-300 rounded-md text-sm text-slate-600 hover:bg-slate-50 disabled:opacity-50" disabled>下一页</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <script src="financial.js"></script>
+</body>
+</html>

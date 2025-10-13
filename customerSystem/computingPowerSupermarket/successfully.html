@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创建成功 - 算力多多</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        // Custom color configuration for Tailwind CSS
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#2979FF', // Main color
+                        'primary-dark': '#1e66e6',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', 'sans-serif';
+        }
+    </style>
+</head>
+<body class="bg-slate-100">
+    <div class="min-h-screen flex flex-col items-center justify-center">
+        <div class="bg-white p-12 rounded-lg shadow-lg text-center max-w-md w-full">
+            <svg class="w-16 h-16 text-green-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <h1 class="text-2xl font-bold text-slate-800 mt-4">实例创建任务已提交</h1>
+            <p class="text-slate-600 mt-2">您的实例正在创建中，预计需要1-3分钟。请稍后到资源管理页面查看。</p>
+            <div class="mt-8 space-x-4">
+                <a href="../Resource Management/index.html" class="bg-primary text-white font-semibold px-6 py-2.5 rounded-lg hover:bg-primary-dark transition-colors">查看实例</a>
+                <a href="index.html" class="bg-slate-100 text-slate-700 font-semibold px-6 py-2.5 rounded-lg hover:bg-slate-200 transition-colors">返回超市</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

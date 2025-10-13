@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>算力多多 | 一站式“低门槛、省钱、省心”的算力超市</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Orbitron for Logo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles to extend Tailwind */
+        body {
+            font-family: 'Inter', 'sans-serif';
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Custom class for the new logo font */
+        .logo-font {
+            font-family: 'Orbitron', sans-serif;
+            /* Add a subtle glow effect to the logo */
+            text-shadow: 0 0 8px rgba(37, 99, 235, 0.3);
+        }
+        /* Style for active tab */
+        .tab-active {
+            border-color: #2563eb; /* blue-600 */
+            color: #2563eb;
+            background-color: #eff6ff; /* blue-50 */
+        }
+        /* Smooth scrolling behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* New animated background for hero section */
+        .hero-animated-bg {
+            background: linear-gradient(-45deg, #eff6ff, #dbeafe, #bfdbfe, #93c5fd);
+            background-size: 400% 400%;
+            animation: moveGradient 15s ease infinite;
+        }
+
+        @keyframes moveGradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        /* Custom card shadow */
+        .custom-shadow {
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+        }
+        .custom-shadow:hover {
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -4px rgb(0 0 0 / 0.07);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 border-b border-gray-200">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Updated Logo with artistic font and gradient -->
+            <a href="#" class="text-3xl logo-font font-bold bg-gradient-to-r from-blue-600 to-sky-400 text-transparent bg-clip-text">
+                算力多多
+            </a>
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="#why-us" class="text-gray-600 hover:text-blue-600 transition-colors">为什么选择我们</a>
+                <a href="#products" class="text-gray-600 hover:text-blue-600 transition-colors">产品与服务</a>
+                <a href="#solutions" class="text-gray-600 hover:text-blue-600 transition-colors">行业解决方案</a>
+                <a href="#partners" class="text-gray-600 hover:text-blue-600 transition-colors">生态伙伴</a>
+            </nav>
+                            <div class="hidden md:flex space-x-3">
+                                <a href="../index.html" class="bg-gray-100 text-gray-700 font-semibold px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-200 transition-transform transform hover:scale-105">
+                                    重新选择系统
+                                </a>
+                                <a href="login.html" class="bg-blue-600 text-white font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105">
+                                    登录
+                                </a>
+                                <a href="register.html" class="bg-white text-blue-600 font-semibold px-4 py-2 rounded-lg border border-blue-600 hover:bg-blue-50 transition-transform transform hover:scale-105">
+                                    注册
+                                </a>
+                            </div>
+            <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-gray-600 hover:bg-gray-100">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#why-us" class="block py-2 text-gray-600 hover:text-blue-600">为什么选择我们</a>
+            <a href="#products" class="block py-2 text-gray-600 hover:text-blue-600">产品与服务</a>
+            <a href="#solutions" class="block py-2 text-gray-600 hover:text-blue-600">行业解决方案</a>
+            <a href="#partners" class="block py-2 text-gray-600 hover:text-blue-600">生态伙伴</a>
+            <a href="login.html" class="block py-2 text-gray-600 hover:text-blue-600">登录</a>
+            <a href="register.html" class="block py-2 text-gray-600 hover:text-blue-600">注册</a>
+            <div class="mt-4 flex flex-col space-y-2">
+                <a href="../index.html" class="block w-full text-center bg-gray-100 text-gray-700 font-semibold px-5 py-2 rounded-lg border border-gray-300 hover:bg-gray-200">
+                    重新选择系统
+                </a>
+                <a href="login.html" class="block w-full text-center bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-700">
+                    登录
+                </a>
+                <a href="register.html" class="block w-full text-center bg-white text-blue-600 font-semibold px-5 py-2 rounded-lg border border-blue-600 hover:bg-blue-50">
+                    注册
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-animated-bg pt-20 pb-24 text-center">
+            <div class="container mx-auto px-6">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight">
+                    一站式<span class="text-blue-600">算力超市</span>
+                </h1>
+                <p class="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-gray-600">
+                    为中小企业提供“低门槛、省钱、省心”的算力服务。无需理解复杂底层资源，即可获得价格透明、性能稳定的算力与全方位托管服务。
+                </p>
+                <div class="mt-10">
+                    <a href="#products" class="bg-blue-600 text-white font-semibold px-8 py-4 rounded-lg text-lg hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-lg">
+                        探索产品
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Us Section -->
+        <section id="why-us" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">核心优势与卖点</h2>
+                    <div class="mt-4 flex justify-center gap-2">
+                        <span class="px-3 py-1 rounded-full text-sm bg-blue-100 text-blue-700">低门槛</span>
+                        <span class="px-3 py-1 rounded-full text-sm bg-blue-100 text-blue-700">省钱</span>
+                        <span class="px-3 py-1 rounded-full text-sm bg-blue-100 text-blue-700">省心</span>
+                    </div>
+                    <p class="mt-4 max-w-2xl mx-auto text-gray-600">我们通过技术与服务创新，为您解决算力采购与管理的核心痛点。</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Feature 1 -->
+                    <div class="bg-white p-8 rounded-xl border border-gray-200 custom-shadow transition-shadow duration-300">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 mb-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">统一门户，统一账单</h3>
+                        <p class="text-gray-600">告别多账户、多账单的混乱。在一个平台管理和支付所有云资源、IDC与自建算力，享受统一技术支持和SLA承诺。</p>
+                    </div>
+                    <!-- Feature 2 -->
+                    <div class="bg-white p-8 rounded-xl border border-gray-200 custom-shadow transition-shadow duration-300">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 mb-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M16.2 7.8 11.4 12l4.8 4.2"/><path d="M8 12h3"/></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">智能省钱引擎</h3>
+                        <p class="text-gray-600">我们的核心技术能跨云、跨资源池智能调度任务，结合FinOps优化，可帮助您的算力总成本降低20%以上。</p>
+                    </div>
+                    <!-- Feature 3 -->
+                    <div class="bg-white p-8 rounded-xl border border-gray-200 custom-shadow transition-shadow duration-300">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 mb-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12v-2a4 4 0 0 0-4-4H4"/><path d="M12 12v2a4 4 0 0 1-4 4H4"/><path d="M12 12h2a4 4 0 0 1 4 4v2"/><path d="M12 12h2a4 4 0 0 0 4-4v-2"/></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">全能增值托管</h3>
+                        <p class="text-gray-600">我们不仅提供资源，更提供从运维、MLOps到渲染环境的全托管服务，显著降低您的技术团队门槛和人力成本。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">我们的产品与服务</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-gray-600">我们提供三种灵活的算力服务模式，以满足您不同场景下的业务需求。</p>
+                </div>
+
+                <!-- Tabs -->
+                <div class="flex justify-center mb-10 border-b border-gray-200">
+                    <div class="flex flex-wrap justify-center -mb-px space-x-2 sm:space-x-4">
+                        <button class="product-tab tab-active px-4 py-3 font-semibold text-gray-500 border-b-2 border-transparent rounded-t-lg hover:text-gray-700 hover:border-gray-300" data-tab="cloud">
+                            A. 云算力
+                        </button>
+                        <button class="product-tab px-4 py-3 font-semibold text-gray-500 border-b-2 border-transparent rounded-t-lg hover:text-gray-700 hover:border-gray-300" data-tab="idc">
+                            B. IDC算力
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tab Content -->
+                <div id="product-content">
+                    <!-- Cloud Content -->
+                    <div class="tab-pane" id="cloud">
+                        <div class="text-center mb-8">
+                            <p class="text-lg text-gray-600">为企业客户提供专属云厂商邀请链接，享受新客户返现和专属优惠价格。</p>
+                            <p class="mt-2 text-blue-600 font-semibold">核心优势：通过我们的企业渠道，获得云厂商官方返现和更低价格，无需直接对接销售。</p>
+                        </div>
+                        <div class="grid lg:grid-cols-3 gap-8 mt-8">
+                            <div class="bg-white p-6 rounded-lg border border-gray-200 flex flex-col">
+                                <h4 class="text-lg font-bold text-blue-700">基础邀请服务</h4>
+                                <p class="mt-2 text-sm text-gray-500 flex-grow">初次接触云服务，希望通过官方渠道获得新客户优惠的企业。</p>
+                                <div class="mt-4 mb-4">
+                                    <div class="text-2xl font-bold text-orange-500">15%<span class="text-sm font-normal text-gray-500"> 返现比例</span></div>
+                                    <div class="text-sm text-gray-600 mt-1">主流云厂商通用配置</div>
+                                </div>
+                                <ul class="mt-4 space-y-2 text-gray-700 text-sm">
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 企业资质验证</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 专属邀请链接</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 新客户返现</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 基础技术支持</li>
+                                </ul>
+                                <div class="mt-6">
+                                    <button onclick="window.location.href='register.html'" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                                        申请邀请链接
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="bg-white p-6 rounded-lg border-2 border-blue-600 flex flex-col relative">
+                                <span class="absolute top-0 right-4 -mt-3 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">推荐</span>
+                                <h4 class="text-lg font-bold text-blue-700">企业专享服务</h4>
+                                <p class="mt-2 text-sm text-gray-500 flex-grow">需要更高返现比例和专业云服务咨询的企业客户。</p>
+                                <div class="mt-4 mb-4">
+                                    <div class="text-2xl font-bold text-orange-500">30%<span class="text-sm font-normal text-gray-500"> 返现比例</span></div>
+                                    <div class="text-sm text-gray-600 mt-1">多云厂商+GPU资源</div>
+                                </div>
+                                <ul class="mt-4 space-y-2 text-gray-700 text-sm">
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 企业快速认证</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 多云厂商邀请链接</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 架构优化建议</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 成本管理咨询</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 专属客户经理</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 优先返现处理</li>
+                                </ul>
+                                <div class="mt-6">
+                                    <button onclick="window.location.href='register.html'" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                                        申请专享服务
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="bg-white p-6 rounded-lg border border-gray-200 flex flex-col relative">
+                                <span class="absolute top-0 right-4 -mt-3 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full">最高</span>
+                                <h4 class="text-lg font-bold text-blue-700">集团企业定制</h4>
+                                <p class="mt-2 text-sm text-gray-500 flex-grow">大型集团企业，需要定制化返现方案和全方位云服务支持。</p>
+                                <div class="mt-4 mb-4">
+                                    <div class="text-2xl font-bold text-orange-500">49%<span class="text-sm font-normal text-gray-500"> 返现比例</span></div>
+                                    <div class="text-sm text-gray-600 mt-1">全云厂商+定制方案</div>
+                                </div>
+                                <ul class="mt-4 space-y-2 text-gray-700 text-sm">
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> VIP企业认证通道</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 定制返现方案</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 7×24专属支持</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 合规与安全顾问</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 季度返现结算</li>
+                                </ul>
+                                <div class="mt-6">
+                                    <button onclick="window.location.href='register.html'" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                                        申请定制方案
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- IDC Content -->
+                    <div class="tab-pane hidden" id="idc">
+                         <div class="text-center mb-8">
+                            <p class="text-lg text-gray-600">获取来自顶级数据中心的高性价比物理服务器和网络资源。</p>
+                            <p class="mt-2 text-blue-600 font-semibold">增值服务：提供DDoS防护、CDN、数据库代运维、对象存储等一系列配套服务。</p>
+                        </div>
+                        <div class="grid lg:grid-cols-3 gap-8 mt-8">
+                           <div class="bg-white p-6 rounded-lg border border-gray-200 flex flex-col">
+                                <h4 class="text-lg font-bold text-blue-700">裸金属快交付</h4>
+                                <p class="mt-2 text-sm text-gray-500 flex-grow">需要稳定、高性能物理机进行数据计算或应用托管的客户。</p>
+                                <div class="mt-4 mb-4">
+                                    <div class="text-2xl font-bold text-orange-500">¥0.8<span class="text-sm font-normal text-gray-500">/小时起</span></div>
+                                    <div class="text-sm text-gray-600 mt-1">Intel 8核 32G 配置</div>
+                                </div>
+                                <ul class="mt-4 space-y-2 text-gray-700 text-sm">
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 标准配置CPU/GPU物理服务器</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 48小时内快速交付</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 专属节点</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 包年包月优惠</li>
+                                </ul>
+                                <div class="mt-6">
+                                    <button onclick="window.location.href='register.html'" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                                        立即购买
+                                    </button>
+                                </div>
+                            </div>
+                             <div class="bg-white p-6 rounded-lg border-2 border-blue-600 flex flex-col">
+                                <h4 class="text-lg font-bold text-blue-700">高性能GPU专机</h4>
+                                <p class="mt-2 text-sm text-gray-500 flex-grow">进行AI训练、深度学习等GPU密集型计算的团队。</p>
+                                <div class="mt-4 mb-4">
+                                    <div class="text-2xl font-bold text-orange-500">¥2.5<span class="text-sm font-normal text-gray-500">/小时起</span></div>
+                                    <div class="text-sm text-gray-600 mt-1">Intel 16核 64G + RTX-4090-D GPU</div>
+                                </div>
+                                <ul class="mt-4 space-y-2 text-gray-700 text-sm">
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 独享高端GPU服务器</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 提供基础容器环境</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> NVIDIA-RTX-4090-D GPU</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 按量计费</li>
+                                </ul>
+                                <div class="mt-6">
+                                    <button onclick="window.location.href='register.html'" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                                        立即购买
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="bg-white p-6 rounded-lg border border-gray-200 flex flex-col">
+                                <h4 class="text-lg font-bold text-blue-700">托管旗舰</h4>
+                                <p class="mt-2 text-sm text-gray-500 flex-grow">对硬件、网络、安全有全面托管需求，希望"拎包入住"的客户。</p>
+                                <div class="mt-4 mb-4">
+                                    <div class="text-2xl font-bold text-orange-500">¥4.5<span class="text-sm font-normal text-gray-500">/小时起</span></div>
+                                    <div class="text-sm text-gray-600 mt-1">Intel 32核 128G + 2x RTX-4090-D GPU</div>
+                                </div>
+                                <ul class="mt-4 space-y-2 text-gray-700 text-sm">
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 7×24远程支持</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 4小时备件更换SLA</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 等保合规咨询</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 2x NVIDIA-RTX-4090-D GPU</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 包年包月优惠</li>
+                                </ul>
+                                <div class="mt-6">
+                                    <button onclick="window.location.href='register.html'" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                                        立即购买
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solutions Section -->
+        <section id="solutions" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">为各行业量身打造解决方案</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-gray-600">无论您身处哪个行业，我们都有成熟的解决方案助您成功。</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div class="p-4">
+                        <div class="flex items-center justify-center h-16 w-16 mx-auto rounded-full bg-blue-100 text-blue-600 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/><path d="M12 20a4 4 0 0 0 4-4h-8a4 4 0 0 0 4 4Z"/></svg>
+                        </div>
+                        <h4 class="font-semibold">AI训练与推理</h4>
+                        <p class="text-sm text-gray-500 mt-1">AIGC, 教育科研</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-center h-16 w-16 mx-auto rounded-full bg-blue-100 text-blue-600 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.3 5.4a2 2 0 0 1-2.4 0L2 7"/></svg>
+                        </div>
+                        <h4 class="font-semibold">渲染与多媒体</h4>
+                        <p class="text-sm text-gray-500 mt-1">影视后期, 游戏美术</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-center h-16 w-16 mx-auto rounded-full bg-blue-100 text-blue-600 mb-4">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>
+                        </div>
+                        <h4 class="font-semibold">数据计算/HPC</h4>
+                        <p class="text-sm text-gray-500 mt-1">基因计算, 金融风控</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-center h-16 w-16 mx-auto rounded-full bg-blue-100 text-blue-600 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
+                        </div>
+                        <h4 class="font-semibold">通用计算</h4>
+                        <p class="text-sm text-gray-500 mt-1">SaaS初创, 中小团队</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Partners Section -->
+        <section id="partners" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">生态合作伙伴</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-gray-600">与云厂商、IDC与软硬件伙伴共同打造开放生态。</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 items-center">
+                    <img src="https://logo.clearbit.com/vnet.com" alt="世纪互联" class="mx-auto grayscale hover:grayscale-0 transition h-12 object-contain" onerror="this.src='https://placehold.co/140x60/f0f0f0/333333?text=21Vianet'" />
+                    <img src="https://logo.clearbit.com/hanhoukeji.com" alt="憨猴" class="mx-auto grayscale hover:grayscale-0 transition h-12 object-contain" onerror="this.src='https://placehold.co/140x60/f0f0f0/333333?text=Hanhou'" />
+                    <img src="https://logo.clearbit.com/netnic.com.cn" alt="企商在线" class="mx-auto grayscale hover:grayscale-0 transition h-12 object-contain" onerror="this.src='https://placehold.co/140x60/f0f0f0/333333?text=Qishang'" />
+                    <img src="https://logo.clearbit.com/aliyun.com" alt="阿里云" class="mx-auto grayscale hover:grayscale-0 transition h-12 object-contain" onerror="this.src='https://placehold.co/140x60/f0f0f0/ff6a00?text=Alibaba'" />
+                    <img src="https://logo.clearbit.com/tencentcloud.com" alt="腾讯云" class="mx-auto grayscale hover:grayscale-0 transition h-12 object-contain" onerror="this.src='https://placehold.co/140x60/f0f0f0/0066cc?text=Tencent'" />
+                    <img src="https://logo.clearbit.com/cloudxy.net" alt="祥云科技" class="mx-auto grayscale hover:grayscale-0 transition h-12 object-contain" onerror="this.src='https://placehold.co/140x60/f0f0f0/333333?text=Xiangyun'" />
+                    <img src="https://logo.clearbit.com/huaweicloud.com" alt="华为云" class="mx-auto grayscale hover:grayscale-0 transition h-12 object-contain" onerror="this.src='https://placehold.co/140x60/f0f0f0/cc0000?text=Huawei'" />
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold">算力多多</h3>
+                    <p class="mt-4 text-gray-400">您的一站式算力超市。</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold">导航</h4>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#why-us" class="text-gray-400 hover:text-white">为什么选择我们</a></li>
+                        <li><a href="#products" class="text-gray-400 hover:text-white">产品与服务</a></li>
+                        <li><a href="#solutions" class="text-gray-400 hover:text-white">行业解决方案</a></li>
+                        <li><a href="login.html" class="text-gray-400 hover:text-white">登录</a></li>
+                        <li><a href="register.html" class="text-gray-400 hover:text-white">注册</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold">法律</h4>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">隐私政策</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">服务条款</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold">联系我们</h4>
+                    <ul class="mt-4 space-y-2">
+                        <li class="text-gray-400">Email: contact@suanduoduo.com</li>
+                        <li class="text-gray-400">电话: 400-123-4567</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-800 pt-8 text-center text-gray-500">
+                &copy; 2024 算力多多. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for tab functionality
+        const tabs = document.querySelectorAll('.product-tab');
+        const panes = document.querySelectorAll('.tab-pane');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetId = tab.getAttribute('data-tab');
+
+                // Deactivate all tabs and panes
+                tabs.forEach(t => t.classList.remove('tab-active'));
+                panes.forEach(p => p.classList.add('hidden'));
+
+                // Activate clicked tab and corresponding pane
+                tab.classList.add('tab-active');
+                document.getElementById(targetId).classList.remove('hidden');
+            });
+        });
+
+        // JavaScript for mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when a link is clicked
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+
+    </script>
+</body>
+</html>

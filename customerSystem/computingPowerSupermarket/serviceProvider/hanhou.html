@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8卡H-100整机 - 服务商一</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2979FF',
+                        'primary-dark': '#1e66e6',
+                        'primary-light': '#e3f2fd'
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        body { font-family: 'Inter', 'sans-serif'; }
+        .price-badge::before { content: '￥'; }
+    </style>
+    <script src="../../component/top.js"></script>
+    <script src="../../component/returnbtn.js"></script>
+</head>
+<body class="bg-slate-100 text-slate-800">
+    <div id="app-container" class="h-screen flex flex-col bg-slate-100">
+        <div class="flex-1 overflow-x-hidden overflow-y-auto">
+            <div class="max-w-6xl mx-auto p-6">
+                <div class="mb-6" id="return-slot">
+                </div>
+
+        <div class="bg-white rounded-lg shadow p-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                    <img src="https://placehold.co/420x220/eff6ff/1e40af?text=H100+Server" alt="8卡H-100整机" class="w-full rounded border bg-slate-50 object-cover">
+                </div>
+                <div class="md:col-span-2 flex flex-col">
+                    <h1 class="text-2xl font-bold mb-2">8卡H-100整机</h1>
+                    <div class="text-sm text-slate-700 whitespace-pre-line mb-3">
+【GPU】 H100\n【CPU】 8558\n【内存】 2048G
+                    </div>
+                    <div class="text-sm text-slate-600">
+                        支持在线创建模型训练、模型推理任务及开发调测环境，支持多种内置AI框架（Tensorflow/Mindspore/Pytorch等）及自定义框架。
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="md:col-span-2">
+                    <div class="border rounded-lg">
+                        <div class="flex items-center justify-between px-4 py-3 border-b bg-slate-50 rounded-t-lg">
+                            <div class="flex items-center space-x-2">
+                                <input id="plan-radio" type="radio" checked class="text-primary">
+                                <label for="plan-radio" class="text-slate-800 font-medium">8卡H-100整机</label>
+                            </div>
+                            <div class="text-primary text-sm font-semibold">
+                                <span class="price-badge" id="unit-price">78000</span>
+                                <span class="text-slate-500 font-normal"> 元/月</span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="text-sm text-slate-600 space-y-2">
+                                <div>
+                                    <span class="text-slate-500">适用范围：</span>支持在线创建模型训练、模型推理任务及开发调测环境；支持多种AI框架（Tensorflow/Mindspore/Pytorch等）及自定义框架。
+                                </div>
+                                <div>
+                                    <span class="text-slate-500">描述：</span>免费试用：提供最小型环境用于体验与验证。配置参考：GPU H100 8卡，CPU 32核，内存64G，支持容器化部署与快速启用，满足通用研发和推理需求。
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <div class="text-sm font-semibold text-slate-700 mb-2">订购周期：</div>
+                        <div id="months" class="grid grid-cols-6 gap-2">
+                            <button data-month="1" class="month-btn px-3 py-2 border rounded text-sm hover:border-primary">1月</button>
+                            <button data-month="2" class="month-btn px-3 py-2 border rounded text-sm hover:border-primary">2月</button>
+                            <button data-month="3" class="month-btn px-3 py-2 border rounded text-sm hover:border-primary">3月</button>
+                            <button data-month="4" class="month-btn px-3 py-2 border rounded text-sm hover:border-primary">4月</button>
+                            <button data-month="5" class="month-btn px-3 py-2 border rounded text-sm hover:border-primary">5月</button>
+                            <button data-month="6" class="month-btn px-3 py-2 border rounded text-sm hover:border-primary">6月</button>
+                            <button data-month="7" class="month-btn px-3 py-2 border rounded text-sm hover:border-primary">7月</button>
+                            <button data-month="8" class="month-btn px-3 py-2 border rounded text-sm hover:border-primary">8月</button>
+                            <button data-month="9" class="month-btn px-3 py-2 border rounded text-sm hover:border-primary">9月</button>
+                            <button data-month="10" class="month-btn px-3 py-2 border rounded text-sm hover:border-primary">10月</button>
+                            <button data-month="11" class="month-btn px-3 py-2 border rounded text-sm hover:border-primary">11月</button>
+                            <button data-month="12" class="month-btn px-3 py-2 border rounded text-sm hover:border-primary">12月</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-1">
+                    <div class="border rounded-lg p-4 bg-slate-50">
+                        <div class="text-sm text-slate-500">计费项</div>
+                        <div class="font-semibold text-slate-800 mt-1">8卡H-100整机</div>
+                        <div class="flex items-center justify-between mt-4">
+                            <div class="text-sm text-slate-500">单价</div>
+                            <div class="text-slate-900 font-semibold"><span class="price-badge">78000</span> <span class="text-sm text-slate-500">/月</span></div>
+                        </div>
+                        <div class="flex items-center justify-between mt-2">
+                            <div class="text-sm text-slate-500">周期</div>
+                            <div id="summary-months" class="text-slate-900 font-semibold">12 月</div>
+                        </div>
+                        <div class="mt-4 border-t"></div>
+                        <div class="flex items-center justify-between mt-4">
+                            <div class="text-sm text-slate-500">售价</div>
+                            <div id="total-price" class="text-primary text-xl font-bold">￥936,000.00</div>
+                        </div>
+                        <div class="flex items-center justify-between mt-2">
+                            <div class="text-sm text-slate-500">续费价</div>
+                            <div id="renew-price" class="text-slate-900 font-semibold">￥936,000.00</div>
+                        </div>
+
+                        <div class="mt-6 flex items-center space-x-3">
+                            <button id="btn-cart" class="flex-1 bg-slate-700 hover:bg-slate-800 text-white text-sm font-semibold px-4 py-2 rounded">加入购物车</button>
+                            <a href="../orderDetailsPage/pendingPayment.html" class="flex-1 text-center bg-primary hover:bg-primary-dark text-white text-sm font-semibold px-4 py-2 rounded">立即购买</a>
+                            <button id="btn-consult" class="flex-1 border border-primary text-primary hover:bg-primary-light text-sm font-semibold px-4 py-2 rounded">申请留资</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10">
+                <details class="bg-white">
+                    <summary class="cursor-pointer select-none text-sm text-primary">详情</summary>
+                    <div class="mt-4 text-sm text-slate-700 space-y-2">
+                        <div class="text-slate-900 font-medium">产品名称：8卡H-100整机</div>
+                        <div class="text-slate-900 font-medium">免费试用：</div>
+                        <p>提供最小体验环境：GPU H100 8卡，CPU 32核，内存64G，适合模型调测与框架验证。</p>
+                        <div class="text-slate-900 font-medium">单机-按年起租 N-H-100（￥78000 元/月）</div>
+                        <ol class="list-decimal pl-6 space-y-1">
+                            <li>支持在线创建模型训练、模型推理任务及开发调测环境。</li>
+                            <li>支持多种AI框架（Tensorflow/Mindspore/Pytorch等）及自定义框架。</li>
+                            <li>容器化交付，快速启用，稳定可靠。</li>
+                        </ol>
+                    </div>
+                </details>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            // Init top header
+            const appContainer = document.getElementById('app-container');
+            if (window.TopHeader && appContainer) {
+                const topHeader = new TopHeader();
+                topHeader.init(appContainer);
+            }
+            // Render return button
+            const returnSlot = document.getElementById('return-slot');
+            if (window.ReturnButton && returnSlot) {
+                const back = new ReturnButton({ text: '返回算力超市', href: '../index.html' });
+                returnSlot.insertAdjacentHTML('beforeend', back.render());
+            }
+            const BASE_PRICE = 78000; // 元/每月
+            const monthButtons = Array.from(document.querySelectorAll('.month-btn'));
+            const summaryMonths = document.getElementById('summary-months');
+            const totalPriceEl = document.getElementById('total-price');
+            const renewPriceEl = document.getElementById('renew-price');
+
+            let selectedMonths = 12;
+
+            function formatCNY(value) {
+                return '￥' + value.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            }
+
+            function updateSummary() {
+                const total = BASE_PRICE * selectedMonths;
+                summaryMonths.textContent = selectedMonths + ' 月';
+                totalPriceEl.textContent = formatCNY(total);
+                renewPriceEl.textContent = formatCNY(total);
+            }
+
+            function setActive(btn) {
+                monthButtons.forEach(b => b.classList.remove('border-primary', 'bg-primary', 'text-white'));
+                btn.classList.add('border-primary', 'bg-primary', 'text-white');
+            }
+
+            monthButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    selectedMonths = parseInt(btn.dataset.month, 10);
+                    setActive(btn);
+                    updateSummary();
+                });
+            });
+
+            // Initialize default state: 12 months active
+            const defaultBtn = monthButtons.find(b => b.dataset.month === '12');
+            if (defaultBtn) setActive(defaultBtn);
+            updateSummary();
+
+            // Basic demo handlers
+            document.getElementById('btn-cart').addEventListener('click', () => {
+                alert('已加入购物车');
+            });
+            document.getElementById('btn-consult').addEventListener('click', () => {
+                alert('已提交留资申请');
+            });
+        })();
+    </script>
+</body>
+</html>
+

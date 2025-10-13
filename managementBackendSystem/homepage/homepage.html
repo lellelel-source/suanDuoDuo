@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理后台 - 算力多多</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js for dropdowns -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        // Custom color configuration for Tailwind CSS
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#2979FF', // Main color
+                        'primary-dark': '#1e66e6',
+                        'primary-light': '#e3f2fd',
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="../component/navigation.js"></script>
+    <script src="../component/top.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', 'sans-serif';
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .nav-active {
+            background-color: #2979FF; /* primary */
+            color: white;
+        }
+         .nav-active svg {
+            color: white;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class="bg-slate-100">
+
+    <div id="app-container" class="h-screen flex bg-slate-100">
+        <!-- Sidebar -->
+        <!-- Populated by navigation.js -->
+        
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Top Header -->
+            <!-- Populated by top.js -->
+
+            <!-- Main Content -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto p-6">
+                <div class="container mx-auto">
+                    <h1 class="text-2xl font-semibold text-slate-800 mb-6">数据看板</h1>
+
+                    <!-- Stats Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h3 class="text-sm font-medium text-slate-500">总用户数</h3>
+                            <p class="mt-2 text-3xl font-bold text-slate-800">1,280</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h3 class="text-sm font-medium text-slate-500">今日新增</h3>
+                            <p class="mt-2 text-3xl font-bold text-slate-800">15</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h3 class="text-sm font-medium text-slate-500">总订单数</h3>
+                            <p class="mt-2 text-3xl font-bold text-slate-800">5,430</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h3 class="text-sm font-medium text-slate-500">今日交易额</h3>
+                            <p class="mt-2 text-3xl font-bold text-slate-800">¥ 89,400</p>
+                        </div>
+                    </div>
+
+                    <!-- Charts Section -->
+                    <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h3 class="text-lg font-semibold text-slate-700">用户增长趋势</h3>
+                             <div class="h-64 mt-4 bg-slate-200 rounded animate-pulse"></div>
+                        </div>
+                         <div class="bg-white p-6 rounded-lg shadow">
+                            <h3 class="text-lg font-semibold text-slate-700">订单状态分布</h3>
+                             <div class="h-64 mt-4 bg-slate-200 rounded animate-pulse"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const appContainer = document.getElementById('app-container');
+            const mainContentContainer = appContainer.querySelector('.flex-1.flex-col');
+            
+            // Initialize Navigation
+            const navigation = new SuanduoNavigation({ activePage: 'dashboard' });
+            navigation.init(appContainer);
+            
+            // Initialize Top Header
+            const header = new TopHeader();
+            header.init(mainContentContainer);
+
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>子账户管理 - 算力多多</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        // Custom color configuration for Tailwind CSS
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#2979FF', // Main color
+                        'primary-dark': '#1e66e6',
+                        'primary-light': '#e3f2fd',
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="../component/navigation.js"></script>
+    <script src="../component/top.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', 'sans-serif';
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .nav-active {
+            background-color: #2979FF;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-slate-100">
+    <div id="app-container" class="h-screen flex flex-col bg-slate-100">
+        <div class="flex flex-1 overflow-hidden">
+            <main class="flex-1 overflow-x-hidden overflow-y-auto p-6">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold text-slate-800 mb-4">子账户管理</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Cloud providers list -->
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const appContainer = document.getElementById('app-container');
+            if (window.TopHeader && appContainer) {
+                new TopHeader().init(appContainer);
+            }
+
+            const contentContainer = document.querySelector('.flex.flex-1.overflow-hidden');
+            if (window.SuanduoNavigation && contentContainer) {
+                new SuanduoNavigation({ activePage: 'sub-account' }).init(contentContainer);
+            }
+
+            const providers = [
+                { name: '阿里云', url: 'https://www.aliyun.com/', account: 'user_aliyun', password: 'password_aliyun' },
+                { name: '华为云', url: 'https://www.huaweicloud.com/', account: 'user_huawei', password: 'password_huawei' },
+                { name: '腾讯云', url: 'https://cloud.tencent.com/', account: 'user_tencent', password: 'password_tencent' },
+                { name: '火山云', url: 'https://www.volcengine.com/', account: 'user_volcengine', password: 'password_volcengine' },
+                { name: '并行科技', url: 'https://www.paratera.com/', account: 'user_paratera', password: 'password_paratera' },
+                { name: '福石投资', url: 'https://www.fushitouzi.com/', account: 'user_fushi', password: 'password_fushi' }
+            ];
+
+            const container = document.querySelector('.grid');
+            providers.forEach(provider => {
+                const card = `
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                        <h4 class="font-semibold text-slate-800">${provider.name}</h4>
+                        <a href="${provider.url}" target="_blank" class="text-sm text-primary hover:underline">${provider.url}</a>
+                        <div class="mt-2 text-sm">
+                            <p><span class="font-medium text-slate-600">账号:</span> ${provider.account}</p>
+                            <p><span class="font-medium text-slate-600">密码:</span> ${provider.password}</p>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += card;
+            });
+        });
+    </script>
+</body>
+</html>

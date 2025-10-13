@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>控制台 - 算力多多</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        // Custom color configuration for Tailwind CSS
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#2979FF', // Main color
+                        'primary-dark': '#1e66e6',
+                        'primary-light': '#e3f2fd',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Include the navigation component -->
+    <script src="../component/navigation.js"></script>
+    <script src="../component/top.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', 'sans-serif';
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Style for the active navigation link */
+        .nav-active {
+            background-color: #2979FF; /* primary */
+            color: white;
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+    </style>
+</head>
+<body class="bg-slate-100">
+
+    <div id="app-container" class="h-screen flex flex-col bg-slate-100">
+        <!-- Header and Navigation will be populated by JavaScript -->
+
+        <div class="flex flex-1 overflow-hidden">
+            <!-- Content Area -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto p-6">
+                
+                <!-- Dashboard Page -->
+                <section id="dashboard-page" class="page-content">
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Left Column -->
+                        <div class="lg:col-span-2 space-y-6">
+                            <div class="bg-white p-6 rounded-lg shadow">
+                                <h3 class="font-semibold text-slate-800">待处理事项</h3>
+                                <div class="grid grid-cols-3 gap-4 mt-4 text-center">
+                                    <div>
+                                        <p class="text-2xl font-bold text-slate-800">0</p>
+                                        <p class="text-sm text-slate-500 mt-1">待获取密钥</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-2xl font-bold text-slate-800">0</p>
+                                        <p class="text-sm text-slate-500 mt-1">待支付订单</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-2xl font-bold text-slate-800">0</p>
+                                        <p class="text-sm text-slate-500 mt-1">待下载发票</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white p-6 rounded-lg shadow">
+                                <h3 class="font-semibold text-slate-800">资源概览</h3>
+                                 <div class="h-48 mt-4 flex items-center justify-center text-slate-400 border-2 border-dashed border-slate-200 rounded-lg">
+                                    <p>暂无收藏资源，快去<a href="../computingPowerSupermarket/index.html" class="text-primary hover:underline">购买算力</a>吧！</p>
+                                </div>
+                            </div>
+                            <div class="bg-white p-6 rounded-lg shadow">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-semibold text-slate-800">消费明细</h3>
+                                    <a href="#billing" class="text-sm text-primary hover:underline">更多 ></a>
+                                </div>
+                                <div class="h-64 mt-4 bg-slate-50 rounded flex items-center justify-center text-slate-500">
+                                    <!-- Placeholder for chart -->
+                                    消费趋势图区域
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Right Column -->
+                        <div class="space-y-6">
+                            
+                            <div class="bg-white p-6 rounded-lg shadow">
+                                <div class="space-y-2">
+                                    <div class="flex justify-between text-sm">
+                                        <span class="text-slate-500">账户可用余额</span>
+                                        <span class="font-semibold text-slate-800">¥ 0.00</span>
+                                    </div>
+                                    <div class="flex justify-between text-sm">
+                                        <span class="text-slate-500">优惠券余额</span>
+                                        <span class="font-semibold text-slate-800">¥ 0.00</span>
+                                    </div>
+                                </div>
+                                <a href="../financialCenter/topUp.html" class="mt-4 w-full block text-center bg-primary text-white font-semibold py-2.5 rounded-lg hover:bg-primary-dark transition-colors">
+                                    立即充值
+                                </a>
+                            </div>
+                            
+                            <!-- Recharge Promotion -->
+                            <div class="bg-white p-6 rounded-lg shadow">
+                                <h3 class="font-semibold text-slate-800 border-b pb-3 mb-4">充值优惠</h3>
+                                <div class="space-y-3 text-sm">
+                                    <p class="text-slate-600">限时活动：充值越多，赠送越多！</p>
+                                    <div class="flex justify-between items-center p-2 bg-primary-light rounded-md">
+                                        <span class="text-primary font-semibold">充 ¥1,000</span>
+                                        <span class="text-slate-700">赠送 <span class="font-bold text-orange-500">¥100</span></span>
+                                    </div>
+                                    <div class="flex justify-between items-center p-2 bg-primary-light rounded-md">
+                                        <span class="text-primary font-semibold">充 ¥5,000</span>
+                                        <span class="text-slate-700">赠送 <span class="font-bold text-orange-500">¥600</span></span>
+                                    </div>
+                                    <div class="flex justify-between items-center p-2 bg-primary-light rounded-md">
+                                        <span class="text-primary font-semibold">充 ¥10,000</span>
+                                        <span class="text-slate-700">赠送 <span class="font-bold text-orange-500">¥1,500</span></span>
+                                    </div>
+                                    <p class="text-xs text-slate-400 pt-2">* 赠送金额将发放到您的优惠券余额中。</p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <script src="console.js"></script>
+</body>
+</html>

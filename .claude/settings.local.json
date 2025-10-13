@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/pc/.codex/**)",
+      "Bash(node --version)",
+      "Bash(codex --version)",
+      "Bash(test -f ~/.codex/auth.json)",
+      "Read(//c/Users/pc/**)",
+      "Bash(echo $PATH)",
+      "Read(//c/nvm4w/nodejs/**)",
+      "Bash(sudo mkdir -p /usr/local/bin)",
+      "Bash(sudo ln -sf /c/nvm4w/nodejs/claude /usr/local/bin/claude)",
+      "Bash(/usr/local/bin/claude --version)",
+      "Bash(chmod +x /usr/local/bin/claude)",
+      "Bash(/c/nvm4w/nodejs/node --version)",
+      "Bash(/c/nvm4w/nodejs/node /c/nvm4w/nodejs/node_modules/@anthropic-ai/claude-code/cli.js --version)",
+      "Bash(claude --version)",
+      "Bash(cat /usr/local/bin/claude)",
+      "Bash(wsl ls /usr/local/bin/claude)",
+      "Bash(wsl which node)",
+      "Bash(wsl bash -c 'sudo mkdir -p /usr/local/bin')",
+      "Bash(wsl bash -c 'sudo bash -c \"\"cat > /usr/local/bin/claude\"\" << ''''EOF''''\n#!/bin/bash\n/mnt/c/nvm4w/nodejs/node /mnt/c/nvm4w/nodejs/node_modules/@anthropic-ai/claude-code/cli.js \"\"$@\"\"\nEOF')",
+      "Bash(wsl bash -c 'sudo chmod +x /usr/local/bin/claude')",
+      "Bash(wsl /usr/local/bin/claude --version)",
+      "Bash(wsl ls -la /mnt/c/nvm4w/nodejs/node)",
+      "WebSearch",
+      "WebFetch(domain:brandfetch.com)",
+      "WebFetch(domain:commons.wikimedia.org)",
+      "Bash(npm --version)",
+      "Bash(claude mcp:*)",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_click",
+      "Bash(mv:*)",
+      "Bash(cat:*)",
+      "mcp__playwright__browser_snapshot",
+      "Bash(git init:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

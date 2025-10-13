@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>充值 - 财务中心 - 算力多多</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        // Custom color configuration for Tailwind CSS
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#2979FF', // Main color
+                        'primary-dark': '#1e66e6',
+                        'primary-light': '#e3f2fd',
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="../component/returnbtn.js"></script>
+    <script src="../component/top.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', 'sans-serif';
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Style for the active navigation link */
+        .nav-active {
+            background-color: #2979FF; /* primary */
+            color: white;
+        }
+        /* Style for the active tab */
+        .recharge-tab-active {
+            border-bottom-color: #2979FF;
+            color: #2979FF;
+        }
+        /* Style for selected amount card */
+        .recharge-amount-selected {
+            border-color: #2979FF;
+            background-color: #e3f2fd;
+        }
+        /* Style for selected payment method */
+        .payment-method-selected {
+            border-color: #2979FF;
+            background-color: #e3f2fd;
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-100">
+
+    <div class="flex h-screen bg-slate-100">
+        <!-- Navigation will be populated by JavaScript -->
+
+        <!-- Main Content -->
+        <div id="main-content-container" class="flex-1 flex flex-col overflow-hidden">
+            <!-- Header for Main Content -->
+
+            <!-- Content Area -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto p-6">
+                <div id="return-btn-container" class="mb-6"></div>
+                <!-- Billing Page -->
+                <section id="billing-page" class="page-content">
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <!-- Tab Navigation -->
+                        <div class="border-b border-slate-200">
+                            <nav class="-mb-px flex space-x-8">
+                                <a href="#" id="online-tab" class="recharge-tab py-2 px-1 border-b-2 border-primary text-primary font-medium text-sm">
+                                    线上充值
+                                </a>
+                                <a href="#" id="offline-tab" class="recharge-tab py-2 px-1 border-b-2 border-transparent text-slate-500 hover:text-slate-700 font-medium text-sm">
+                                    线下汇款
+                                </a>
+                            </nav>
+                        </div>
+
+        <!-- Online Recharge Content -->
+        <div id="online-content" class="recharge-content mt-6">
+            <!-- Alert -->
+            <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-blue-700">
+                            <strong>温馨提示</strong><br>
+                            建议采用在线充值，即时到账。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recharge Amount Selection -->
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-slate-700 mb-4">充值金额(¥)</label>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-4">
+                    <div class="recharge-amount-card border-2 border-slate-200 rounded-lg p-4 text-center cursor-pointer hover:border-primary transition-colors" data-amount="100">
+                        <div class="text-lg font-bold text-slate-800">¥ 5000 <span class="text-sm font-normal">元</span></div>
+                        <div class="bg-orange-100 text-orange-600 text-xs font-medium px-2 py-1 rounded mt-2">送 5000</div>
+                    </div>
+                    <div class="recharge-amount-card border-2 border-primary rounded-lg p-4 text-center cursor-pointer bg-orange-50 relative" data-amount="500">
+                        <div class="absolute -top-2 -right-2 bg-orange-400 text-white text-xs px-2 py-1 rounded transform rotate-12">推荐</div>
+                        <div class="text-lg font-bold text-slate-800">¥ 10000 <span class="text-sm font-normal">元</span></div>
+                        <div class="bg-orange-100 text-orange-600 text-xs font-medium px-2 py-1 rounded mt-2">送 10000</div>
+                    </div>
+                    <div class="recharge-amount-card border-2 border-slate-200 rounded-lg p-4 text-center cursor-pointer hover:border-primary transition-colors" data-amount="1000">
+                        <div class="text-lg font-bold text-slate-800">¥ 50000 <span class="text-sm font-normal">元</span></div>
+                        <div class="bg-orange-100 text-orange-600 text-xs font-medium px-2 py-1 rounded mt-2">送 50000</div>
+                    </div>
+                    <div class="recharge-amount-card border-2 border-slate-200 rounded-lg p-4 text-center cursor-pointer hover:border-primary transition-colors" data-amount="5000">
+                        <div class="text-lg font-bold text-slate-800">¥ 100000 <span class="text-sm font-normal">元</span></div>
+                        <div class="bg-orange-100 text-orange-600 text-xs font-medium px-2 py-1 rounded mt-2">送 100000</div>
+                    </div>
+                    <div class="recharge-amount-card border-2 border-slate-200 rounded-lg p-4 text-center cursor-pointer hover:border-primary transition-colors" data-amount="10000">
+                        <div class="text-lg font-bold text-slate-800">¥ 500000 <span class="text-sm font-normal">元</span></div>
+                        <div class="bg-orange-100 text-orange-600 text-xs font-medium px-2 py-1 rounded mt-2">送 500000</div>
+                    </div>
+                </div>
+
+                <!-- Custom Amount Input -->
+                <div class="flex items-center space-x-2">
+                    <input type="number" id="custom-amount" placeholder="500" class="flex-1 max-w-xs border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary">
+                    <span class="text-sm text-slate-500">元</span>
+                    <span class="text-sm text-orange-600">系统会送 <span id="bonus-amount">10000</span> 元优惠券</span>
+                </div>
+                <p class="text-xs text-slate-400 mt-2">
+                    充值后余额和赠送的优惠券会存入您的账户，优惠券可用于算力消费。
+                    <a href="#" class="text-primary hover:underline">活动规则</a>
+                </p>
+            </div>
+
+            <!-- Payment Method -->
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-slate-700 mb-4">支付方式</label>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <!-- Alipay -->
+                    <div class="payment-method border-2 border-primary rounded-lg p-4 flex justify-between items-center cursor-pointer bg-blue-50" data-method="alipay" data-name="支付宝">
+                        <div>
+                            <p class="font-medium text-slate-800">支付宝充值</p>
+                            <p class="text-xs text-slate-500 mt-1">实时到账</p>
+                            <p class="text-xs text-slate-500">不支持信用卡</p>
+                        </div>
+                        <div class="flex-shrink-0 w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center text-white font-bold text-lg">
+                            支
+                        </div>
+                    </div>
+
+                    <!-- UnionPay -->
+                    <div class="payment-method border-2 border-slate-200 rounded-lg p-4 flex justify-between items-center cursor-pointer hover:border-primary" data-method="unionpay" data-name="银联在线支付">
+                        <div>
+                            <p class="font-medium text-slate-800">银联在线支付</p>
+                            <p class="text-xs text-slate-500 mt-1">实时到账</p>
+                            <p class="text-xs text-slate-500">不支持信用卡</p>
+                        </div>
+                        <div class="flex-shrink-0 w-10 h-10 bg-red-500 rounded-lg flex items-center justify-center text-white font-bold text-xs">
+                            银联
+                        </div>
+                    </div>
+                    
+                    <!-- Personal Online Banking -->
+                    <div class="payment-method border-2 border-slate-200 rounded-lg p-4 flex justify-between items-center cursor-pointer hover:border-primary" data-method="personal_bank" data-name="个人网银">
+                        <div>
+                            <p class="font-medium text-slate-800">个人网银</p>
+                            <p class="text-xs text-slate-500 mt-1">实时到账</p>
+                            <p class="text-xs text-slate-500">不支持信用卡</p>
+                        </div>
+                        <div class="flex-shrink-0 w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center text-white">
+                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>
+                        </div>
+                    </div>
+
+                    <!-- Corporate Online Banking -->
+                    <div class="payment-method border-2 border-slate-200 rounded-lg p-4 flex justify-between items-center cursor-pointer hover:border-primary" data-method="corporate_bank" data-name="企业网银">
+                        <div>
+                            <p class="font-medium text-slate-800">企业网银</p>
+                            <p class="text-xs text-slate-500 mt-1">实时到账</p>
+                            <p class="text-xs text-slate-500">需准备客户识别号</p>
+                        </div>
+                        <div class="flex-shrink-0 w-10 h-10 bg-indigo-500 rounded-lg flex items-center justify-center text-white">
+                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5h1.586a1 1 0 01.707.293l2.414 2.414a1 1 0 001.414 0l2.414-2.414a1 1 0 01.707-.293H17v5m-5 0v-5a1 1 0 011-1h2a1 1 0 011 1v5m-5 0h-2" /></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="flex justify-center">
+                <button id="recharge-btn" class="bg-slate-600 text-white font-semibold px-8 py-3 rounded-lg hover:bg-slate-700 transition-colors">
+                    立即充值
+                </button>
+            </div>
+            <p class="text-center text-xs text-red-500 mt-2">当前账户未实名认证，完成认证，即可立即充值</p>
+        </div>
+
+        <!-- Offline Transfer Content -->
+        <div id="offline-content" class="recharge-content mt-6 hidden">
+            <!-- Alert -->
+            <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-blue-700">
+                            <strong>温馨提示</strong><br>
+                            建议采用在线充值，即时到账。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-sm text-slate-600 mb-6">
+                除线上充值的方式外，您还可以通过银行汇款的方式进行充值，以下是具体信息：
+            </p>
+
+            <!-- Bank Transfer Information -->
+            <div class="bg-slate-50 rounded-lg p-6">
+                <table class="w-full text-sm">
+                    <tr class="border-b border-slate-200">
+                        <td class="py-3 font-medium text-slate-700 w-32">开户银行</td>
+                        <td class="py-3 text-slate-800">中信银行星地中心产业园支行</td>
+                    </tr>
+                    <tr class="border-b border-slate-200">
+                        <td class="py-3 font-medium text-slate-700">账户名称</td>
+                        <td class="py-3 text-slate-800">福石投资管理（北京）有限公司</td>
+                    </tr>
+                    <tr class="border-b border-slate-200">
+                        <td class="py-3 font-medium text-slate-700">账户充值</td>
+                        <td class="py-3 text-slate-800 font-mono">8110 8888 8888 8888 888</td>
+                    </tr>
+                    <tr>
+                        <td class="py-3 font-medium text-slate-700">银行电汇代码</td>
+                        <td class="py-3 text-slate-800 font-mono">CIBKCNBJ888</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-yellow-800">
+                            请在转账备注中填写您的账户ID或者账户注册名称，以便您在云平台的登录账户，以保证账户的分款来源。
+                            请在转账备注中填写您的账户ID或者账户注册名称，以便您在云平台的登录账户，分款来源。
+                            如发生错误，建议您在充值后询问邮件发送给
+                            <a href="mailto:contactus@yunify.com" class="font-medium underline">contactus@fushitouzi.com</a>，
+                            如果您需要开具发票，请联系
+                            <a href="#" class="font-medium underline text-primary">「发票」</a>
+                            页面。
+                        </p>
+                    </div>
+                </div>
+            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- Top Header Initialization ---
+            const mainContentContainer = document.getElementById('main-content-container');
+            if (window.TopHeader && mainContentContainer) {
+                const topHeader = new TopHeader();
+                topHeader.init(mainContentContainer);
+            }
+
+            // --- Return Button Initialization ---
+            const returnBtnContainer = document.getElementById('return-btn-container');
+            if (window.ReturnButton && returnBtnContainer) {
+                const returnButton = new ReturnButton({
+                    text: '充值',
+                    href: 'index.html'
+                });
+                returnBtnContainer.innerHTML = returnButton.render();
+            }
+
+            const menuToggle = document.getElementById('menu-toggle');
+            const sidebar = document.getElementById('sidebar');
+            const onlineTab = document.getElementById('online-tab');
+            const offlineTab = document.getElementById('offline-tab');
+            const onlineContent = document.getElementById('online-content');
+            const offlineContent = document.getElementById('offline-content');
+            const rechargeBtn = document.getElementById('recharge-btn');
+            const customAmount = document.getElementById('custom-amount');
+            const bonusAmount = document.getElementById('bonus-amount');
+            const rechargeAmountCards = document.querySelectorAll('.recharge-amount-card');
+            const paymentMethods = document.querySelectorAll('.payment-method');
+
+            let selectedAmount = 500; // Default selected amount
+            let selectedPaymentMethod = 'alipay'; // Default payment method
+            let selectedPaymentName = '支付宝'; // Default payment method name
+
+            // Toggle sidebar on mobile
+            menuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('hidden');
+            });
+
+            // Tab switching functionality
+            onlineTab.addEventListener('click', (e) => {
+                e.preventDefault();
+                onlineTab.classList.add('recharge-tab-active');
+                onlineTab.classList.remove('border-transparent', 'text-slate-500');
+                onlineTab.classList.add('border-primary', 'text-primary');
+
+                offlineTab.classList.remove('recharge-tab-active');
+                offlineTab.classList.add('border-transparent', 'text-slate-500');
+                offlineTab.classList.remove('border-primary', 'text-primary');
+
+                onlineContent.classList.remove('hidden');
+                offlineContent.classList.add('hidden');
+            });
+
+            offlineTab.addEventListener('click', (e) => {
+                e.preventDefault();
+                offlineTab.classList.add('recharge-tab-active');
+                offlineTab.classList.remove('border-transparent', 'text-slate-500');
+                offlineTab.classList.add('border-primary', 'text-primary');
+
+                onlineTab.classList.remove('recharge-tab-active');
+                onlineTab.classList.add('border-transparent', 'text-slate-500');
+                onlineTab.classList.remove('border-primary', 'text-primary');
+
+                offlineContent.classList.remove('hidden');
+                onlineContent.classList.add('hidden');
+            });
+
+            // Amount card selection
+            rechargeAmountCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    // Remove selected class from all cards
+                    rechargeAmountCards.forEach(c => {
+                        c.classList.remove('recharge-amount-selected', 'border-primary', 'bg-orange-50');
+                        c.classList.add('border-slate-200');
+                    });
+
+                    // Add selected class to clicked card
+                    card.classList.add('recharge-amount-selected', 'border-primary', 'bg-orange-50');
+                    card.classList.remove('border-slate-200');
+
+                    // Update selected amount
+                    selectedAmount = parseInt(card.dataset.amount);
+
+                    // Update custom amount input
+                    customAmount.value = selectedAmount;
+
+                    // Update bonus amount display
+                    updateBonusAmount(selectedAmount);
+                });
+            });
+
+            // Custom amount input handling
+            customAmount.addEventListener('input', (e) => {
+                const amount = parseInt(e.target.value) || 0;
+                if (amount > 0) {
+                    selectedAmount = amount;
+                    updateBonusAmount(amount);
+
+                    // Remove selection from amount cards
+                    rechargeAmountCards.forEach(card => {
+                        card.classList.remove('recharge-amount-selected', 'border-primary', 'bg-orange-50');
+                        card.classList.add('border-slate-200');
+                    });
+                }
+            });
+
+            // Payment method selection
+            paymentMethods.forEach(method => {
+                method.addEventListener('click', () => {
+                    // Remove selected class from all methods
+                    paymentMethods.forEach(m => {
+                        m.classList.remove('payment-method-selected', 'border-primary', 'bg-blue-50');
+                        m.classList.add('border-slate-200');
+                    });
+
+                    // Add selected class to clicked method
+                    method.classList.add('payment-method-selected', 'border-primary', 'bg-blue-50');
+                    method.classList.remove('border-slate-200');
+
+                    // Update selected payment method from data attribute
+                    selectedPaymentMethod = method.dataset.method;
+                    selectedPaymentName = method.dataset.name;
+                });
+            });
+
+            // Recharge button click
+            rechargeBtn.addEventListener('click', () => {
+                if (selectedAmount <= 0) {
+                    alert('请选择或输入有效的充值金额');
+                    return;
+                }
+
+                // Here you would typically integrate with a payment gateway
+                alert(`正在跳转到${selectedPaymentName}支付页面...\n充值金额: ¥${selectedAmount}`);
+
+                // For demo purposes, you could redirect to a payment URL
+                // window.location.href = `payment-gateway-url?amount=${selectedAmount}&method=${selectedPaymentMethod}`;
+            });
+
+            // Function to update the bonus amount based on the recharge amount
+            function updateBonusAmount(amount) {
+                let bonus = 0;
+                if (amount >= 500000) bonus = 500000;
+                else if (amount >= 100000) bonus = 100000;
+                else if (amount >= 50000) bonus = 50000;
+                else if (amount >= 10000) bonus = 10000;
+                else if (amount >= 5000) bonus = 5000;
+                
+                const bonusAmountSpan = document.getElementById('bonus-amount');
+                if (bonusAmountSpan) {
+                    bonusAmountSpan.textContent = bonus;
+                }
+            }
+
+            // Initialize default selections
+            updateBonusAmount(selectedAmount);
+        });
+    </script>
+    <script src="financial.js"></script>
+</body>
+</html>

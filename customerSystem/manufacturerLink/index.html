@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>厂商链接 - 算力多多</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        // Custom color configuration for Tailwind CSS
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#2979FF', // Main color
+                        'primary-dark': '#1e66e6',
+                        'primary-light': '#e3f2fd',
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="../component/navigation.js"></script>
+    <script src="../component/top.js"></script>
+    <script src="../component/returnbtn.js"></script>
+    <script src="../component/toast.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', 'sans-serif';
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Style for the active navigation link */
+        .nav-active {
+            background-color: #2979FF; /* primary */
+            color: white;
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-100">
+
+    <div id="app-container" class="h-screen flex flex-col bg-slate-100">
+        <!-- Header and Navigation will be populated by JavaScript -->
+        <div class="flex flex-1 overflow-hidden">
+            <!-- Main Content -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto p-6">
+
+                <!-- Vendor Links Page -->
+                <section id="vendor-links-page" class="page-content">
+                    <div class="bg-white p-6 rounded-lg shadow">
+
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h4 class="text-lg font-semibold text-slate-800">提交记录</h4>
+                                <div class="flex flex-wrap gap-4 mt-4">
+                                    <input type="text" placeholder="搜索企业名称" class="border border-slate-300 rounded-md px-3 py-2 text-sm">
+                                    <input type="text" placeholder="搜索厂商名称" class="border border-slate-300 rounded-md px-3 py-2 text-sm">
+                                    <button class="bg-slate-200 text-slate-700 font-semibold px-4 py-2 rounded-lg text-sm hover:bg-slate-300">查询</button>
+                                </div>
+                            </div>
+                            <div>
+                                <button id="add-record-btn" class="bg-primary text-white font-semibold px-4 py-2 rounded-lg text-sm hover:bg-primary-dark transition-colors">
+                                    新增记录
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="overflow-x-auto mt-4">
+                            <table class="w-full text-sm text-left text-slate-500">
+                                <thead class="text-xs text-slate-700 uppercase bg-slate-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3">企业名称</th>
+                                        <th scope="col" class="px-6 py-3">统一信用代码</th>
+                                        <th scope="col" class="px-6 py-3">手机号码</th>
+                                        <th scope="col" class="px-6 py-3">邮箱</th>
+                                        <th scope="col" class="px-6 py-3">厂商名称</th>
+                                        <th scope="col" class="px-6 py-3">链接状态</th>
+                                        <th scope="col" class="px-6 py-3">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="vendor-table-body">
+                                    <tr class="bg-white border-b hover:bg-slate-50">
+                                        <td class="px-6 py-4">北京科技有限公司</td>
+                                        <td class="px-6 py-4">91110101MA01A2B3C4</td>
+                                        <td class="px-6 py-4">13901234567</td>
+                                        <td class="px-6 py-4">contact@beijingtech.com</td>
+                                        <td class="px-6 py-4">华为云</td>
+                                        <td class="px-6 py-4">
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">已发送</span>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <div class="flex space-x-2">
+                                                <button class="text-primary hover:underline text-sm copy-link-btn">复制链接</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="bg-white border-b hover:bg-slate-50">
+                                        <td class="px-6 py-4">上海智能科技股份有限公司</td>
+                                        <td class="px-6 py-4">91310000MA1FL0123E</td>
+                                        <td class="px-6 py-4">13812345678</td>
+                                        <td class="px-6 py-4">info@shanghaitech.com</td>
+                                        <td class="px-6 py-4">阿里云</td>
+                                        <td class="px-6 py-4">
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">待发送</span>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <div class="flex space-x-2">
+                                                <!-- No action buttons for 待发送 status -->
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="bg-white border-b hover:bg-slate-50">
+                                        <td class="px-6 py-4">深圳云计算技术有限公司</td>
+                                        <td class="px-6 py-4">91440300MA5EF6789G</td>
+                                        <td class="px-6 py-4">13723456789</td>
+                                        <td class="px-6 py-4">admin@shenzhencloud.com</td>
+                                        <td class="px-6 py-4">腾讯云</td>
+                                        <td class="px-6 py-4">
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">已发送</span>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <div class="flex space-x-2">
+                                                <button class="text-primary hover:underline text-sm copy-link-btn">复制链接</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="bg-white border-b hover:bg-slate-50">
+                                        <td class="px-6 py-4">广州数据科技有限公司</td>
+                                        <td class="px-6 py-4">91440101MA59K0123H</td>
+                                        <td class="px-6 py-4">13634567890</td>
+                                        <td class="px-6 py-4">service@guangzhoudata.com</td>
+                                        <td class="px-6 py-4">火山云</td>
+                                        <td class="px-6 py-4">
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">待发送</span>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <div class="flex space-x-2">
+                                                <!-- No action buttons for 待发送 status -->
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="bg-white border-b hover:bg-slate-50">
+                                        <td class="px-6 py-4">成都智慧科技股份有限公司</td>
+                                        <td class="px-6 py-4">91510100MA62N4567J</td>
+                                        <td class="px-6 py-4">13545678901</td>
+                                        <td class="px-6 py-4">support@chendutech.com</td>
+                                        <td class="px-6 py-4">阿里云</td>
+                                        <td class="px-6 py-4">
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">已发送</span>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <div class="flex space-x-2">
+                                                <button class="text-primary hover:underline text-sm copy-link-btn">复制链接</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Pagination -->
+                        <div class="mt-6 flex items-center justify-between">
+                            <div class="text-sm text-slate-600">
+                                显示 <span class="font-medium">1</span> 到 <span class="font-medium">5</span> of <span class="font-medium">5</span> 条结果
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button class="px-3 py-1 border border-slate-300 rounded-md text-sm text-slate-600 hover:bg-slate-50 disabled:opacity-50" disabled>上一页</button>
+                                <button class="px-3 py-1 border border-slate-300 rounded-md text-sm text-slate-600 hover:bg-slate-50 disabled:opacity-50" disabled>下一页</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Add Record Modal -->
+    <div id="add-record-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h4 class="text-lg font-semibold text-slate-800">新增记录</h4>
+                <button id="close-modal-btn" class="text-slate-400 hover:text-slate-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <form id="record-form">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">
+                            企业名称 <span class="text-red-500">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="modal-company-name" 
+                            required 
+                            placeholder="请输入企业名称"
+                            class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                        >
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">
+                            统一信用代码 <span class="text-red-500">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="modal-credit-code" 
+                            required 
+                            placeholder="请输入18位统一信用代码"
+                            maxlength="18"
+                            class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                        >
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">
+                            手机号 <span class="text-red-500">*</span>
+                        </label>
+                        <input 
+                            type="tel" 
+                            id="modal-phone" 
+                            required 
+                            placeholder="请输入手机号"
+                            maxlength="11"
+                            class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                        >
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">
+                            邮箱 <span class="text-red-500">*</span>
+                        </label>
+                        <input 
+                            type="email" 
+                            id="modal-email" 
+                            required 
+                            placeholder="请输入邮箱地址"
+                            class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                        >
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">
+                            云厂商 <span class="text-red-500">*</span>
+                        </label>
+                        <select 
+                            id="modal-cloud-provider" 
+                            required 
+                            class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                        >
+                            <option value="">请选择云厂商</option>
+                            <option value="阿里云">阿里云</option>
+                            <option value="华为云">华为云</option>
+                            <option value="火山云">火山云</option>
+                            <option value="腾讯云">腾讯云</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-2 mt-6">
+                    <button type="button" id="cancel-btn" class="px-4 py-2 border border-slate-300 rounded-md text-sm text-slate-700 hover:bg-slate-50 transition-colors">取消</button>
+                    <button type="submit" class="px-4 py-2 bg-primary text-white rounded-md text-sm hover:bg-primary-dark transition-colors">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="vendorLinks.js"></script>
+    <script>
+        // Initialize navigation and header components
+        document.addEventListener('DOMContentLoaded', function () {
+            const appContainer = document.getElementById('app-container');
+            const contentContainer = appContainer.querySelector('.flex-1.overflow-hidden');
+
+            // Initialize Navigation
+            const navigation = new SuanduoNavigation({
+                activePage: 'vendors',
+                user: {
+                    name: 'HL 13520841021',
+                    avatar: 'https://placehold.co/100x100/e3f2fd/2979FF?text=A'
+                }
+            });
+            navigation.init(contentContainer);
+
+            // Initialize Header
+            const header = new SuanduoTop({
+                title: '厂商链接',
+                breadcrumbs: [
+                    { label: '首页', href: '../console/index.html' },
+                    { label: '厂商链接' }
+                ],
+                user: {
+                    name: 'HL 13520841021',
+                    avatar: 'https://placehold.co/100x100/e3f2fd/2979FF?text=A'
+                }
+            });
+            header.init(appContainer);
+        });
+
+        // Copy link functionality with toast notification
+        document.addEventListener('DOMContentLoaded', function() {
+            const copyButtons = document.querySelectorAll('.copy-link-btn');
+            
+            copyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Generate a sample link (you can modify this to use actual data)
+                    const link = 'https://suanduoduo.com/vendor-link/' + Math.random().toString(36).substr(2, 9);
+                    
+                    // Copy to clipboard
+                    navigator.clipboard.writeText(link).then(function() {
+                        // Show success toast notification
+                        window.suanduoToast.success('复制成功');
+                    }).catch(function(err) {
+                        // Fallback for older browsers
+                        const textArea = document.createElement('textarea');
+                        textArea.value = link;
+                        document.body.appendChild(textArea);
+                        textArea.select();
+                        
+                        try {
+                            const successful = document.execCommand('copy');
+                            if (successful) {
+                                window.suanduoToast.success('复制成功');
+                            } else {
+                                window.suanduoToast.error('复制失败');
+                            }
+                        } catch (err) {
+                            window.suanduoToast.error('复制失败');
+                        }
+                        
+                        document.body.removeChild(textArea);
+                    });
+                });
+            });
+        });
+
+        // Add Record Modal functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const addRecordBtn = document.getElementById('add-record-btn');
+            const modal = document.getElementById('add-record-modal');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const cancelBtn = document.getElementById('cancel-btn');
+            const recordForm = document.getElementById('record-form');
+
+            // Open modal
+            if (addRecordBtn) {
+                addRecordBtn.addEventListener('click', function() {
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                    // Clear form when opening
+                    recordForm.reset();
+                });
+            }
+
+            // Close modal functions
+            function closeModal() {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                recordForm.reset();
+            }
+
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', closeModal);
+            }
+
+            if (cancelBtn) {
+                cancelBtn.addEventListener('click', closeModal);
+            }
+
+            // Close modal when clicking outside
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Handle form submission with validation
+            if (recordForm) {
+                recordForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    // Get form values
+                    const companyName = document.getElementById('modal-company-name').value.trim();
+                    const creditCode = document.getElementById('modal-credit-code').value.trim();
+                    const phone = document.getElementById('modal-phone').value.trim();
+                    const email = document.getElementById('modal-email').value.trim();
+                    const cloudProvider = document.getElementById('modal-cloud-provider').value;
+
+                    // Validation
+                    if (!companyName) {
+                        window.suanduoToast.error('请输入企业名称');
+                        return;
+                    }
+
+                    if (!creditCode) {
+                        window.suanduoToast.error('请输入统一信用代码');
+                        return;
+                    }
+
+                    if (creditCode.length !== 18) {
+                        window.suanduoToast.error('统一信用代码必须为18位');
+                        return;
+                    }
+
+                    if (!phone) {
+                        window.suanduoToast.error('请输入手机号');
+                        return;
+                    }
+
+                    // Basic phone number validation (Chinese mobile numbers)
+                    const phoneRegex = /^1[3-9]\d{9}$/;
+                    if (!phoneRegex.test(phone)) {
+                        window.suanduoToast.error('请输入正确的手机号格式');
+                        return;
+                    }
+
+                    if (!email) {
+                        window.suanduoToast.error('请输入邮箱地址');
+                        return;
+                    }
+
+                    // Basic email validation
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(email)) {
+                        window.suanduoToast.error('请输入正确的邮箱格式');
+                        return;
+                    }
+
+                    if (!cloudProvider) {
+                        window.suanduoToast.error('请选择云厂商');
+                        return;
+                    }
+
+                    // If all validation passes, show success and close modal
+                    window.suanduoToast.success('记录添加成功');
+                    closeModal();
+
+                    // Here you would typically send the data to your backend
+                    console.log('New record data:', {
+                        companyName,
+                        creditCode,
+                        phone,
+                        email,
+                        cloudProvider
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

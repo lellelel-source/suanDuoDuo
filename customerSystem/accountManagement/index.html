@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>账户管理 - 算力多多</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        // Custom color configuration for Tailwind CSS
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#2979FF', // Main color
+                        'primary-dark': '#1e66e6',
+                        'primary-light': '#e3f2fd',
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="../component/navigation.js"></script>
+    <script src="../component/top.js"></script>
+    <script src="../component/toast.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', 'sans-serif';
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Style for the active navigation link */
+        .nav-active {
+            background-color: #2979FF; /* primary */
+            color: white;
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+    </style>
+</head>
+<body class="bg-slate-100">
+
+    <div id="app-container" class="h-screen flex flex-col bg-slate-100">
+        <!-- Header and Navigation will be populated by JavaScript -->
+        <div class="flex flex-1 overflow-hidden">
+            <!-- Main Content -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto p-6">
+                <!-- Account Page -->
+                <section id="account-page" class="page-content">
+                    <div class="space-y-6">
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h3 class="text-xl font-semibold text-slate-800 border-b pb-4">基本资料</h3>
+                            <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                                <div class="flex">
+                                    <span class="w-24 text-slate-500 flex-shrink-0">用户ID</span>
+                                    <span class="text-slate-800 font-medium">10086</span>
+                                </div>
+                                <div class="flex">
+                                    <span class="w-24 text-slate-500 flex-shrink-0">注册时间</span>
+                                    <span class="text-slate-800 font-medium">2024-05-20 13:14</span>
+                                </div>
+                                <div class="flex">
+                                    <span class="w-24 text-slate-500 flex-shrink-0">实名认证</span>
+                                    <span class="text-green-600 font-medium flex items-center">
+                                        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                        个人认证
+                                    </span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="w-24 text-slate-500 flex-shrink-0"></span>
+                                    <a href="#" class="text-primary font-semibold hover:underline">查看详情</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h3 class="text-xl font-semibold text-slate-800 border-b pb-4">安全设置</h3>
+                            <div class="mt-4 divide-y">
+                                <div class="flex items-center justify-between py-4">
+                                    <div>
+                                        <p class="font-semibold text-slate-800">登录密码</p>
+                                        <p class="text-xs text-slate-500 mt-1">建议定期更换密码，保证账号安全</p>
+                                    </div>
+                                    <a href="#" class="text-primary font-semibold text-sm hover:underline">修改</a>
+                                </div>
+                                <div class="flex items-center justify-between py-4">
+                                    <div>
+                                        <p class="font-semibold text-slate-800">手机验证</p>
+                                        <p class="text-xs text-slate-500 mt-1">已绑定: 135****1021</p>
+                                    </div>
+                                    <a href="#" class="text-primary font-semibold text-sm hover:underline">修改</a>
+                                </div>
+                                <div class="flex items-center justify-between py-4">
+                                    <div>
+                                        <p class="font-semibold text-slate-800">邮箱验证</p>
+                                        <p class="text-xs text-slate-500 mt-1">未绑定</p>
+                                    </div>
+                                    <a href="#" class="text-primary font-semibold text-sm hover:underline">绑定</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <div class="flex justify-between items-center border-b pb-4">
+                                <h3 class="text-xl font-semibold text-slate-800">佣金收款账户</h3>
+                                <button id="commission-account-btn" class="bg-primary text-white font-semibold px-4 py-2 rounded-lg text-sm hover:bg-primary-dark transition-colors">
+                                    <span id="commission-btn-text">添加账户</span>
+                                </button>
+                            </div>
+                            
+                            <!-- No account state -->
+                            <div id="no-commission-account" class="mt-6 text-center py-12">
+                                <div class="text-slate-400 mb-4">
+                                    <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                    </svg>
+                                </div>
+                                <p class="text-slate-500 text-lg font-medium">未设置佣金收款账户</p>
+                                <p class="text-slate-400 text-sm mt-2">添加收款账户以接收佣金</p>
+                            </div>
+
+                            <!-- Account info state (hidden by default) -->
+                            <div id="commission-account-info" class="mt-6 hidden">
+                                <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                                        <div class="flex">
+                                            <span class="w-20 text-slate-500 flex-shrink-0">账户类型</span>
+                                            <span class="text-slate-800 font-medium" id="account-type-display">-</span>
+                                        </div>
+                                        <div class="flex">
+                                            <span class="w-20 text-slate-500 flex-shrink-0">开户行</span>
+                                            <span class="text-slate-800 font-medium" id="bank-name-display">-</span>
+                                        </div>
+                                        <div class="flex">
+                                            <span class="w-20 text-slate-500 flex-shrink-0">账户名称</span>
+                                            <span class="text-slate-800 font-medium" id="account-name-display">-</span>
+                                        </div>
+                                        <div class="flex">
+                                            <span class="w-20 text-slate-500 flex-shrink-0">账户号码</span>
+                                            <span class="text-slate-800 font-medium" id="account-number-display">-</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h3 class="text-xl font-semibold text-slate-800 border-b pb-4">子账户管理</h3>
+                            <div class="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                                    <h4 class="font-semibold text-slate-800">阿里云</h4>
+                                    <a href="https://www.aliyun.com/" target="_blank" class="text-sm text-primary hover:underline">https://www.aliyun.com/</a>
+                                    <div class="mt-2 text-sm">
+                                        <p><span class="font-medium text-slate-600">账号:</span> user_aliyun</p>
+                                        <p><span class="font-medium text-slate-600">密码:</span> password_aliyun</p>
+                                    </div>
+                                </div>
+                                <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                                    <h4 class="font-semibold text-slate-800">华为云</h4>
+                                    <a href="https://www.huaweicloud.com/" target="_blank" class="text-sm text-primary hover:underline">https://www.huaweicloud.com/</a>
+                                    <div class="mt-2 text-sm">
+                                        <p><span class="font-medium text-slate-600">账号:</span> user_huawei</p>
+                                        <p><span class="font-medium text-slate-600">密码:</span> password_huawei</p>
+                                    </div>
+                                </div>
+                                <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                                    <h4 class="font-semibold text-slate-800">腾讯云</h4>
+                                    <a href="https://cloud.tencent.com/" target="_blank" class="text-sm text-primary hover:underline">https://cloud.tencent.com/</a>
+                                    <div class="mt-2 text-sm">
+                                        <p><span class="font-medium text-slate-600">账号:</span> user_tencent</p>
+                                        <p><span class="font-medium text-slate-600">密码:</span> password_tencent</p>
+                                    </div>
+                                </div>
+                                <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                                    <h4 class="font-semibold text-slate-800">火山云</h4>
+                                    <a href="https://www.volcengine.com/" target="_blank" class="text-sm text-primary hover:underline">https://www.volcengine.com/</a>
+                                    <div class="mt-2 text-sm">
+                                        <p><span class="font-medium text-slate-600">账号:</span> user_volcengine</p>
+                                        <p><span class="font-medium text-slate-600">密码:</span> password_volcengine</p>
+                                    </div>
+                                </div>
+                                <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                                    <h4 class="font-semibold text-slate-800">并行科技</h4>
+                                    <a href="https://www.paratera.com/" target="_blank" class="text-sm text-primary hover:underline">https://www.paratera.com/</a>
+                                    <div class="mt-2 text-sm">
+                                        <p><span class="font-medium text-slate-600">账号:</span> user_paratera</p>
+                                        <p><span class="font-medium text-slate-600">密码:</span> password_paratera</p>
+                                    </div>
+                                </div>
+                                <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                                    <h4 class="font-semibold text-slate-800">福石投资</h4>
+                                    <a href="https://www.fushitouzi.com/" target="_blank" class="text-sm text-primary hover:underline">https://www.fushitouzi.com/</a>
+                                    <div class="mt-2 text-sm">
+                                        <p><span class="font-medium text-slate-600">账号:</span> user_fushi</p>
+                                        <p><span class="font-medium text-slate-600">密码:</span> password_fushi</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Commission Account Modal -->
+    <div id="commission-account-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h4 class="text-lg font-semibold text-slate-800" id="modal-title">添加佣金收款账户</h4>
+                <button id="close-commission-modal-btn" class="text-slate-400 hover:text-slate-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <form id="commission-account-form">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">
+                            账户类型 <span class="text-red-500">*</span>
+                        </label>
+                        <select 
+                            id="account-type" 
+                            required 
+                            class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                        >
+                            <option value="">请选择账户类型</option>
+                            <option value="银行卡">银行卡</option>
+                            <option value="支付宝">支付宝</option>
+                            <option value="微信">微信</option>
+                        </select>
+                    </div>
+                    <div id="bank-name-field" class="hidden">
+                        <label class="block text-sm font-medium text-slate-700 mb-1">
+                            开户行 <span class="text-red-500">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="bank-name" 
+                            placeholder="请输入开户银行名称"
+                            class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                        >
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">
+                            账户名称 <span class="text-red-500">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="account-name" 
+                            required 
+                            placeholder="请输入账户名称"
+                            class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                        >
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">
+                            账户号码 <span class="text-red-500">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="account-number" 
+                            required 
+                            placeholder="请输入账户号码"
+                            class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                        >
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-2 mt-6">
+                    <button type="button" id="cancel-commission-btn" class="px-4 py-2 border border-slate-300 rounded-md text-sm text-slate-700 hover:bg-slate-50 transition-colors">取消</button>
+                    <button type="submit" class="px-4 py-2 bg-primary text-white rounded-md text-sm hover:bg-primary-dark transition-colors">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="account.js"></script>
+    <script>
+        // Commission Account Management
+        document.addEventListener('DOMContentLoaded', function() {
+            const commissionAccountBtn = document.getElementById('commission-account-btn');
+            const commissionModal = document.getElementById('commission-account-modal');
+            const closeCommissionModalBtn = document.getElementById('close-commission-modal-btn');
+            const cancelCommissionBtn = document.getElementById('cancel-commission-btn');
+            const commissionAccountForm = document.getElementById('commission-account-form');
+            const noAccountSection = document.getElementById('no-commission-account');
+            const accountInfoSection = document.getElementById('commission-account-info');
+            const commissionBtnText = document.getElementById('commission-btn-text');
+            const modalTitle = document.getElementById('modal-title');
+            
+            // Form fields
+            const accountTypeField = document.getElementById('account-type');
+            const bankNameField = document.getElementById('bank-name');
+            const bankNameFieldContainer = document.getElementById('bank-name-field');
+            const accountNameField = document.getElementById('account-name');
+            const accountNumberField = document.getElementById('account-number');
+            
+            // Display fields
+            const accountTypeDisplay = document.getElementById('account-type-display');
+            const bankNameDisplay = document.getElementById('bank-name-display');
+            const accountNameDisplay = document.getElementById('account-name-display');
+            const accountNumberDisplay = document.getElementById('account-number-display');
+            
+            // Check if account exists in localStorage
+            let commissionAccount = JSON.parse(localStorage.getItem('commissionAccount') || 'null');
+            
+            // Initialize display
+            updateAccountDisplay();
+            
+            // Show/hide bank name field based on account type
+            accountTypeField.addEventListener('change', function() {
+                if (this.value === '银行卡') {
+                    bankNameFieldContainer.classList.remove('hidden');
+                    bankNameField.required = true;
+                } else {
+                    bankNameFieldContainer.classList.add('hidden');
+                    bankNameField.required = false;
+                    bankNameField.value = '';
+                }
+            });
+
+            // Open modal
+            commissionAccountBtn.addEventListener('click', function() {
+                if (commissionAccount) {
+                    // Editing existing account
+                    modalTitle.textContent = '修改佣金收款账户';
+                    populateForm();
+                } else {
+                    // Adding new account
+                    modalTitle.textContent = '添加佣金收款账户';
+                    commissionAccountForm.reset();
+                    bankNameFieldContainer.classList.add('hidden');
+                    bankNameField.required = false;
+                }
+                commissionModal.classList.remove('hidden');
+                commissionModal.classList.add('flex');
+            });
+
+            // Close modal functions
+            function closeModal() {
+                commissionModal.classList.add('hidden');
+                commissionModal.classList.remove('flex');
+                commissionAccountForm.reset();
+                bankNameFieldContainer.classList.add('hidden');
+                bankNameField.required = false;
+            }
+
+            closeCommissionModalBtn.addEventListener('click', closeModal);
+            cancelCommissionBtn.addEventListener('click', closeModal);
+
+            // Close modal when clicking outside
+            commissionModal.addEventListener('click', function(e) {
+                if (e.target === commissionModal) {
+                    closeModal();
+                }
+            });
+
+            // Handle form submission
+            commissionAccountForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Get form values
+                const accountType = accountTypeField.value.trim();
+                const bankName = bankNameField.value.trim();
+                const accountName = accountNameField.value.trim();
+                const accountNumber = accountNumberField.value.trim();
+
+                // Validation
+                if (!accountType) {
+                    window.suanduoToast.error('请选择账户类型');
+                    return;
+                }
+
+                if (accountType === '银行卡' && !bankName) {
+                    window.suanduoToast.error('请输入开户银行名称');
+                    return;
+                }
+
+                if (!accountName) {
+                    window.suanduoToast.error('请输入账户名称');
+                    return;
+                }
+
+                if (!accountNumber) {
+                    window.suanduoToast.error('请输入账户号码');
+                    return;
+                }
+
+                // Save account data
+                commissionAccount = {
+                    accountType,
+                    bankName: accountType === '银行卡' ? bankName : '',
+                    accountName,
+                    accountNumber
+                };
+
+                localStorage.setItem('commissionAccount', JSON.stringify(commissionAccount));
+                
+                // Show success message
+                const action = modalTitle.textContent.includes('修改') ? '修改' : '添加';
+                window.suanduoToast.success(`账户${action}成功`);
+                
+                // Update display and close modal
+                updateAccountDisplay();
+                closeModal();
+            });
+
+            function populateForm() {
+                if (!commissionAccount) return;
+                
+                accountTypeField.value = commissionAccount.accountType;
+                accountNameField.value = commissionAccount.accountName;
+                accountNumberField.value = commissionAccount.accountNumber;
+                
+                if (commissionAccount.accountType === '银行卡') {
+                    bankNameFieldContainer.classList.remove('hidden');
+                    bankNameField.required = true;
+                    bankNameField.value = commissionAccount.bankName;
+                }
+            }
+
+            function updateAccountDisplay() {
+                if (commissionAccount) {
+                    // Show account info
+                    noAccountSection.classList.add('hidden');
+                    accountInfoSection.classList.remove('hidden');
+                    commissionBtnText.textContent = '修改账户';
+                    
+                    // Update display values
+                    accountTypeDisplay.textContent = commissionAccount.accountType;
+                    bankNameDisplay.textContent = commissionAccount.accountType === '银行卡' ? commissionAccount.bankName : '-';
+                    accountNameDisplay.textContent = commissionAccount.accountName;
+                    accountNumberDisplay.textContent = maskAccountNumber(commissionAccount.accountNumber);
+                } else {
+                    // Show no account state
+                    noAccountSection.classList.remove('hidden');
+                    accountInfoSection.classList.add('hidden');
+                    commissionBtnText.textContent = '添加账户';
+                }
+            }
+
+            function maskAccountNumber(accountNumber) {
+                if (accountNumber.length <= 8) return accountNumber;
+                const start = accountNumber.substring(0, 4);
+                const end = accountNumber.substring(accountNumber.length - 4);
+                const middle = '*'.repeat(accountNumber.length - 8);
+                return start + middle + end;
+            }
+        });
+    </script>
+</body>
+</html>
