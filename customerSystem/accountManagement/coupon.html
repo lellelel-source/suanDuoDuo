@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的优惠券 - 算力多多</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        // Custom color configuration for Tailwind CSS
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#2979FF', // Main color
+                        'primary-dark': '#1e66e6',
+                        'primary-light': '#e3f2fd',
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="../component/navigation.js"></script>
+    <script src="../component/top.js"></script>
+    <script src="../component/toast.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', 'sans-serif';
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Style for the active navigation link */
+        .nav-active {
+            background-color: #2979FF; /* primary */
+            color: white;
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        /* Coupon card styles */
+        .coupon-card {
+            background: linear-gradient(135deg, #2979FF 0%, #1e66e6 100%);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+        .coupon-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .coupon-card-content {
+            padding: 24px;
+            color: white;
+        }
+        .coupon-amount {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1;
+        }
+        .coupon-amount-unit {
+            font-size: 16px;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+        .coupon-description {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-top: 12px;
+        }
+        .coupon-footer {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 12px;
+        }
+        .coupon-expired {
+            background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%);
+        }
+        .coupon-status-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="bg-slate-100">
+
+    <div id="app-container" class="h-screen flex flex-col bg-slate-100">
+        <!-- Header and Navigation will be populated by JavaScript -->
+        <div class="flex flex-1 overflow-hidden">
+            <!-- Main Content -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto p-6">
+                <!-- Coupon Page -->
+                <section id="coupon-page" class="page-content">
+                    <div class="space-y-6">
+                        <!-- Header -->
+                        <div class="flex items-center justify-between mb-8">
+                            <div>
+                                <h1 class="text-3xl font-bold text-slate-800">我的优惠券</h1>
+                                <p class="text-slate-500 mt-2">管理和使用您的优惠券</p>
+                            </div>
+                            <button id="back-btn" class="flex items-center text-primary hover:text-primary-dark transition-colors font-semibold">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                </svg>
+                                返回
+                            </button>
+                        </div>
+
+                        <!-- Filter Tabs -->
+                        <div class="bg-white p-4 rounded-lg shadow flex gap-4 overflow-x-auto">
+                            <button class="filter-tab active whitespace-nowrap px-6 py-2 rounded-lg font-semibold text-sm transition-colors" data-filter="all">
+                                全部
+                            </button>
+                            <button class="filter-tab whitespace-nowrap px-6 py-2 rounded-lg font-semibold text-sm transition-colors" data-filter="available">
+                                可用
+                            </button>
+                            <button class="filter-tab whitespace-nowrap px-6 py-2 rounded-lg font-semibold text-sm transition-colors" data-filter="expired">
+                                已过期
+                            </button>
+                            <button class="filter-tab whitespace-nowrap px-6 py-2 rounded-lg font-semibold text-sm transition-colors" data-filter="used">
+                                已使用
+                            </button>
+                        </div>
+
+                        <!-- Coupon List -->
+                        <div id="coupon-list" class="space-y-4">
+                            <!-- Coupons will be populated here by JavaScript -->
+                        </div>
+
+                        <!-- Empty State -->
+                        <div id="empty-state" class="bg-white p-12 rounded-lg shadow text-center hidden">
+                            <div class="text-slate-400 mb-4">
+                                <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                                </svg>
+                            </div>
+                            <p class="text-slate-500 text-lg font-medium">暂无优惠券</p>
+                            <p class="text-slate-400 text-sm mt-2">快去获取优惠券吧！</p>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Coupon Details Modal -->
+    <div id="coupon-details-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-lg shadow-lg max-w-2xl w-full mx-4 max-h-96 overflow-y-auto">
+            <div class="flex justify-between items-start mb-6">
+                <div>
+                    <h4 id="modal-coupon-name" class="text-3xl font-bold text-primary mb-2"></h4>
+                    <div id="modal-coupon-discount" class="text-4xl font-bold text-primary"></div>
+                </div>
+                <button id="close-coupon-modal-btn" class="text-slate-400 hover:text-slate-600">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div id="modal-coupon-description" class="text-slate-600 mb-6 text-base"></div>
+
+            <div class="bg-slate-50 p-4 rounded-lg mb-4">
+                <h5 class="font-bold text-slate-800 mb-3">使用规则：</h5>
+                <ul id="modal-coupon-rules" class="space-y-2"></ul>
+            </div>
+
+            <div id="modal-coupon-info" class="text-sm text-slate-600 space-y-2 mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200"></div>
+
+            <button id="use-coupon-btn" class="w-full bg-primary text-white font-bold py-3 rounded-lg hover:bg-primary-dark transition-colors text-lg">
+                立即使用
+            </button>
+        </div>
+    </div>
+
+    <script src="../component/navigation.js"></script>
+    <script>
+        // Sample coupon data - same data shared with index.html - 7折优惠券
+        const sampleCoupons = [
+            {
+                id: 1,
+                type: 'discount',
+                discount: '7折',
+                discountPercent: 30,
+                name: '全场7折优惠��',
+                description: '购买算力产品享受7折优惠',
+                minAmount: 200,
+                maxDiscount: null,
+                expiryDate: '2025-12-31',
+                status: 'available',
+                rules: [
+                    '适用于全场所有算力产品',
+                    '单笔订单满200元可用',
+                    '每个账户可多次使用',
+                    '不可与其他优惠叠加',
+                    '专享活动期间有效'
+                ]
+            },
+            {
+                id: 2,
+                type: 'discount',
+                discount: '7折',
+                discountPercent: 30,
+                name: '高级用户7折优惠券',
+                description: '用户等级越高，优惠越大',
+                minAmount: 500,
+                maxDiscount: null,
+                expiryDate: '2025-11-15',
+                status: 'available',
+                rules: [
+                    '仅限VIP用户使用',
+                    '单笔订单满500元可用',
+                    '最多可省费用30%',
+                    '每月限用2次',
+                    '不可转让和退款'
+                ]
+            },
+            {
+                id: 3,
+                type: 'discount',
+                discount: '7折',
+                discountPercent: 30,
+                name: '新用户专属7折优惠券',
+                description: '注册后30天内新用户专享',
+                minAmount: 100,
+                maxDiscount: null,
+                expiryDate: '2025-10-20',
+                status: 'available',
+                rules: [
+                    '仅限注册30天内新用户',
+                    '单笔订单满100元可用',
+                    '首次购买享受最大优惠',
+                    '仅可使用一次',
+                    '过期无法使用'
+                ]
+            },
+            {
+                id: 4,
+                type: 'discount',
+                discount: '7折',
+                discountPercent: 30,
+                name: '节假日专属7折优惠券',
+                description: '假期购物专享优惠',
+                minAmount: 150,
+                maxDiscount: null,
+                expiryDate: '2025-09-01',
+                status: 'expired',
+                rules: [
+                    '仅限节假日使用',
+                    '单笔订单满150元可用',
+                    '限时优惠已结束',
+                    '每个账户限用1次',
+                    '过期券已失效'
+                ]
+            },
+            {
+                id: 5,
+                type: 'discount',
+                discount: '7折',
+                discountPercent: 30,
+                name: '推荐好友7折优惠券',
+                description: '通过推荐获得的优惠券',
+                minAmount: 300,
+                maxDiscount: null,
+                expiryDate: '2025-10-15',
+                status: 'used',
+                rules: [
+                    '邀请好友成功后获得',
+                    '单笔订单满300元可用',
+                    '最多可节省费用30%',
+                    '已被使用过',
+                    '使用记录已保存'
+                ]
+            }
+        ];
+
+        let currentFilter = 'all';
+        let coupons = sampleCoupons;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Back button
+            const backBtn = document.getElementById('back-btn');
+            backBtn.addEventListener('click', function() {
+                window.history.back();
+            });
+
+            // Filter tabs
+            const filterTabs = document.querySelectorAll('.filter-tab');
+            filterTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    filterTabs.forEach(t => {
+                        t.classList.remove('active', 'bg-primary', 'text-white');
+                        t.classList.add('text-slate-700', 'hover:bg-slate-50');
+                    });
+                    this.classList.add('active', 'bg-primary', 'text-white');
+                    this.classList.remove('text-slate-700', 'hover:bg-slate-50');
+                    currentFilter = this.getAttribute('data-filter');
+                    renderCoupons();
+                });
+            });
+
+            // Initial render
+            renderCoupons();
+
+            // Coupon modal event listeners
+            const closeCouponModalBtn = document.getElementById('close-coupon-modal-btn');
+            const couponDetailsModal = document.getElementById('coupon-details-modal');
+            const useCouponBtn = document.getElementById('use-coupon-btn');
+
+            if (closeCouponModalBtn) {
+                closeCouponModalBtn.addEventListener('click', closeCouponModal);
+            }
+
+            if (useCouponBtn) {
+                useCouponBtn.addEventListener('click', function() {
+                    alert('优惠券使用成功');
+                    closeCouponModal();
+                });
+            }
+
+            // Close modal when clicking outside
+            if (couponDetailsModal) {
+                couponDetailsModal.addEventListener('click', function(e) {
+                    if (e.target === couponDetailsModal) {
+                        closeCouponModal();
+                    }
+                });
+            }
+        });
+
+        function renderCoupons() {
+            const couponList = document.getElementById('coupon-list');
+            const emptyState = document.getElementById('empty-state');
+
+            // Filter coupons
+            let filteredCoupons = coupons;
+            if (currentFilter !== 'all') {
+                filteredCoupons = coupons.filter(coupon => coupon.status === currentFilter);
+            }
+
+            // Clear and render
+            couponList.innerHTML = '';
+
+            if (filteredCoupons.length === 0) {
+                emptyState.classList.remove('hidden');
+                couponList.classList.add('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+                couponList.classList.remove('hidden');
+
+                filteredCoupons.forEach(coupon => {
+                    const couponCard = document.createElement('div');
+                    couponCard.className = `coupon-card ${coupon.status === 'expired' ? 'coupon-expired' : ''}`;
+                    couponCard.style.cursor = 'pointer';
+
+                    let statusText = '';
+                    if (coupon.status === 'expired') {
+                        statusText = '已过期';
+                    } else if (coupon.status === 'used') {
+                        statusText = '已使用';
+                    } else {
+                        statusText = '可用';
+                    }
+
+                    const expiryDate = new Date(coupon.expiryDate);
+                    const formattedDate = expiryDate.toLocaleDateString('zh-CN', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit'
+                    });
+
+                    couponCard.innerHTML = `
+                        <div class="coupon-status-badge">${statusText}</div>
+                        <div class="coupon-card-content">
+                            <div style="background: rgba(255, 0, 0, 0.7); padding: 8px 12px; border-radius: 6px; display: inline-block; margin-bottom: 12px;">
+                                <span style="font-size: 24px; font-weight: 700; color: white;">${coupon.discount}</span>
+                            </div>
+                            <div style="font-size: 18px; font-weight: 700; margin-bottom: 8px; color: white; line-height: 1.3;">${coupon.name}</div>
+                            <div class="coupon-description">${coupon.description}</div>
+                            <div class="coupon-footer">
+                                有效期至：${formattedDate}
+                            </div>
+                        </div>
+                    `;
+
+                    // Add click event to open modal
+                    couponCard.addEventListener('click', function() {
+                        openCouponModal(coupon);
+                    });
+
+                    // Add hover effect for available coupons
+                    if (coupon.status === 'available') {
+                        couponCard.addEventListener('mouseenter', function() {
+                            this.style.transform = 'translateY(-4px)';
+                            this.style.boxShadow = '0 12px 24px rgba(41, 121, 255, 0.2)';
+                            this.style.transition = 'all 0.3s ease';
+                        });
+                        couponCard.addEventListener('mouseleave', function() {
+                            this.style.transform = 'translateY(0)';
+                            this.style.boxShadow = 'none';
+                        });
+                    }
+
+                    couponList.appendChild(couponCard);
+                });
+            }
+        }
+
+        // Open coupon details modal
+        function openCouponModal(coupon) {
+            const modal = document.getElementById('coupon-details-modal');
+            const nameEl = document.getElementById('modal-coupon-name');
+            const discountEl = document.getElementById('modal-coupon-discount');
+            const descriptionEl = document.getElementById('modal-coupon-description');
+            const rulesEl = document.getElementById('modal-coupon-rules');
+            const infoEl = document.getElementById('modal-coupon-info');
+
+            nameEl.textContent = coupon.name;
+            discountEl.textContent = coupon.discount;
+            descriptionEl.textContent = coupon.description;
+
+            // Populate rules
+            rulesEl.innerHTML = coupon.rules.map(rule => `
+                <li class="text-base text-slate-700 flex items-start">
+                    <span class="mr-3 font-bold text-primary text-lg">•</span>
+                    <span>${rule}</span>
+                </li>
+            `).join('');
+
+            // Add additional info
+            const expiryDate = new Date(coupon.expiryDate);
+            const formattedDate = expiryDate.toLocaleDateString('zh-CN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            });
+
+            infoEl.innerHTML = `
+                <div><span class="font-semibold text-slate-800">最低消费：</span> ¥${coupon.minAmount}</div>
+                <div><span class="font-semibold text-slate-800">优惠类型：</span> ${coupon.discountPercent}% 折扣</div>
+                <div><span class="font-semibold text-slate-800">有效期至：</span> ${formattedDate}</div>
+            `;
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        // Close coupon modal
+        function closeCouponModal() {
+            const modal = document.getElementById('coupon-details-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+    </script>
+</body>
+</html>

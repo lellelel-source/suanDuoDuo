@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>&#35774;&#22791;&#36716;&#31199; - &#31639;&#21147;&#22810;&#22810;</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        // Custom color configuration for Tailwind CSS
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#2979FF', // Main color
+                        'primary-dark': '#1e66e6',
+                        'primary-light': '#e3f2fd',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Include the navigation component -->
+    <script src="../component/navigation.js"></script>
+    <script src="../component/top.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', 'sans-serif';
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .nav-active {
+            background-color: #2979FF;
+            /* primary */
+            color: white;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-100">
+    <div id="app-container" class="h-screen flex flex-col bg-slate-100">
+        <!-- Header and Navigation will be populated by JavaScript -->
+        <div class="flex flex-1 overflow-hidden">
+            <!-- Main Content -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto p-6">
+                <div class="space-y-6">
+                    <!-- Sublease List -->
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 id="page-title" class="text-lg font-semibold text-slate-800"></h3>
+                            <div class="flex gap-3">
+                                <button onclick="showNewSubleaseModal()"
+                                    id="btn-publish"
+                                    class="bg-orange-500 text-white font-semibold px-4 py-2 rounded-lg text-sm hover:bg-orange-600 transition-colors">
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Tabs -->
+                        <div class="border-b border-gray-200">
+                            <nav class="-mb-px flex space-x-6" aria-label="Tabs">
+                                <a href="#" data-tab="all" onclick="switchTab('all'); return false;"
+                                    class="tab-link border-primary text-primary whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm">
+                                    <span id="tab-all-label"></span> <span id="count-all"
+                                        class="bg-primary-light text-primary ml-2 px-2 py-0.5 rounded-full text-xs font-semibold">0</span>
+                                </a>
+                                <a href="#" data-tab="active" onclick="switchTab('active'); return false;"
+                                    class="tab-link border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm">
+                                    <span id="tab-active-label"></span> <span id="count-active"
+                                        class="bg-slate-100 text-slate-600 ml-2 px-2 py-0.5 rounded-full text-xs font-semibold">0</span>
+                                </a>
+                                <a href="#" data-tab="rented" onclick="switchTab('rented'); return false;"
+                                    class="tab-link border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm">
+                                    <span id="tab-rented-label"></span> <span id="count-rented"
+                                        class="bg-slate-100 text-slate-600 ml-2 px-2 py-0.5 rounded-full text-xs font-semibold">0</span>
+                                </a>
+                                <a href="#" data-tab="expired" onclick="switchTab('expired'); return false;"
+                                    class="tab-link border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm">
+                                    <span id="tab-expired-label"></span> <span id="count-expired"
+                                        class="bg-slate-100 text-slate-600 ml-2 px-2 py-0.5 rounded-full text-xs font-semibold">0</span>
+                                </a>
+                            </nav>
+                        </div>
+
+                        <!-- Sublease Cards -->
+                        <div id="sublease-cards-container"
+                            class="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <!-- Cards will be populated by JavaScript -->
+                        </div>
+
+                        <!-- Empty State -->
+                        <div id="empty-state" class="hidden mt-6 text-center py-12">
+                            <svg class="mx-auto h-12 w-12 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                            </svg>
+                            <h3 id="empty-title" class="mt-2 text-sm font-medium text-slate-900"></h3>
+                            <p id="empty-desc" class="mt-1 text-sm text-slate-500"></p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="sublease.js"></script>
+</body>
+
+</html>

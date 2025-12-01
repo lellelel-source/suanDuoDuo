@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>区级政府仪表盘</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#2979FF',
+                        'primary-dark': '#1e66e6',
+                        'primary-light': '#e3f2fd',
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="govNavigation.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .nav-active {
+            background-color: #2979FF;
+            color: white;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+
+        .filter-btn.active {
+            background-color: #2979FF;
+            color: white;
+        }
+
+        .dimension-btn.active {
+            background-color: #2979FF;
+            color: white;
+        }
+
+        .trend-btn.active {
+            background-color: #2979FF;
+            color: white;
+        }
+
+        .tab-btn.active {
+            border-color: #2979FF;
+            color: #2979FF;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-100">
+    <div id="app-container" class="h-screen flex flex-col bg-slate-100">
+        <header class="bg-white border-b border-slate-200 px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <button id="menu-toggle" class="sm:hidden mr-4 text-slate-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                    <h1 class="text-xl font-bold text-slate-800">实际消耗与财政补贴概览</h1>
+                </div>
+                <div class="text-sm text-slate-500">最后更新: <span id="last-updated"></span></div>
+            </div>
+        </header>
+        <div class="flex flex-1 overflow-hidden">
+            <main class="flex-1 overflow-x-hidden overflow-y-auto p-6">
+                <!-- Filter Controls -->
+                <div class="bg-white p-4 rounded-lg shadow mb-6">
+                    <div class="flex flex-wrap items-center gap-6">
+                        <!-- Time Duration Filter -->
+                        <div class="flex items-center space-x-3">
+                            <span class="text-sm font-medium text-slate-600">
+                                <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                    </path>
+                                </svg>
+                                时间范围:
+                            </span>
+                            <div class="flex items-center space-x-2">
+                                <input type="date" id="start-date"
+                                    class="px-3 py-1.5 border border-slate-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <span class="text-slate-400">至</span>
+                                <input type="date" id="end-date"
+                                    class="px-3 py-1.5 border border-slate-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                            <!-- Quick Select Buttons -->
+                            <div class="flex bg-slate-100 rounded-lg p-1 ml-2">
+                                <button
+                                    class="filter-btn px-3 py-1 rounded-md text-xs font-medium text-slate-600 hover:bg-slate-200 transition-colors"
+                                    data-range="week">本周</button>
+                                <button
+                                    class="filter-btn px-3 py-1 rounded-md text-xs font-medium text-slate-600 hover:bg-slate-200 transition-colors"
+                                    data-range="month">本月</button>
+                                <button
+                                    class="filter-btn px-3 py-1 rounded-md text-xs font-medium text-slate-600 hover:bg-slate-200 transition-colors"
+                                    data-range="quarter">本季度</button>
+                                <button
+                                    class="filter-btn active px-3 py-1 rounded-md text-xs font-medium transition-colors"
+                                    data-range="year">本年</button>
+                            </div>
+                        </div>
+                        <!-- Dimension Filter (Park/Enterprise) -->
+                        <div class="flex items-center space-x-3">
+                            <span class="text-sm font-medium text-slate-600">
+                                <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                    </path>
+                                </svg>
+                                数据维度:
+                            </span>
+                            <div class="flex bg-slate-100 rounded-lg p-1">
+                                <button
+                                    class="dimension-btn active px-4 py-1.5 rounded-md text-sm font-medium transition-colors"
+                                    data-dimension="enterprise">企业</button>
+                                <button
+                                    class="dimension-btn px-4 py-1.5 rounded-md text-sm font-medium text-slate-600 hover:bg-slate-200 transition-colors"
+                                    data-dimension="park">园区</button>
+                            </div>
+                        </div>
+                        <!-- Apply Button -->
+                        <button id="apply-filter-btn"
+                            class="ml-auto px-4 py-1.5 bg-primary text-white rounded-md text-sm font-medium hover:bg-primary-dark transition-colors">
+                            <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z">
+                                </path>
+                            </svg>
+                            应用筛选
+                        </button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-slate-500">实际消耗总额</p>
+                                <p id="stat-consumption" class="text-2xl font-bold text-slate-800 mt-2">0 元</p>
+                            </div>
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-slate-500">财政补贴总额</p>
+                                <p id="stat-subsidy" class="text-2xl font-bold text-green-600 mt-2">0 元</p>
+                            </div>
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-slate-500" id="count-label">企业数量</p>
+                                <p id="stat-count" class="text-2xl font-bold text-slate-800 mt-2">0</p>
+                            </div>
+                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                                <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                    <!-- Bar Chart: Consumption vs Subsidy -->
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-4">消耗与补贴对比</h3>
+                        <div class="h-72">
+                            <canvas id="barChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Doughnut Chart: Distribution -->
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-4">消耗分布</h3>
+                        <div class="h-72">
+                            <canvas id="doughnutChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Line Chart: Trend with granularity selector -->
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-slate-800">趋势分析</h3>
+                            <div class="flex bg-slate-100 rounded-lg p-1">
+                                <button
+                                    class="trend-btn px-3 py-1 rounded-md text-xs font-medium text-slate-600 hover:bg-slate-200 transition-colors"
+                                    data-granularity="quarter">季</button>
+                                <button
+                                    class="trend-btn active px-3 py-1 rounded-md text-xs font-medium transition-colors"
+                                    data-granularity="month">月</button>
+                                <button
+                                    class="trend-btn px-3 py-1 rounded-md text-xs font-medium text-slate-600 hover:bg-slate-200 transition-colors"
+                                    data-granularity="week">周</button>
+                                <button
+                                    class="trend-btn px-3 py-1 rounded-md text-xs font-medium text-slate-600 hover:bg-slate-200 transition-colors"
+                                    data-granularity="day">日</button>
+                            </div>
+                        </div>
+                        <div class="h-72">
+                            <canvas id="lineChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Horizontal Bar: Top Performers -->
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-4">补贴排行榜</h3>
+                        <div class="h-72">
+                            <canvas id="horizontalBarChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Charts Row -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                    <!-- Radar Chart: Multi-dimensional Analysis -->
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-4">多维度分析</h3>
+                        <div class="h-64">
+                            <canvas id="radarChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Polar Area Chart: Subsidy Ratio -->
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-4">补贴比例分析</h3>
+                        <div class="h-64">
+                            <canvas id="polarChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow">
+                    <div class="border-b border-slate-200 px-6 py-4">
+                        <h3 class="text-lg font-semibold text-slate-800">
+                            <span id="table-title">企业</span>详细数据
+                        </h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm text-left text-slate-500">
+                                <thead class="text-xs text-slate-700 uppercase bg-slate-50">
+                                    <tr>
+                                        <th class="px-6 py-3">名称</th>
+                                        <th class="px-6 py-3">总实际消耗 (元)</th>
+                                        <th class="px-6 py-3">总财政补贴 (元)</th>
+                                        <th class="px-6 py-3">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="data-table-body"></tbody>
+                            </table>
+                        </div>
+                        <div class="mt-6 flex items-center justify-between">
+                            <div class="text-sm text-slate-600">
+                                显示 <span id="pagination-start" class="font-medium">1</span> 至 <span id="pagination-end"
+                                    class="font-medium">10</span> 条，共 <span id="pagination-total"
+                                    class="font-medium">0</span> 条记录
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button id="prev-btn"
+                                    class="px-3 py-1 border border-slate-300 rounded-md text-sm text-slate-600 hover:bg-slate-50 disabled:opacity-50"
+                                    disabled>上一页</button>
+                                <button id="next-btn"
+                                    class="px-3 py-1 border border-slate-300 rounded-md text-sm text-slate-600 hover:bg-slate-50 disabled:opacity-50">下一页</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Daily Details Modal -->
+    <div id="daily-details-modal" class="hidden fixed inset-0 z-50 overflow-y-auto">
+        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:p-0">
+            <!-- Background overlay -->
+            <div class="fixed inset-0 transition-opacity bg-slate-500 bg-opacity-75" onclick="closeDailyDetails()"></div>
+
+            <!-- Modal panel -->
+            <div class="relative inline-block overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
+                <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
+                    <h3 id="modal-title" class="text-lg font-semibold text-slate-800">每日明细</h3>
+                    <button onclick="closeDailyDetails()" class="text-slate-400 hover:text-slate-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div id="modal-body" class="px-6 py-4 max-h-96 overflow-y-auto">
+                    <!-- Daily data will be inserted here -->
+                </div>
+                <div class="px-6 py-4 border-t border-slate-200 bg-slate-50 flex justify-end">
+                    <button onclick="closeDailyDetails()" class="px-4 py-2 bg-slate-200 text-slate-700 rounded-md text-sm font-medium hover:bg-slate-300 transition-colors">
+                        关闭
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const mockData = {
+            enterprise: {
+                total: [
+                    { name: '华为技术有限公司', consumption: 1500000, subsidy: 450000 },
+                    { name: '阿里云计算有限公司', consumption: 2800000, subsidy: 840000 },
+                    { name: '腾讯科技有限公司', consumption: 950000, subsidy: 285000 },
+                    { name: '百度智能云公司', consumption: 1800000, subsidy: 540000 },
+                    { name: '中兴通讯股份有限公司', consumption: 1200000, subsidy: 360000 },
+                    { name: '科大讯飞股份有限公司', consumption: 2200000, subsidy: 660000 },
+                    { name: '商汤科技有限公司', consumption: 750000, subsidy: 225000 },
+                    { name: '寒武纪科技有限公司', consumption: 3500000, subsidy: 1050000 },
+                    { name: '旷视科技有限公司', consumption: 1900000, subsidy: 570000 },
+                    { name: '云从科技有限公司', consumption: 850000, subsidy: 255000 },
+                    { name: '依图科技有限公司', consumption: 1100000, subsidy: 330000 },
+                    { name: '地平线机器人公司', consumption: 1450000, subsidy: 435000 }
+                ],
+                weekly: [
+                    { name: '华为技术有限公司', consumption: 32000, subsidy: 9600 },
+                    { name: '阿里云计算有限公司', consumption: 58000, subsidy: 17400 },
+                    { name: '腾讯科技有限公司', consumption: 19800, subsidy: 5940 },
+                    { name: '百度智能云公司', consumption: 37500, subsidy: 11250 },
+                    { name: '中兴通讯股份有限公司', consumption: 25000, subsidy: 7500 },
+                    { name: '科大讯飞股份有限公司', consumption: 45800, subsidy: 13740 }
+                ],
+                monthly: [
+                    { name: '华为技术有限公司', consumption: 125000, subsidy: 37500 },
+                    { name: '阿里云计算有限公司', consumption: 230000, subsidy: 69000 },
+                    { name: '腾讯科技有限公司', consumption: 80000, subsidy: 24000 },
+                    { name: '百度智能云公司', consumption: 150000, subsidy: 45000 },
+                    { name: '中兴通讯股份有限公司', consumption: 100000, subsidy: 30000 },
+                    { name: '科大讯飞股份有限公司', consumption: 180000, subsidy: 54000 },
+                    { name: '商汤科技有限公司', consumption: 62500, subsidy: 18750 },
+                    { name: '寒武纪科技有限公司', consumption: 291000, subsidy: 87300 }
+                ],
+                quarterly: [
+                    { name: '华为技术有限公司', consumption: 375000, subsidy: 112500 },
+                    { name: '阿里云计算有限公司', consumption: 700000, subsidy: 210000 },
+                    { name: '腾讯科技有限公司', consumption: 240000, subsidy: 72000 },
+                    { name: '百度智能云公司', consumption: 450000, subsidy: 135000 },
+                    { name: '中兴通讯股份有限公司', consumption: 300000, subsidy: 90000 },
+                    { name: '科大讯飞股份有限公司', consumption: 550000, subsidy: 165000 },
+                    { name: '商汤科技有限公司', consumption: 187500, subsidy: 56250 },
+                    { name: '寒武纪科技有限公司', consumption: 875000, subsidy: 262500 },
+                    { name: '旷视科技有限公司', consumption: 475000, subsidy: 142500 },
+                    { name: '云从科技有限公司', consumption: 212500, subsidy: 63750 }
+                ]
+            },
+            park: {
+                total: [
+                    { name: '中关村科技园区', consumption: 8500000, subsidy: 2550000 },
+                    { name: '张江高科技园区', consumption: 6200000, subsidy: 1860000 },
+                    { name: '深圳南山科技园', consumption: 4800000, subsidy: 1440000 },
+                    { name: '杭州云栖小镇', consumption: 7200000, subsidy: 2160000 },
+                    { name: '武汉光谷产业园', consumption: 3900000, subsidy: 1170000 },
+                    { name: '成都天府软件园', consumption: 5500000, subsidy: 1650000 },
+                    { name: '西安高新技术区', consumption: 4200000, subsidy: 1260000 },
+                    { name: '苏州工业园区', consumption: 5800000, subsidy: 1740000 },
+                    { name: '合肥高新技术区', consumption: 3200000, subsidy: 960000 },
+                    { name: '南京软件谷', consumption: 4500000, subsidy: 1350000 }
+                ],
+                weekly: [
+                    { name: '中关村科技园区', consumption: 175000, subsidy: 52500 },
+                    { name: '张江高科技园区', consumption: 128000, subsidy: 38400 },
+                    { name: '深圳南山科技园', consumption: 99000, subsidy: 29700 },
+                    { name: '杭州云栖小镇', consumption: 148000, subsidy: 44400 },
+                    { name: '武汉光谷产业园', consumption: 80500, subsidy: 24150 },
+                    { name: '成都天府软件园', consumption: 113500, subsidy: 34050 }
+                ],
+                monthly: [
+                    { name: '中关村科技园区', consumption: 700000, subsidy: 210000 },
+                    { name: '张江高科技园区', consumption: 520000, subsidy: 156000 },
+                    { name: '深圳南山科技园', consumption: 400000, subsidy: 120000 },
+                    { name: '杭州云栖小镇', consumption: 600000, subsidy: 180000 },
+                    { name: '武汉光谷产业园', consumption: 325000, subsidy: 97500 },
+                    { name: '成都天府软件园', consumption: 458000, subsidy: 137400 },
+                    { name: '西安高新技术区', consumption: 350000, subsidy: 105000 },
+                    { name: '苏州工业园区', consumption: 483000, subsidy: 144900 }
+                ],
+                quarterly: [
+                    { name: '中关村科技园区', consumption: 2125000, subsidy: 637500 },
+                    { name: '张江高科技园区', consumption: 1550000, subsidy: 465000 },
+                    { name: '深圳南山科技园', consumption: 1200000, subsidy: 360000 },
+                    { name: '杭州云栖小镇', consumption: 1800000, subsidy: 540000 },
+                    { name: '武汉光谷产业园', consumption: 975000, subsidy: 292500 },
+                    { name: '成都天府软件园', consumption: 1375000, subsidy: 412500 },
+                    { name: '西安高新技术区', consumption: 1050000, subsidy: 315000 },
+                    { name: '苏州工业园区', consumption: 1450000, subsidy: 435000 },
+                    { name: '合肥高新技术区', consumption: 800000, subsidy: 240000 }
+                ]
+            }
+        };
+        let currentPeriod = 'total', currentDimension = 'enterprise', currentPage = 1;
+        const itemsPerPage = 10;
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const dimensionBtns = document.querySelectorAll('.dimension-btn');
+        const tableBody = document.getElementById('data-table-body');
+        const formatNumber = num => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        const getCurrentData = () => mockData[currentDimension][currentPeriod] || [];
+
+        // Chart instances
+        let barChart, doughnutChart, lineChart, horizontalBarChart, radarChart, polarChart;
+        let currentTrendGranularity = 'month';
+
+        // Chart colors
+        const chartColors = {
+            primary: '#2979FF',
+            primaryLight: 'rgba(41, 121, 255, 0.2)',
+            green: '#10b981',
+            greenLight: 'rgba(16, 185, 129, 0.2)',
+            purple: '#8b5cf6',
+            orange: '#f59e0b',
+            red: '#ef4444',
+            cyan: '#06b6d4',
+            pink: '#ec4899',
+            indigo: '#6366f1',
+            palette: ['#2979FF', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#06b6d4', '#ec4899', '#6366f1', '#84cc16', '#f97316']
+        };
+
+        // Trend data for different granularities
+        const trendData = {
+            enterprise: {
+                quarter: {
+                    labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                    consumption: [3800000, 4200000, 4500000, 4900000],
+                    subsidy: [1140000, 1260000, 1350000, 1470000]
+                },
+                month: {
+                    labels: ['7月', '8月', '9月', '10月', '11月', '12月'],
+                    consumption: [680000, 750000, 820000, 890000, 865000, 920000],
+                    subsidy: [204000, 225000, 246000, 267000, 259500, 276000]
+                },
+                week: {
+                    labels: ['第1周', '第2周', '第3周', '第4周'],
+                    consumption: [215000, 228000, 242000, 235000],
+                    subsidy: [64500, 68400, 72600, 70500]
+                },
+                day: {
+                    labels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+                    consumption: [32000, 35000, 38000, 36000, 34000, 28000, 25000],
+                    subsidy: [9600, 10500, 11400, 10800, 10200, 8400, 7500]
+                }
+            },
+            park: {
+                quarter: {
+                    labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                    consumption: [7200000, 7800000, 8400000, 9100000],
+                    subsidy: [2160000, 2340000, 2520000, 2730000]
+                },
+                month: {
+                    labels: ['7月', '8月', '9月', '10月', '11月', '12月'],
+                    consumption: [2100000, 2300000, 2450000, 2600000, 2550000, 2800000],
+                    subsidy: [630000, 690000, 735000, 780000, 765000, 840000]
+                },
+                week: {
+                    labels: ['第1周', '第2周', '第3周', '第4周'],
+                    consumption: [650000, 680000, 710000, 690000],
+                    subsidy: [195000, 204000, 213000, 207000]
+                },
+                day: {
+                    labels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+                    consumption: [95000, 102000, 108000, 105000, 98000, 85000, 78000],
+                    subsidy: [28500, 30600, 32400, 31500, 29400, 25500, 23400]
+                }
+            }
+        };
+
+        // Radar chart dimensions
+        const radarDimensions = {
+            enterprise: {
+                labels: ['算力使用', '存储占用', '网络带宽', '任务数量', 'GPU利用率'],
+                datasets: [
+                    { label: '华为技术有限公司', data: [85, 72, 68, 90, 78] },
+                    { label: '阿里云计算有限公司', data: [92, 88, 85, 78, 95] }
+                ]
+            },
+            park: {
+                labels: ['算力使用', '存储占用', '网络带宽', '任务数量', 'GPU利用率'],
+                datasets: [
+                    { label: '中关村科技园区', data: [88, 75, 82, 85, 80] },
+                    { label: '张江高科技园区', data: [78, 82, 70, 88, 75] }
+                ]
+            }
+        };
+
+        function initCharts() {
+            const data = getCurrentData();
+
+            // Bar Chart - Consumption vs Subsidy
+            const barCtx = document.getElementById('barChart').getContext('2d');
+            barChart = new Chart(barCtx, {
+                type: 'bar',
+                data: {
+                    labels: data.slice(0, 6).map(d => d.name.length > 6 ? d.name.substring(0, 6) + '...' : d.name),
+                    datasets: [
+                        {
+                            label: '实际消耗',
+                            data: data.slice(0, 6).map(d => d.consumption),
+                            backgroundColor: chartColors.primary,
+                            borderRadius: 4
+                        },
+                        {
+                            label: '财政补贴',
+                            data: data.slice(0, 6).map(d => d.subsidy),
+                            backgroundColor: chartColors.green,
+                            borderRadius: 4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top' },
+                        tooltip: {
+                            callbacks: {
+                                label: ctx => ctx.dataset.label + ': ' + formatNumber(ctx.raw) + ' 元'
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: value => (value / 10000) + '万'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Doughnut Chart - Distribution
+            const doughnutCtx = document.getElementById('doughnutChart').getContext('2d');
+            doughnutChart = new Chart(doughnutCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: data.slice(0, 8).map(d => d.name.length > 8 ? d.name.substring(0, 8) + '...' : d.name),
+                    datasets: [{
+                        data: data.slice(0, 8).map(d => d.consumption),
+                        backgroundColor: chartColors.palette.slice(0, 8),
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'right', labels: { boxWidth: 12, font: { size: 11 } } },
+                        tooltip: {
+                            callbacks: {
+                                label: ctx => ctx.label + ': ' + formatNumber(ctx.raw) + ' 元'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Line Chart - Trend with granularity
+            const lineCtx = document.getElementById('lineChart').getContext('2d');
+            const currentTrend = trendData[currentDimension][currentTrendGranularity];
+            lineChart = new Chart(lineCtx, {
+                type: 'line',
+                data: {
+                    labels: currentTrend.labels,
+                    datasets: [
+                        {
+                            label: '实际消耗',
+                            data: currentTrend.consumption,
+                            borderColor: chartColors.primary,
+                            backgroundColor: chartColors.primaryLight,
+                            tension: 0.4,
+                            fill: true
+                        },
+                        {
+                            label: '财政补贴',
+                            data: currentTrend.subsidy,
+                            borderColor: chartColors.green,
+                            backgroundColor: chartColors.greenLight,
+                            tension: 0.4,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top' },
+                        tooltip: {
+                            callbacks: {
+                                label: ctx => ctx.dataset.label + ': ' + formatNumber(ctx.raw) + ' 元'
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: value => (value / 10000) + '万'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Horizontal Bar Chart - Top Performers by Subsidy
+            const horizontalCtx = document.getElementById('horizontalBarChart').getContext('2d');
+            const sortedBySubsidy = [...data].sort((a, b) => b.subsidy - a.subsidy).slice(0, 6);
+            horizontalBarChart = new Chart(horizontalCtx, {
+                type: 'bar',
+                data: {
+                    labels: sortedBySubsidy.map(d => d.name.length > 10 ? d.name.substring(0, 10) + '...' : d.name),
+                    datasets: [{
+                        label: '财政补贴',
+                        data: sortedBySubsidy.map(d => d.subsidy),
+                        backgroundColor: chartColors.palette.slice(0, 6),
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: ctx => '财政补贴: ' + formatNumber(ctx.raw) + ' 元'
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: value => (value / 10000) + '万'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Radar Chart - Multi-dimensional Analysis
+            const radarCtx = document.getElementById('radarChart').getContext('2d');
+            const radarData = radarDimensions[currentDimension];
+            radarChart = new Chart(radarCtx, {
+                type: 'radar',
+                data: {
+                    labels: radarData.labels,
+                    datasets: radarData.datasets.map((ds, i) => ({
+                        label: ds.label.length > 8 ? ds.label.substring(0, 8) + '...' : ds.label,
+                        data: ds.data,
+                        borderColor: chartColors.palette[i],
+                        backgroundColor: chartColors.palette[i] + '33',
+                        borderWidth: 2,
+                        pointBackgroundColor: chartColors.palette[i]
+                    }))
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top', labels: { boxWidth: 12, font: { size: 10 } } }
+                    },
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: { stepSize: 20, font: { size: 9 } }
+                        }
+                    }
+                }
+            });
+
+            // Polar Area Chart - Subsidy Ratio
+            const polarCtx = document.getElementById('polarChart').getContext('2d');
+            const subsidyRatios = data.slice(0, 6).map(d => ((d.subsidy / d.consumption) * 100).toFixed(1));
+            polarChart = new Chart(polarCtx, {
+                type: 'polarArea',
+                data: {
+                    labels: data.slice(0, 6).map(d => d.name.length > 6 ? d.name.substring(0, 6) + '...' : d.name),
+                    datasets: [{
+                        data: subsidyRatios,
+                        backgroundColor: chartColors.palette.slice(0, 6).map(c => c + '99')
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'right', labels: { boxWidth: 10, font: { size: 10 } } },
+                        tooltip: {
+                            callbacks: {
+                                label: ctx => ctx.label + ': ' + ctx.raw + '%'
+                            }
+                        }
+                    },
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            ticks: { font: { size: 9 } }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateCharts() {
+            const data = getCurrentData();
+
+            // Update Bar Chart
+            barChart.data.labels = data.slice(0, 6).map(d => d.name.length > 6 ? d.name.substring(0, 6) + '...' : d.name);
+            barChart.data.datasets[0].data = data.slice(0, 6).map(d => d.consumption);
+            barChart.data.datasets[1].data = data.slice(0, 6).map(d => d.subsidy);
+            barChart.update();
+
+            // Update Doughnut Chart
+            doughnutChart.data.labels = data.slice(0, 8).map(d => d.name.length > 8 ? d.name.substring(0, 8) + '...' : d.name);
+            doughnutChart.data.datasets[0].data = data.slice(0, 8).map(d => d.consumption);
+            doughnutChart.update();
+
+            // Update Line Chart with current granularity
+            const currentTrend = trendData[currentDimension][currentTrendGranularity];
+            lineChart.data.labels = currentTrend.labels;
+            lineChart.data.datasets[0].data = currentTrend.consumption;
+            lineChart.data.datasets[1].data = currentTrend.subsidy;
+            lineChart.update();
+
+            // Update Horizontal Bar Chart
+            const sortedBySubsidy = [...data].sort((a, b) => b.subsidy - a.subsidy).slice(0, 6);
+            horizontalBarChart.data.labels = sortedBySubsidy.map(d => d.name.length > 10 ? d.name.substring(0, 10) + '...' : d.name);
+            horizontalBarChart.data.datasets[0].data = sortedBySubsidy.map(d => d.subsidy);
+            horizontalBarChart.update();
+
+            // Update Radar Chart
+            const radarData = radarDimensions[currentDimension];
+            radarChart.data.datasets = radarData.datasets.map((ds, i) => ({
+                label: ds.label.length > 8 ? ds.label.substring(0, 8) + '...' : ds.label,
+                data: ds.data,
+                borderColor: chartColors.palette[i],
+                backgroundColor: chartColors.palette[i] + '33',
+                borderWidth: 2,
+                pointBackgroundColor: chartColors.palette[i]
+            }));
+            radarChart.update();
+
+            // Update Polar Chart
+            const subsidyRatios = data.slice(0, 6).map(d => ((d.subsidy / d.consumption) * 100).toFixed(1));
+            polarChart.data.labels = data.slice(0, 6).map(d => d.name.length > 6 ? d.name.substring(0, 6) + '...' : d.name);
+            polarChart.data.datasets[0].data = subsidyRatios;
+            polarChart.update();
+        }
+
+        function updateTrendChart() {
+            const currentTrend = trendData[currentDimension][currentTrendGranularity];
+            lineChart.data.labels = currentTrend.labels;
+            lineChart.data.datasets[0].data = currentTrend.consumption;
+            lineChart.data.datasets[1].data = currentTrend.subsidy;
+            lineChart.update();
+        }
+        function updateTableTitle() {
+            const tableTitle = document.getElementById('table-title');
+            const dimensionLabel = currentDimension === 'enterprise' ? '企业' : '园区';
+            tableTitle.textContent = dimensionLabel;
+        }
+
+        function updateStats() {
+            const data = getCurrentData();
+            const totalConsumption = data.reduce((sum, item) => sum + item.consumption, 0);
+            const totalSubsidy = data.reduce((sum, item) => sum + item.subsidy, 0);
+            document.getElementById('stat-consumption').textContent = formatNumber(totalConsumption) + ' 元';
+            document.getElementById('stat-subsidy').textContent = formatNumber(totalSubsidy) + ' 元';
+            document.getElementById('stat-count').textContent = data.length;
+            document.getElementById('count-label').textContent = currentDimension === 'enterprise' ? '企业数量' : '园区数量';
+            updateTableTitle();
+        }
+        function renderTable() {
+            const data = getCurrentData();
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = Math.min(start + itemsPerPage, data.length);
+            tableBody.innerHTML = data.slice(start, end).map((item, index) => `
+                <tr class="bg-white border-b hover:bg-slate-50">
+                    <td class="px-6 py-4 font-medium text-slate-800">${item.name}</td>
+                    <td class="px-6 py-4">${formatNumber(item.consumption)}</td>
+                    <td class="px-6 py-4 text-green-600 font-medium">${formatNumber(item.subsidy)}</td>
+                    <td class="px-6 py-4">
+                        <button onclick="showDailyDetails('${item.name}', ${item.consumption}, ${item.subsidy})" class="text-primary hover:text-primary-dark font-medium text-sm hover:underline">每日明细</button>
+                    </td>
+                </tr>
+            `).join('');
+            document.getElementById('pagination-start').textContent = data.length > 0 ? start + 1 : 0;
+            document.getElementById('pagination-end').textContent = end;
+            document.getElementById('pagination-total').textContent = data.length;
+            document.getElementById('prev-btn').disabled = currentPage === 1;
+            document.getElementById('next-btn').disabled = end >= data.length;
+        }
+
+        // Daily details modal functions
+        function generateDailyData(name, totalConsumption, totalSubsidy) {
+            // Generate days based on current period
+            let days;
+            switch (currentPeriod) {
+                case 'weekly':
+                    days = 7;
+                    break;
+                case 'monthly':
+                    days = 30;
+                    break;
+                case 'quarterly':
+                    days = 90;
+                    break;
+                default:
+                    days = 365;
+            }
+
+            const dailyData = [];
+            const baseConsumption = totalConsumption / days;
+            const baseSubsidy = totalSubsidy / days;
+
+            for (let i = days; i >= 1; i--) {
+                const date = new Date();
+                date.setDate(date.getDate() - i);
+                const variance = 0.7 + Math.random() * 0.6;
+                dailyData.push({
+                    date: date.toLocaleDateString('zh-CN'),
+                    consumption: Math.round(baseConsumption * variance),
+                    subsidy: Math.round(baseSubsidy * variance)
+                });
+            }
+            return dailyData;
+        }
+
+        function showDailyDetails(name, totalConsumption, totalSubsidy) {
+            const modal = document.getElementById('daily-details-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalBody = document.getElementById('modal-body');
+
+            modalTitle.textContent = name + ' - 每日明细';
+
+            const dailyData = generateDailyData(name, totalConsumption, totalSubsidy);
+
+            modalBody.innerHTML = `
+                <table class="w-full text-sm text-left text-slate-500">
+                    <thead class="text-xs text-slate-700 uppercase bg-slate-50 sticky top-0">
+                        <tr>
+                            <th class="px-4 py-3">日期</th>
+                            <th class="px-4 py-3">实际消耗 (元)</th>
+                            <th class="px-4 py-3">财政补贴 (元)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${dailyData.map(day => `
+                            <tr class="bg-white border-b hover:bg-slate-50">
+                                <td class="px-4 py-3">${day.date}</td>
+                                <td class="px-4 py-3">${formatNumber(day.consumption)}</td>
+                                <td class="px-4 py-3 text-green-600 font-medium">${formatNumber(day.subsidy)}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeDailyDetails() {
+            document.getElementById('daily-details-modal').classList.add('hidden');
+        }
+        function init() {
+            document.getElementById('last-updated').textContent = new Date().toLocaleString('zh-CN');
+            const appContainer = document.querySelector('.flex.flex-1.overflow-hidden');
+            new GovNavigation({ activePage: 'dashboard', user: { name: '区级管理员', avatar: 'https://placehold.co/100x100/2979FF/ffffff?text=管' } }).init(appContainer);
+
+            // Set default date range (this year)
+            const today = new Date();
+            const startOfYear = new Date(today.getFullYear(), 0, 1);
+            document.getElementById('start-date').value = startOfYear.toISOString().split('T')[0];
+            document.getElementById('end-date').value = today.toISOString().split('T')[0];
+
+            // Initialize charts
+            initCharts();
+
+            // Date range quick select buttons
+            filterBtns.forEach(btn => btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const range = btn.dataset.range;
+                const today = new Date();
+                let startDate = new Date();
+
+                switch (range) {
+                    case 'week':
+                        const dayOfWeek = today.getDay();
+                        const diff = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+                        startDate.setDate(today.getDate() - diff);
+                        break;
+                    case 'month':
+                        startDate = new Date(today.getFullYear(), today.getMonth(), 1);
+                        break;
+                    case 'quarter':
+                        const quarter = Math.floor(today.getMonth() / 3);
+                        startDate = new Date(today.getFullYear(), quarter * 3, 1);
+                        break;
+                    case 'year':
+                        startDate = new Date(today.getFullYear(), 0, 1);
+                        break;
+                }
+
+                document.getElementById('start-date').value = startDate.toISOString().split('T')[0];
+                document.getElementById('end-date').value = today.toISOString().split('T')[0];
+            }));
+
+            // Dimension buttons
+            dimensionBtns.forEach(btn => btn.addEventListener('click', () => {
+                dimensionBtns.forEach(b => { b.classList.remove('active'); b.classList.add('text-slate-600'); });
+                btn.classList.add('active');
+                btn.classList.remove('text-slate-600');
+                currentDimension = btn.dataset.dimension;
+            }));
+
+            // Trend granularity buttons
+            const trendBtns = document.querySelectorAll('.trend-btn');
+            trendBtns.forEach(btn => btn.addEventListener('click', () => {
+                trendBtns.forEach(b => { b.classList.remove('active'); b.classList.add('text-slate-600'); });
+                btn.classList.add('active');
+                btn.classList.remove('text-slate-600');
+                currentTrendGranularity = btn.dataset.granularity;
+                updateTrendChart();
+            }));
+
+            // Apply filter button
+            document.getElementById('apply-filter-btn').addEventListener('click', () => {
+                const startDate = document.getElementById('start-date').value;
+                const endDate = document.getElementById('end-date').value;
+
+                // Determine period based on quick select or date range
+                const activeFilter = document.querySelector('.filter-btn.active');
+                if (activeFilter) {
+                    const range = activeFilter.dataset.range;
+                    switch (range) {
+                        case 'week':
+                            currentPeriod = 'weekly';
+                            break;
+                        case 'month':
+                            currentPeriod = 'monthly';
+                            break;
+                        case 'quarter':
+                            currentPeriod = 'quarterly';
+                            break;
+                        case 'year':
+                        default:
+                            currentPeriod = 'total';
+                            break;
+                    }
+                } else {
+                    // Calculate period based on date range
+                    const start = new Date(startDate);
+                    const end = new Date(endDate);
+                    const diffDays = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
+
+                    if (diffDays <= 7) {
+                        currentPeriod = 'weekly';
+                    } else if (diffDays <= 31) {
+                        currentPeriod = 'monthly';
+                    } else if (diffDays <= 92) {
+                        currentPeriod = 'quarterly';
+                    } else {
+                        currentPeriod = 'total';
+                    }
+                }
+
+                currentPage = 1;
+                updateStats();
+                renderTable();
+                updateCharts();
+            });
+
+            // Clear active on date input change
+            document.getElementById('start-date').addEventListener('change', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+            });
+            document.getElementById('end-date').addEventListener('change', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+            });
+
+            document.getElementById('prev-btn').addEventListener('click', () => { if (currentPage > 1) { currentPage--; renderTable(); } });
+            document.getElementById('next-btn').addEventListener('click', () => { if (currentPage * itemsPerPage < getCurrentData().length) { currentPage++; renderTable(); } });
+            updateStats();
+            renderTable();
+        }
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+
+</html>

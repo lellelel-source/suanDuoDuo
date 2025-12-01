@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(where:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(npm install:*)",
+      "Bash(gemini --version:*)",
+      "Bash(gemini auth login:*)",
+      "Bash(gemini auth logout:*)",
+      "Bash(gemini auth --help:*)",
+      "Bash(echo:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
