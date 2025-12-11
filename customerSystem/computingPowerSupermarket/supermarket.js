@@ -43,9 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const cloudProviderFilterRow = document.getElementById('cloud-provider-filter-row');
     const cloudContent = document.getElementById('cloud-content');
     const productListContainer = document.getElementById('product-list-container');
-    const cloudDefaultMessage = document.getElementById('cloud-default-message');
     const cloudRegistrationForm = document.getElementById('cloud-registration-form');
-    const selectedProviderSpan = document.getElementById('selected-provider');
     let currentFilters = {
         powerSource: 'IDC',
         cloudProvider: null, // No default since there's no "全部" option
@@ -341,10 +339,191 @@ document.addEventListener('DOMContentLoaded', function () {
             if (cloudProviderFilterRow) cloudProviderFilterRow.classList.remove('hidden');
             if (cloudContent) cloudContent.classList.remove('hidden');
             if (productListContainer) productListContainer.classList.add('hidden');
-            
+
             // Reset IDC filters
             resetIdcFilters();
+
+            // Check if we should show the new entity guidance popup
+            const hideUntil = localStorage.getItem('hideNewEntityPopupUntil');
+            const shouldShowPopup = !hideUntil || Date.now() > parseInt(hideUntil, 10);
+
+            if (shouldShowPopup) {
+                // Show the new entity guidance popup
+                showNewEntityGuidancePopup(() => {
+                    // Callback after popup is closed - auto-select 阿里云
+                    selectAliyunProvider();
+                });
+            } else {
+                // Skip popup and directly select 阿里云
+                selectAliyunProvider();
+            }
         }
+    }
+
+    /**
+     * Select 阿里云 as the default cloud provider
+     */
+    function selectAliyunProvider() {
+        const aliyunButton = cloudProviderFilterRow?.querySelector('button[data-filter="阿里云"]');
+        if (aliyunButton) {
+            // Remove active state from all cloud provider buttons
+            const cloudProviderButtons = cloudProviderFilterRow?.querySelectorAll('button');
+            cloudProviderButtons?.forEach(btn => btn.classList.remove('filter-btn-active'));
+
+            // Set 阿里云 as active
+            aliyunButton.classList.add('filter-btn-active');
+            currentFilters.cloudProvider = '阿里云';
+
+            // Show the registration form for 阿里云
+            handleCloudProviderSelection('阿里云');
+        }
+    }
+
+    /**
+     * Show the new entity guidance popup with countdown
+     * @param {Function} onClose - Callback function when popup is closed
+     */
+    function showNewEntityGuidancePopup(onClose) {
+        // Remove existing popup if any
+        const existingPopup = document.getElementById('new-entity-guidance-popup');
+        if (existingPopup) existingPopup.remove();
+
+        let countdown = 10;
+        let countdownInterval = null;
+
+        const popupHtml = `
+            <div id="new-entity-guidance-popup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 overflow-hidden">
+                    <div class="bg-primary p-4">
+                        <h3 class="text-xl font-bold text-white text-center">新主体 vs 老主体 - 选择指南</h3>
+                    </div>
+                    <div class="p-6">
+                        <!-- Comparison Table -->
+                        <div class="overflow-x-auto mb-6">
+                            <table class="w-full border-collapse">
+                                <thead>
+                                    <tr class="bg-slate-100">
+                                        <th class="border border-slate-300 px-4 py-3 text-left text-sm font-semibold text-slate-700">对比项</th>
+                                        <th class="border border-slate-300 px-4 py-3 text-center text-sm font-semibold text-green-700 bg-green-50">
+                                            <div class="flex items-center justify-center">
+                                                <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                                </svg>
+                                                新主体（推荐）
+                                            </div>
+                                        </th>
+                                        <th class="border border-slate-300 px-4 py-3 text-center text-sm font-semibold text-slate-600">老主体</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="border border-slate-300 px-4 py-3 text-sm text-slate-700 font-medium">首购折扣</td>
+                                        <td class="border border-slate-300 px-4 py-3 text-sm text-center text-green-700 bg-green-50 font-semibold">最高5折优惠</td>
+                                        <td class="border border-slate-300 px-4 py-3 text-sm text-center text-slate-500">无折扣</td>
+                                    </tr>
+                                    <tr class="bg-slate-50">
+                                        <td class="border border-slate-300 px-4 py-3 text-sm text-slate-700 font-medium">免费体验金</td>
+                                        <td class="border border-slate-300 px-4 py-3 text-sm text-center text-green-700 bg-green-50 font-semibold">赠送5000元</td>
+                                        <td class="border border-slate-300 px-4 py-3 text-sm text-center text-slate-500">无赠送</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-slate-300 px-4 py-3 text-sm text-slate-700 font-medium">GPU资源配额</td>
+                                        <td class="border border-slate-300 px-4 py-3 text-sm text-center text-green-700 bg-green-50 font-semibold">优先分配稀缺资源</td>
+                                        <td class="border border-slate-300 px-4 py-3 text-sm text-center text-slate-500">标准排队</td>
+                                    </tr>
+                                    <tr class="bg-slate-50">
+                                        <td class="border border-slate-300 px-4 py-3 text-sm text-slate-700 font-medium">技术支持</td>
+                                        <td class="border border-slate-300 px-4 py-3 text-sm text-center text-green-700 bg-green-50 font-semibold">专属顾问1对1服务</td>
+                                        <td class="border border-slate-300 px-4 py-3 text-sm text-center text-slate-500">标准工单支持</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-slate-300 px-4 py-3 text-sm text-slate-700 font-medium">返佣比例</td>
+                                        <td class="border border-slate-300 px-4 py-3 text-sm text-center text-green-700 bg-green-50 font-semibold">最高15%返佣</td>
+                                        <td class="border border-slate-300 px-4 py-3 text-sm text-center text-slate-500">无返佣</td>
+                                    </tr>
+                                    <tr class="bg-slate-50">
+                                        <td class="border border-slate-300 px-4 py-3 text-sm text-slate-700 font-medium">活动参与资格</td>
+                                        <td class="border border-slate-300 px-4 py-3 text-sm text-center text-green-700 bg-green-50 font-semibold">可参与新客专属活动</td>
+                                        <td class="border border-slate-300 px-4 py-3 text-sm text-center text-slate-500">仅限老客活动</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Recommendation Note -->
+                        <div class="bg-amber-50 border border-amber-300 rounded-lg p-4 mb-6">
+                            <div class="flex">
+                                <svg class="w-5 h-5 text-amber-500 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                                </svg>
+                                <div class="text-sm text-amber-800">
+                                    <strong>温馨提示：</strong>如果您的企业已在目标云厂商注册过账号，建议使用关联公司或新设立的企业主体进行注册，以享受新用户专属优惠。
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Don't show again checkbox -->
+                        <div class="flex items-center mb-4">
+                            <input type="checkbox" id="dont-show-again" class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary">
+                            <label for="dont-show-again" class="ml-2 text-sm text-slate-600">30天内不再提示</label>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="flex justify-center">
+                            <button type="button" id="close-guidance-popup" disabled
+                                    class="bg-primary hover:bg-primary-dark disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-semibold py-3 px-8 rounded-md transition-colors min-w-[200px]">
+                                我已了解 (<span id="countdown-timer">${countdown}</span>s)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        document.body.insertAdjacentHTML('beforeend', popupHtml);
+
+        const closeBtn = document.getElementById('close-guidance-popup');
+        const countdownTimer = document.getElementById('countdown-timer');
+        const dontShowAgainCheckbox = document.getElementById('dont-show-again');
+        const popup = document.getElementById('new-entity-guidance-popup');
+
+        // Start countdown
+        countdownInterval = setInterval(() => {
+            countdown--;
+            if (countdownTimer) {
+                countdownTimer.textContent = countdown;
+            }
+            if (countdown <= 0) {
+                clearInterval(countdownInterval);
+                if (closeBtn) {
+                    closeBtn.disabled = false;
+                    closeBtn.textContent = '我已了解';
+                }
+            }
+        }, 1000);
+
+        // Close button handler
+        const handleClose = () => {
+            if (countdown > 0) return; // Don't close if countdown not finished
+
+            // Check if "don't show again" is checked
+            if (dontShowAgainCheckbox?.checked) {
+                // Set expiration to 30 days from now
+                const expirationTime = Date.now() + (30 * 24 * 60 * 60 * 1000);
+                localStorage.setItem('hideNewEntityPopupUntil', expirationTime.toString());
+            }
+
+            // Clean up
+            clearInterval(countdownInterval);
+            popup?.remove();
+
+            // Call the callback
+            if (typeof onClose === 'function') {
+                onClose();
+            }
+        };
+
+        closeBtn?.addEventListener('click', handleClose);
     }
 
     /**
@@ -567,16 +746,149 @@ document.addEventListener('DOMContentLoaded', function () {
     // Cloud provider form handlers
     const submitInvitationBtn = document.getElementById('submit-invitation');
     
+    /**
+     * Simulate checking if the company is a new user for the cloud provider
+     * In production, this would be an API call to the cloud provider's system
+     * @param {string} companyName - Company name
+     * @param {string} creditCode - Unified credit code
+     * @param {string} phoneNumber - Phone number
+     * @param {string} email - Email address
+     * @param {string} provider - Cloud provider name
+     * @returns {Promise<{isNew: boolean, reason?: string}>}
+     */
+    async function checkNewUserStatus(companyName, creditCode, phoneNumber, email, provider) {
+        // Simulate API call delay
+        await new Promise(resolve => setTimeout(resolve, 800));
+        
+        // Simulated existing users database (for demo purposes)
+        const existingUsers = {
+            creditCodes: ['91110000MA01ABCD12', '91310000MA02EFGH34'],
+            phones: ['13800138000', '13900139000'],
+            emails: ['existing@company.com', 'registered@enterprise.cn']
+        };
+        
+        // Check if any of the provided info already exists
+        if (existingUsers.creditCodes.includes(creditCode)) {
+            return { isNew: false, reason: '该统一信用代码已在' + provider + '注册过账号' };
+        }
+        if (existingUsers.phones.includes(phoneNumber)) {
+            return { isNew: false, reason: '该手机号已在' + provider + '注册过账号' };
+        }
+        if (existingUsers.emails.includes(email)) {
+            return { isNew: false, reason: '该邮箱已在' + provider + '注册过账号' };
+        }
+        
+        // All checks passed - this is a new user
+        return { isNew: true };
+    }
+    
+    /**
+     * Show the new user verification result modal
+     * @param {boolean} isNew - Whether the user is new
+     * @param {string} reason - Reason if not new
+     * @param {string} provider - Cloud provider name
+     */
+    function showVerificationResult(isNew, reason, provider) {
+        // Remove existing modal if any
+        const existingModal = document.getElementById('verification-result-modal');
+        if (existingModal) existingModal.remove();
+        
+        // Cloud provider invitation links
+        const providerLinks = {
+            '阿里云': 'https://cn.aliyun.com/daily-act/ecs/activity_selection?from_alibabacloud=&userCode=cu2il7k2&gad_source=1&gad_campaignid=23089212124&gbraid=0AAAAAo5RAXubFIaqMDslqhQG9HAu26X5V&gclid=Cj0KCQiA_8TJBhDNARIsAPX5qxSMiAfwI_kAcimfDaO3gCc-pZ4a7OpN3RhWj6SMsyKCuafRTvVVssMaAtBeEALw_wcB',
+            '腾讯云': 'https://cloud.tencent.com/',
+            '火山云': 'https://www.volcengine.com/',
+            '华为云': 'https://www.huaweicloud.com/'
+        };
+        
+        const inviteLink = providerLinks[provider] || providerLinks['阿里云'];
+        
+        const modalHtml = `
+            <div id="verification-result-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4 overflow-hidden">
+                    <div class="p-6">
+                        ${isNew ? `
+                            <!-- Success State -->
+                            <div class="text-center">
+                                <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4">
+                                    <svg class="h-8 w-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-semibold text-slate-800 mb-2">验证通过</h3>
+                                <p class="text-sm text-slate-600 mb-4">
+                                    恭喜！您的企业信息验证通过，符合${provider}新用户条件。
+                                </p>
+                                <p class="text-sm text-slate-500 mb-6">
+                                    点击下方按钮前往${provider}专属邀请页面完成注册。
+                                </p>
+                                <div class="space-y-3">
+                                    <a href="${inviteLink}" target="_blank" rel="noopener noreferrer"
+                                       class="block w-full bg-primary hover:bg-primary-dark text-white font-semibold py-3 px-4 rounded-md transition-colors text-center">
+                                        前往${provider}注册
+                                    </a>
+                                    <button type="button" id="close-verification-modal"
+                                            class="block w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-2 px-4 rounded-md transition-colors">
+                                        关闭
+                                    </button>
+                                </div>
+                            </div>
+                        ` : `
+                            <!-- Failure State -->
+                            <div class="text-center">
+                                <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-red-100 mb-4">
+                                    <svg class="h-8 w-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-semibold text-slate-800 mb-2">验证未通过</h3>
+                                <p class="text-sm text-slate-600 mb-4">
+                                    抱歉，您的企业信息不符合${provider}新用户条件。
+                                </p>
+                                <div class="bg-red-50 border border-red-200 rounded-md p-3 mb-6">
+                                    <p class="text-sm text-red-700">
+                                        <strong>原因：</strong>${reason}
+                                    </p>
+                                </div>
+                                <p class="text-xs text-slate-500 mb-4">
+                                    如有疑问，请联系客服或尝试使用其他企业信息。
+                                </p>
+                                <button type="button" id="close-verification-modal"
+                                        class="block w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-2 px-4 rounded-md transition-colors">
+                                    关闭
+                                </button>
+                            </div>
+                        `}
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.body.insertAdjacentHTML('beforeend', modalHtml);
+        
+        // Add close button handler
+        document.getElementById('close-verification-modal')?.addEventListener('click', () => {
+            document.getElementById('verification-result-modal')?.remove();
+        });
+        
+        // Close on backdrop click
+        document.getElementById('verification-result-modal')?.addEventListener('click', (e) => {
+            if (e.target.id === 'verification-result-modal') {
+                e.target.remove();
+            }
+        });
+    }
+    
     if (submitInvitationBtn) {
-        submitInvitationBtn.addEventListener('click', () => {
+        submitInvitationBtn.addEventListener('click', async () => {
             const companyName = document.getElementById('company-name')?.value.trim();
             const creditCode = document.getElementById('credit-code')?.value.trim();
             const phoneNumber = document.getElementById('phone-number')?.value.trim();
             const email = document.getElementById('email')?.value.trim();
+            const provider = currentFilters.cloudProvider || '阿里云';
             
             // Validate required fields
             if (!companyName || !creditCode || !phoneNumber || !email) {
-                // Use toast instead of alert for better UX
                 if (window.suanduoToast) {
                     window.suanduoToast.error('请填写完整的企业信息');
                 } else {
@@ -587,7 +899,6 @@ document.addEventListener('DOMContentLoaded', function () {
             
             // Validate credit code length
             if (creditCode.length !== 18) {
-                // Use toast instead of alert for better UX
                 if (window.suanduoToast) {
                     window.suanduoToast.error('统一信用代码必须为18位');
                 } else {
@@ -618,18 +929,28 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
             
-            // Show success toast and redirect to Manufacturer Link page
-            if (window.suanduoToast) {
-                window.suanduoToast.success('提交成功');
+            // Show loading state
+            submitInvitationBtn.disabled = true;
+            submitInvitationBtn.innerHTML = '<span class="inline-flex items-center"><svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>验证中...</span>';
+            
+            try {
+                // Check if the company is a new user
+                const result = await checkNewUserStatus(companyName, creditCode, phoneNumber, email, provider);
                 
-                // Redirect to Manufacturer Link page after showing toast
-                setTimeout(() => {
-                    window.location.href = '../manufacturerLink/index.html';
-                }, 1000); // Wait 1 second to allow user to see the toast
-            } else {
-                // Fallback if toast is not available
-                alert(`提交成功！\n企业名称：${companyName}\n信用代码：${creditCode}\n云厂商：${currentFilters.cloudProvider}`);
-                window.location.href = '../manufacturerLink/index.html';
+                // Show verification result modal
+                showVerificationResult(result.isNew, result.reason, provider);
+                
+            } catch (error) {
+                console.error('Verification error:', error);
+                if (window.suanduoToast) {
+                    window.suanduoToast.error('验证失败，请稍后重试');
+                } else {
+                    alert('验证失败，请稍后重试');
+                }
+            } finally {
+                // Reset button state
+                submitInvitationBtn.disabled = false;
+                submitInvitationBtn.textContent = '提交';
             }
         });
     }

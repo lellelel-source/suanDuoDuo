@@ -40,9 +40,23 @@
       "Bash(claude model:*)",
       "Bash(test:*)",
       "Bash(git checkout:*)",
-      "Bash(git stash:*)"
+      "Bash(git stash:*)",
+      "Bash(git commit:*)",
+      "Bash(git remote add:*)",
+      "Bash(git push:*)",
+      "Bash(pipx:*)",
+      "Bash(pip --version:*)",
+      "Bash(pip install:*)",
+      "Bash(C:Userspc.localbinclaude-extract.exe --help)",
+      "Bash(\"/c/Users/pc/.local/bin/claude-extract.exe\" --help)",
+      "Bash(\"/c/Users/pc/.local/bin/claude-extract.exe\" --list --limit 20)",
+      "Bash(PYTHONIOENCODING=utf-8 \"/c/Users/pc/.local/bin/claude-extract.exe\":*)",
+      "Bash(printf:*)",
+      "Bash(node -e:*)",
+      "Bash(node:*)"
     ],
     "deny": [],
     "ask": []
-  }
+  },
+  "outputStyle": "default"
 }

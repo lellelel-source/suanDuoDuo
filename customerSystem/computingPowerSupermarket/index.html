@@ -224,79 +224,127 @@
 
                         <!-- Cloud Provider Content (hidden by default) -->
                         <div class="mt-6 border-t pt-6 hidden" id="cloud-content">
-                            <!-- Default message when no specific provider is selected -->
-                            <div class="text-center py-16 text-slate-500" id="cloud-default-message">
-                                <div class="text-lg font-medium mb-2">云厂商服务即将上线</div>
-                                <div class="text-sm">敬请期待阿里云、腾讯云、火山云、华为云等云厂商的算力服务</div>
-                            </div>
-
                             <!-- Cloud Provider Registration Form (hidden by default) -->
-                            <div class="hidden" id="cloud-registration-form">
-                                <div class="max-w-2xl mx-auto">
-                                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
-                                        <h3 class="text-lg font-semibold text-slate-800 mb-4">
-                                            <span id="selected-provider">阿里云</span> 新用户邀请
-                                        </h3>
+                            <div id="cloud-registration-form">
+                                <div class="flex gap-6 items-start justify-center">
+                                    <!-- Left: Blue Form -->
+                                    <div class="w-full max-w-xl">
+                                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                                            <h3 class="text-lg font-semibold text-slate-800 mb-4 text-center">
+                                                新用户邀请
+                                            </h3>
 
-                                        <div class="space-y-4">
-                                            <div>
-                                                <label for="company-name"
-                                                    class="block text-sm font-medium text-slate-700 mb-2">
-                                                    企业名称 <span class="text-red-500">*</span>
-                                                </label>
-                                                <input type="text" id="company-name" name="company-name"
-                                                    placeholder="请输入企业全称"
-                                                    class="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
-                                            </div>
-
-                                            <div>
-                                                <label for="credit-code"
-                                                    class="block text-sm font-medium text-slate-700 mb-2">
-                                                    统一信用代码 <span class="text-red-500">*</span>
-                                                </label>
-                                                <input type="text" id="credit-code" name="credit-code"
-                                                    placeholder="请输入18位统一信用代码" maxlength="18"
-                                                    class="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
-                                            </div>
-
-                                            <div>
-                                                <label for="phone-number"
-                                                    class="block text-sm font-medium text-slate-700 mb-2">
-                                                    手机号 <span class="text-red-500">*</span>
-                                                </label>
-                                                <input type="tel" id="phone-number" name="phone-number"
-                                                    placeholder="请输入手机号" maxlength="11"
-                                                    class="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
-                                            </div>
-
-                                            <div>
-                                                <label for="email"
-                                                    class="block text-sm font-medium text-slate-700 mb-2">
-                                                    邮箱 <span class="text-red-500">*</span>
-                                                </label>
-                                                <input type="email" id="email" name="email" placeholder="请输入邮箱地址"
-                                                    class="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
-                                            </div>
-
-                                            <div class="bg-amber-50 border border-amber-200 rounded-md p-3">
-                                                <div class="flex">
-                                                    <svg class="w-5 h-5 text-amber-400 mt-0.5 mr-2 flex-shrink-0"
-                                                        fill="currentColor" viewBox="0 0 20 20">
-                                                        <path fill-rule="evenodd"
-                                                            d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-                                                            clip-rule="evenodd"></path>
-                                                    </svg>
-                                                    <div class="text-sm text-amber-800">
-                                                        <strong>重要提示：</strong>您提供以上信息仅用于我们生成邀请链接，建议您在提交前确认四项信息全部未曾提交给对应厂商。
+                                            <div class="space-y-4">
+                                                <div>
+                                                    <label for="company-name"
+                                                        class="block text-sm font-medium text-slate-700 mb-2">
+                                                        选择您的企业 <span class="text-red-500">*</span>
+                                                    </label>
+                                                    <div class="relative" id="company-dropdown-container">
+                                                        <button type="button" id="company-dropdown-btn"
+                                                            class="w-full px-3 py-2 border border-slate-300 rounded-md bg-white text-left flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                                            <span id="company-selected-text" class="text-slate-400">请选择企业</span>
+                                                            <svg class="w-5 h-5 text-slate-400 transition-transform" id="dropdown-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                                            </svg>
+                                                        </button>
+                                                        <input type="hidden" id="company-name" name="company-name">
+                                                        
+                                                        <!-- Dropdown Panel -->
+                                                        <div id="company-dropdown-panel" class="absolute z-50 w-full mt-1 bg-white border border-slate-300 rounded-md shadow-lg hidden">
+                                                            <!-- Search Input -->
+                                                            <div class="p-3 border-b border-slate-200">
+                                                                <div class="relative">
+                                                                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                                                    </svg>
+                                                                    <input type="text" id="company-search-input" 
+                                                                        placeholder="请输入企业名称(2字及以上)"
+                                                                        class="w-full pl-9 pr-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+                                                                </div>
+                                                            </div>
+                                                            <!-- Options List -->
+                                                            <div id="company-options-list" class="max-h-48 overflow-y-auto">
+                                                                <div id="company-no-result" class="py-6 text-center text-slate-500 text-sm">
+                                                                    未找到企业
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="pt-4">
-                                                <button type="button" id="submit-invitation"
-                                                    class="w-full bg-primary hover:bg-primary-dark text-white font-semibold py-2 px-4 rounded-md transition-colors">
-                                                    提交
-                                                </button>
+                                                <div>
+                                                    <label for="credit-code"
+                                                        class="block text-sm font-medium text-slate-700 mb-2">
+                                                        统一信用代码 <span class="text-red-500">*</span>
+                                                    </label>
+                                                    <input type="text" id="credit-code" name="credit-code"
+                                                        placeholder="请输入18位统一信用代码" maxlength="18"
+                                                        class="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                                </div>
+
+                                                <div>
+                                                    <label for="phone-number"
+                                                        class="block text-sm font-medium text-slate-700 mb-2">
+                                                        手机号 <span class="text-red-500">*</span>
+                                                    </label>
+                                                    <input type="tel" id="phone-number" name="phone-number"
+                                                        placeholder="请输入手机号" maxlength="11"
+                                                        class="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                                </div>
+
+                                                <div>
+                                                    <label for="email"
+                                                        class="block text-sm font-medium text-slate-700 mb-2">
+                                                        邮箱 <span class="text-red-500">*</span>
+                                                    </label>
+                                                    <input type="email" id="email" name="email" placeholder="请输入邮箱地址"
+                                                        class="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                                </div>
+
+                                                <div class="bg-amber-50 border border-amber-200 rounded-md p-3">
+                                                    <div class="flex">
+                                                        <svg class="w-5 h-5 text-amber-400 mt-0.5 mr-2 flex-shrink-0"
+                                                            fill="currentColor" viewBox="0 0 20 20">
+                                                            <path fill-rule="evenodd"
+                                                                d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                                                                clip-rule="evenodd"></path>
+                                                        </svg>
+                                                        <div class="text-sm text-amber-800">
+                                                            <strong>重要提示：</strong>您提供以上信息仅用于我们生成邀请链接，建议您在提交前确认四项信息全部未曾提交给对应厂商。
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="pt-4">
+                                                    <button type="button" id="submit-invitation"
+                                                        class="w-full bg-primary hover:bg-primary-dark text-white font-semibold py-2 px-4 rounded-md transition-colors">
+                                                        提交
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Right: Guidance Section -->
+                                    <div class="w-full max-w-md">
+                                        <div class="bg-green-50 border border-green-300 rounded-lg p-4">
+                                            <div class="flex">
+                                                <svg class="w-6 h-6 text-green-500 mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                                </svg>
+                                                <div>
+                                                    <h4 class="text-base font-semibold text-green-800 mb-2">新用户专属优惠通道</h4>
+                                                    <p class="text-sm text-green-700 mb-2">
+                                                        建议您使用<strong>全新的企业主体</strong>进行注册，以享受云厂商新用户专属优惠：
+                                                    </p>
+                                                    <ul class="text-sm text-green-700 list-disc list-inside space-y-1">
+                                                        <li>首购算力资源可享<strong>最高5折</strong>优惠</li>
+                                                        <li>赠送价值<strong>5000元</strong>的免费算力体验金</li>
+                                                        <li>专属技术顾问一对一服务</li>
+                                                        <li>优先获得稀缺GPU资源配额</li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -312,6 +360,88 @@
 
     <script src="supermarket.js"></script>
     <script src="../component/productcard.js"></script>
+    <script>
+        // Company Dropdown with Search Suggestion
+        (function() {
+            const dropdownBtn = document.getElementById('company-dropdown-btn');
+            const dropdownPanel = document.getElementById('company-dropdown-panel');
+            const dropdownArrow = document.getElementById('dropdown-arrow');
+            const searchInput = document.getElementById('company-search-input');
+            const optionsList = document.getElementById('company-options-list');
+            const noResult = document.getElementById('company-no-result');
+            const selectedText = document.getElementById('company-selected-text');
+            const hiddenInput = document.getElementById('company-name');
+
+            // Mock company data - replace with actual API call
+            const companies = [
+                { id: 1, name: '北京科技有限公司' },
+                { id: 2, name: '上海智能科技股份有限公司' },
+                { id: 3, name: '深圳创新技术有限公司' },
+                { id: 4, name: '杭州数据科技有限公司' },
+                { id: 5, name: '广州云计算有限公司' },
+                { id: 6, name: '成都人工智能有限公司' },
+                { id: 7, name: '武汉软件开发有限公司' },
+                { id: 8, name: '南京信息技术有限公司' },
+            ];
+
+            let isOpen = false;
+
+            function toggleDropdown(open) {
+                isOpen = open !== undefined ? open : !isOpen;
+                dropdownPanel.classList.toggle('hidden', !isOpen);
+                dropdownArrow.classList.toggle('rotate-180', isOpen);
+                if (isOpen) {
+                    searchInput.focus();
+                    renderOptions('');
+                }
+            }
+
+            function renderOptions(query) {
+                const filtered = companies.filter(c => 
+                    c.name.toLowerCase().includes(query.toLowerCase())
+                );
+
+                if (filtered.length === 0) {
+                    noResult.classList.remove('hidden');
+                    optionsList.querySelectorAll('.company-option').forEach(el => el.remove());
+                } else {
+                    noResult.classList.add('hidden');
+                    optionsList.querySelectorAll('.company-option').forEach(el => el.remove());
+                    
+                    filtered.forEach(company => {
+                        const option = document.createElement('div');
+                        option.className = 'company-option px-4 py-3 hover:bg-slate-100 cursor-pointer text-sm text-slate-700 border-b border-slate-100 last:border-b-0';
+                        option.textContent = company.name;
+                        option.dataset.id = company.id;
+                        option.addEventListener('click', () => selectCompany(company));
+                        optionsList.appendChild(option);
+                    });
+                }
+            }
+
+            function selectCompany(company) {
+                selectedText.textContent = company.name;
+                selectedText.classList.remove('text-slate-400');
+                selectedText.classList.add('text-slate-800');
+                hiddenInput.value = company.name;
+                toggleDropdown(false);
+                searchInput.value = '';
+            }
+
+            dropdownBtn.addEventListener('click', () => toggleDropdown());
+
+            searchInput.addEventListener('input', (e) => {
+                renderOptions(e.target.value);
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!document.getElementById('company-dropdown-container').contains(e.target)) {
+                    toggleDropdown(false);
+                }
+            });
+        })();
+    </script>
 </body>
 
 </html>

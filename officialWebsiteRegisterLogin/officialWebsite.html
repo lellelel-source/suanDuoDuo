@@ -3,7 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>算力多多 | 一站式“低门槛、省钱、省心”的算力超市</title>
+    <title>算力多多 | 一站式"低门槛、省钱、省心"的算力超市</title>
+    <meta name="description" content="算力多多为中小企业提供一站式算力服务，包括云算力、IDC算力等，价格透明、性能稳定，帮助企业降低20%以上算力成本。">
+    <meta name="keywords" content="算力超市,云计算,GPU服务器,AI训练,IDC托管,云服务,算力租赁">
+    <meta name="author" content="算力多多">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.suanduoduo.com/">
+    <meta property="og:title" content="算力多多 | 一站式算力超市">
+    <meta property="og:description" content="为中小企业提供低门槛、省钱、省心的算力服务，帮助企业降低20%以上算力成本。">
+    <meta property="og:image" content="https://www.suanduoduo.com/og-image.png">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.suanduoduo.com/">
+    <meta property="twitter:title" content="算力多多 | 一站式算力超市">
+    <meta property="twitter:description" content="为中小企业提供低门槛、省钱、省心的算力服务。">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter & Orbitron for Logo -->
@@ -58,22 +74,104 @@
         .custom-shadow:hover {
             box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -4px rgb(0 0 0 / 0.07);
         }
+        /* Scroll animation classes */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Counter animation */
+        .counter {
+            font-variant-numeric: tabular-nums;
+        }
+        /* Floating animation for decorative elements */
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        /* Scroll to top button */
+        .scroll-to-top {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        .scroll-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        /* FAQ accordion */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+        /* Testimonial card hover */
+        .testimonial-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+        /* Pulse animation for CTA */
+        .pulse-ring {
+            animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+        }
+        @keyframes pulse-ring {
+            0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 99, 235, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+        }
+        /* Particle canvas styles */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+        #particle-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
     </style>
 </head>
 <body class="bg-white text-gray-800">
 
     <!-- Header -->
-    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 border-b border-gray-200">
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 border-b border-gray-200" role="banner">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <!-- Updated Logo with artistic font and gradient -->
-            <a href="#" class="text-3xl logo-font font-bold bg-gradient-to-r from-blue-600 to-sky-400 text-transparent bg-clip-text">
+            <a href="#" class="text-3xl logo-font font-bold bg-gradient-to-r from-blue-600 to-sky-400 text-transparent bg-clip-text" aria-label="算力多多首页">
                 算力多多
             </a>
-            <nav class="hidden md:flex space-x-8 items-center">
+            <nav class="hidden md:flex space-x-8 items-center" role="navigation" aria-label="主导航">
                 <a href="#why-us" class="text-gray-600 hover:text-blue-600 transition-colors">为什么选择我们</a>
                 <a href="#products" class="text-gray-600 hover:text-blue-600 transition-colors">产品与服务</a>
                 <a href="#solutions" class="text-gray-600 hover:text-blue-600 transition-colors">行业解决方案</a>
-                <a href="#partners" class="text-gray-600 hover:text-blue-600 transition-colors">生态伙伴</a>
+                <a href="#testimonials" class="text-gray-600 hover:text-blue-600 transition-colors">客户评价</a>
+                <a href="#faq" class="text-gray-600 hover:text-blue-600 transition-colors">常见问题</a>
             </nav>
                             <div class="hidden md:flex space-x-3">
                                 <a href="../index.html" class="bg-gray-100 text-gray-700 font-semibold px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-200 transition-transform transform hover:scale-105">
@@ -86,20 +184,19 @@
                                     注册
                                 </a>
                             </div>
-            <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-gray-600 hover:bg-gray-100">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-gray-600 hover:bg-gray-100" aria-label="打开菜单" aria-expanded="false" aria-controls="mobile-menu">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
             </button>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4" role="navigation" aria-label="移动端导航">
             <a href="#why-us" class="block py-2 text-gray-600 hover:text-blue-600">为什么选择我们</a>
             <a href="#products" class="block py-2 text-gray-600 hover:text-blue-600">产品与服务</a>
             <a href="#solutions" class="block py-2 text-gray-600 hover:text-blue-600">行业解决方案</a>
-            <a href="#partners" class="block py-2 text-gray-600 hover:text-blue-600">生态伙伴</a>
-            <a href="login.html" class="block py-2 text-gray-600 hover:text-blue-600">登录</a>
-            <a href="register.html" class="block py-2 text-gray-600 hover:text-blue-600">注册</a>
+            <a href="#testimonials" class="block py-2 text-gray-600 hover:text-blue-600">客户评价</a>
+            <a href="#faq" class="block py-2 text-gray-600 hover:text-blue-600">常见问题</a>
             <div class="mt-4 flex flex-col space-y-2">
                 <a href="../index.html" class="block w-full text-center bg-gray-100 text-gray-700 font-semibold px-5 py-2 rounded-lg border border-gray-300 hover:bg-gray-200">
                     重新选择系统
@@ -117,18 +214,51 @@
     <!-- Main Content -->
     <main>
         <!-- Hero Section -->
-        <section class="hero-animated-bg pt-20 pb-24 text-center">
-            <div class="container mx-auto px-6">
+        <section class="hero-section hero-animated-bg pt-20 pb-24 text-center">
+            <canvas id="particle-canvas"></canvas>
+            <div class="hero-content container mx-auto px-6">
                 <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight">
                     一站式<span class="text-blue-600">算力超市</span>
                 </h1>
                 <p class="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-gray-600">
-                    为中小企业提供“低门槛、省钱、省心”的算力服务。无需理解复杂底层资源，即可获得价格透明、性能稳定的算力与全方位托管服务。
+                    为中小企业提供"低门槛、省钱、省心"的算力服务。无需理解复杂底层资源，即可获得价格透明、性能稳定的算力与全方位托管服务。
                 </p>
                 <div class="mt-10">
                     <a href="#products" class="bg-blue-600 text-white font-semibold px-8 py-4 rounded-lg text-lg hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-lg">
                         探索产品
                     </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="py-16 bg-white border-b border-gray-100">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div class="fade-in-up">
+                        <div class="text-4xl md:text-5xl font-bold text-blue-600">
+                            <span class="counter" data-target="500">0</span>+
+                        </div>
+                        <div class="mt-2 text-gray-600 font-medium">企业客户</div>
+                    </div>
+                    <div class="fade-in-up" style="transition-delay: 0.1s;">
+                        <div class="text-4xl md:text-5xl font-bold text-blue-600">
+                            <span class="counter" data-target="20">0</span>%+
+                        </div>
+                        <div class="mt-2 text-gray-600 font-medium">平均成本节省</div>
+                    </div>
+                    <div class="fade-in-up" style="transition-delay: 0.2s;">
+                        <div class="text-4xl md:text-5xl font-bold text-blue-600">
+                            <span class="counter" data-target="99">0</span>.9%
+                        </div>
+                        <div class="mt-2 text-gray-600 font-medium">服务可用性</div>
+                    </div>
+                    <div class="fade-in-up" style="transition-delay: 0.3s;">
+                        <div class="text-4xl md:text-5xl font-bold text-blue-600">
+                            24/7
+                        </div>
+                        <div class="mt-2 text-gray-600 font-medium">技术支持</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -378,6 +508,75 @@
             </div>
         </section>
 
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 fade-in-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">客户评价</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-gray-600">听听我们的客户怎么说</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="testimonial-card bg-gray-50 p-8 rounded-xl border border-gray-200 custom-shadow fade-in-up">
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 italic mb-6">"通过算力多多的智能调度，我们的GPU训练成本降低了35%，而且服务非常稳定，技术支持响应迅速。"</p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-lg">李</div>
+                            <div class="ml-4">
+                                <div class="font-semibold text-gray-900">李明</div>
+                                <div class="text-sm text-gray-500">某AI科技公司 CTO</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card bg-gray-50 p-8 rounded-xl border border-gray-200 custom-shadow fade-in-up" style="transition-delay: 0.1s;">
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 italic mb-6">"统一账单功能太方便了！以前管理多个云账户头疼不已，现在一个平台搞定所有，财务对账效率提升了80%。"</p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold text-lg">王</div>
+                            <div class="ml-4">
+                                <div class="font-semibold text-gray-900">王芳</div>
+                                <div class="text-sm text-gray-500">某电商平台 运维总监</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card bg-gray-50 p-8 rounded-xl border border-gray-200 custom-shadow fade-in-up" style="transition-delay: 0.2s;">
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 italic mb-6">"作为创业公司，我们资源有限。算力多多的托管服务让我们无需组建专业运维团队，专注于核心业务开发。"</p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-bold text-lg">张</div>
+                            <div class="ml-4">
+                                <div class="font-semibold text-gray-900">张伟</div>
+                                <div class="text-sm text-gray-500">某SaaS创业公司 创始人</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Partners Section -->
         <section id="partners" class="py-20 bg-white">
             <div class="container mx-auto px-6">
@@ -396,10 +595,84 @@
                 </div>
             </div>
         </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 fade-in-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">常见问题</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-gray-600">快速了解算力多多的服务细节</p>
+                </div>
+                <div class="max-w-3xl mx-auto space-y-4">
+                    <div class="faq-item bg-white rounded-xl border border-gray-200 overflow-hidden fade-in-up">
+                        <button class="faq-toggle w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-50 transition-colors" aria-expanded="false">
+                            <span class="font-semibold text-gray-900">算力多多适合什么规模的企业？</span>
+                            <svg class="faq-icon w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="faq-answer px-6 text-gray-600">
+                            <p class="pb-5">我们的服务面向各种规模的企业，从初创公司到大型集团企业。无论您是刚开始使用云服务的小团队，还是需要管理多云资源的大型企业，我们都有适合您的方案。</p>
+                        </div>
+                    </div>
+                    <div class="faq-item bg-white rounded-xl border border-gray-200 overflow-hidden fade-in-up" style="transition-delay: 0.1s;">
+                        <button class="faq-toggle w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-50 transition-colors" aria-expanded="false">
+                            <span class="font-semibold text-gray-900">如何保证数据安全？</span>
+                            <svg class="faq-icon w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="faq-answer px-6 text-gray-600">
+                            <p class="pb-5">我们采用行业领先的安全标准，包括数据加密传输和存储、多因素身份验证、访问控制等。同时，我们的数据中心均通过等保三级认证，确保您的数据安全。</p>
+                        </div>
+                    </div>
+                    <div class="faq-item bg-white rounded-xl border border-gray-200 overflow-hidden fade-in-up" style="transition-delay: 0.2s;">
+                        <button class="faq-toggle w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-50 transition-colors" aria-expanded="false">
+                            <span class="font-semibold text-gray-900">返现是如何计算和发放的？</span>
+                            <svg class="faq-icon w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="faq-answer px-6 text-gray-600">
+                            <p class="pb-5">云算力返现根据您通过我们链接产生的实际消费金额计算，按月统计并在次月发放至您的账户余额。您可以选择提现或直接用于抵扣后续消费。</p>
+                        </div>
+                    </div>
+                    <div class="faq-item bg-white rounded-xl border border-gray-200 overflow-hidden fade-in-up" style="transition-delay: 0.3s;">
+                        <button class="faq-toggle w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-50 transition-colors" aria-expanded="false">
+                            <span class="font-semibold text-gray-900">是否支持按需扩容和缩容？</span>
+                            <svg class="faq-icon w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="faq-answer px-6 text-gray-600">
+                            <p class="pb-5">是的，我们支持灵活的资源伸缩。云算力可即时调整，IDC算力支持48小时内快速扩容。您可以根据业务需求随时调整资源配置。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-20 bg-gradient-to-r from-blue-600 to-blue-700">
+            <div class="container mx-auto px-6 text-center">
+                <div class="fade-in-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">准备好降低您的算力成本了吗？</h2>
+                    <p class="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">立即注册，享受专属优惠，让您的业务更上一层楼</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="register.html" class="pulse-ring inline-block bg-white text-blue-600 font-semibold px-8 py-4 rounded-lg text-lg hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg">
+                            免费注册
+                        </a>
+                        <a href="#products" class="inline-block bg-transparent text-white font-semibold px-8 py-4 rounded-lg text-lg border-2 border-white hover:bg-white/10 transition-all">
+                            了解更多
+                        </a>
+                    </div>
+                    <p class="mt-6 text-blue-200 text-sm">无需信用卡 · 免费试用 · 随时取消</p>
+                </div>
+            </div>
+        </section>
     </main>
 
+    <!-- Scroll to Top Button -->
+    <button id="scroll-to-top" class="scroll-to-top fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-all z-50" aria-label="返回顶部">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </button>
+
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white">
+    <footer class="bg-gray-900 text-white" role="contentinfo">
         <div class="container mx-auto px-6 py-12">
             <div class="grid md:grid-cols-4 gap-8">
                 <div>
@@ -412,6 +685,8 @@
                         <li><a href="#why-us" class="text-gray-400 hover:text-white">为什么选择我们</a></li>
                         <li><a href="#products" class="text-gray-400 hover:text-white">产品与服务</a></li>
                         <li><a href="#solutions" class="text-gray-400 hover:text-white">行业解决方案</a></li>
+                        <li><a href="#testimonials" class="text-gray-400 hover:text-white">客户评价</a></li>
+                        <li><a href="#faq" class="text-gray-400 hover:text-white">常见问题</a></li>
                         <li><a href="login.html" class="text-gray-400 hover:text-white">登录</a></li>
                         <li><a href="register.html" class="text-gray-400 hover:text-white">注册</a></li>
                     </ul>
@@ -432,7 +707,7 @@
                 </div>
             </div>
             <div class="mt-12 border-t border-gray-800 pt-8 text-center text-gray-500">
-                &copy; 2024 算力多多. All Rights Reserved.
+                &copy; 2025 算力多多. All Rights Reserved.
             </div>
         </div>
     </footer>
@@ -470,6 +745,238 @@
                 mobileMenu.classList.add('hidden');
             }
         });
+
+        // FAQ Accordion functionality
+        const faqToggles = document.querySelectorAll('.faq-toggle');
+        faqToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const faqItem = toggle.parentElement;
+                const isActive = faqItem.classList.contains('active');
+
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                    item.querySelector('.faq-toggle').setAttribute('aria-expanded', 'false');
+                });
+
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                    toggle.setAttribute('aria-expanded', 'true');
+                }
+            });
+        });
+
+        // Scroll to Top functionality
+        const scrollToTopBtn = document.getElementById('scroll-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Scroll Animation (Intersection Observer)
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+
+                    // Counter animation for stats
+                    if (entry.target.querySelector('.counter')) {
+                        animateCounter(entry.target.querySelector('.counter'));
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Counter Animation
+        function animateCounter(counter) {
+            const target = parseInt(counter.getAttribute('data-target'));
+            const duration = 2000;
+            const step = target / (duration / 16);
+            let current = 0;
+
+            const updateCounter = () => {
+                current += step;
+                if (current < target) {
+                    counter.textContent = Math.floor(current);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.textContent = target;
+                }
+            };
+
+            updateCounter();
+        }
+
+        // Particle Animation
+        (function() {
+            const canvas = document.getElementById('particle-canvas');
+            const ctx = canvas.getContext('2d');
+            const heroSection = document.querySelector('.hero-section');
+
+            let particles = [];
+            let animationId;
+            let mouseX = 0;
+            let mouseY = 0;
+
+            // Resize canvas to match hero section
+            function resizeCanvas() {
+                canvas.width = heroSection.offsetWidth;
+                canvas.height = heroSection.offsetHeight;
+            }
+
+            // Particle class
+            class Particle {
+                constructor() {
+                    this.reset();
+                }
+
+                reset() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 4 + 1;
+                    this.speedX = (Math.random() - 0.5) * 0.8;
+                    this.speedY = (Math.random() - 0.5) * 0.8;
+                    this.opacity = Math.random() * 0.5 + 0.2;
+                    // Blue color palette
+                    const colors = [
+                        'rgba(37, 99, 235,',   // blue-600
+                        'rgba(59, 130, 246,',  // blue-500
+                        'rgba(96, 165, 250,',  // blue-400
+                        'rgba(147, 197, 253,', // blue-300
+                        'rgba(14, 165, 233,'   // sky-500
+                    ];
+                    this.color = colors[Math.floor(Math.random() * colors.length)];
+                }
+
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+
+                    // Mouse interaction - particles move away from cursor
+                    const dx = this.x - mouseX;
+                    const dy = this.y - mouseY;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 100) {
+                        const force = (100 - distance) / 100;
+                        this.x += dx * force * 0.02;
+                        this.y += dy * force * 0.02;
+                    }
+
+                    // Wrap around edges
+                    if (this.x < 0) this.x = canvas.width;
+                    if (this.x > canvas.width) this.x = 0;
+                    if (this.y < 0) this.y = canvas.height;
+                    if (this.y > canvas.height) this.y = 0;
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color + this.opacity + ')';
+                    ctx.fill();
+                }
+            }
+
+            // Initialize particles
+            function initParticles() {
+                particles = [];
+                const particleCount = Math.min(80, Math.floor((canvas.width * canvas.height) / 15000));
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new Particle());
+                }
+            }
+
+            // Draw connections between nearby particles
+            function drawConnections() {
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < 120) {
+                            const opacity = (1 - distance / 120) * 0.15;
+                            ctx.beginPath();
+                            ctx.strokeStyle = `rgba(37, 99, 235, ${opacity})`;
+                            ctx.lineWidth = 1;
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            // Animation loop
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Draw connections first (behind particles)
+                drawConnections();
+
+                // Update and draw particles
+                particles.forEach(particle => {
+                    particle.update();
+                    particle.draw();
+                });
+
+                animationId = requestAnimationFrame(animate);
+            }
+
+            // Mouse move handler
+            function handleMouseMove(e) {
+                const rect = heroSection.getBoundingClientRect();
+                mouseX = e.clientX - rect.left;
+                mouseY = e.clientY - rect.top;
+            }
+
+            // Initialize
+            resizeCanvas();
+            initParticles();
+            animate();
+
+            // Event listeners
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+                initParticles();
+            });
+
+            heroSection.addEventListener('mousemove', handleMouseMove);
+
+            // Pause animation when not visible (performance optimization)
+            const heroObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (!animationId) animate();
+                    } else {
+                        cancelAnimationFrame(animationId);
+                        animationId = null;
+                    }
+                });
+            }, { threshold: 0 });
+
+            heroObserver.observe(heroSection);
+        })();
 
     </script>
 </body>

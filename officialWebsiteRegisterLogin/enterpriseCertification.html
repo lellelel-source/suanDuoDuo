@@ -14,6 +14,13 @@
             font-family: 'Inter', sans-serif;
             background-color: #f7fafc;
         }
+        .upload-area {
+            transition: all 0.3s ease;
+        }
+        .upload-area:hover {
+            border-color: #0d9488; /* teal-600 */
+            background-color: #f0fdfa; /* teal-50 */
+        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -48,162 +55,383 @@
             <form id="certification-form" class="mt-8 space-y-8" action="#" method="POST">
                 
                 <!-- Business License Upload -->
-                <div class="upload-section">
-                    <label class="block text-sm font-medium text-gray-700">营业执照</label>
+                <div class="upload-section" data-type="business-license">
+                    <label class="block text-sm font-medium text-gray-700">营业执照 <span class="text-red-500">*</span></label>
                     <div class="mt-2 flex space-x-4">
-                        <button type="button" class="scan-btn px-4 py-2 text-sm font-medium text-teal-600 bg-white border border-teal-600 rounded-md">扫码上传</button>
+                        <button type="button" class="scan-btn px-4 py-2 text-sm font-medium text-teal-600 bg-teal-50 border border-teal-600 rounded-md">扫码上传</button>
                         <button type="button" class="local-btn px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md">本地上传</button>
                     </div>
-                    <div class="scan-content mt-4 p-4 border rounded-md text-center">
-                        <img src="https://via.placeholder.com/150" alt="QR Code" class="mx-auto">
-                        <p class="text-sm text-gray-500 mt-2">请使用微信扫一扫上传 <a href="#" class="text-teal-600">刷新</a></p>
+                    
+                    <!-- Scan Content -->
+                    <div class="scan-content mt-4 p-6 border border-gray-200 rounded-md text-center bg-gray-50">
+                        <div class="qr-container inline-block relative">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=BusinessLicenseUpload" alt="QR Code" class="mx-auto rounded shadow-sm">
+                            <div class="qr-loading absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center hidden">
+                                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-teal-600"></div>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-3">请使用微信扫一扫上传 <a href="#" class="refresh-qr text-teal-600 hover:underline">刷新</a></p>
                     </div>
-                    <div class="local-content mt-4 p-4 border rounded-md text-center hidden">
-                        <p>本地上传功能开发中</p>
+
+                    <!-- Local Content -->
+                    <div class="local-content mt-4 hidden">
+                        <input type="file" id="file-business-license" name="business-license" accept=".jpg,.jpeg,.png" class="hidden file-input">
+                        
+                        <!-- Upload Placeholder -->
+                        <div class="upload-placeholder upload-area border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer" onclick="document.getElementById('file-business-license').click()">
+                            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 48 48">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" />
+                            </svg>
+                            <p class="mt-1 text-sm text-gray-600">点击选择文件或拖拽文件到此处</p>
+                            <p class="text-xs text-gray-500">支持 JPG, PNG, JPEG</p>
+                        </div>
+
+                        <!-- Image Preview -->
+                        <div class="preview-container hidden mt-2 relative border rounded-lg overflow-hidden w-64 h-48 bg-gray-100 mx-auto">
+                            <img src="" alt="Preview" class="w-full h-full object-contain">
+                            <button type="button" class="remove-btn absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 focus:outline-none">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            </button>
+                        </div>
                     </div>
+                    
                     <p class="text-xs text-gray-500 mt-2">支持图片格式JPG、JPEG和PNG；上传的图片需清晰完整；图片大小不得超过4M</p>
                 </div>
 
                 <!-- Company Info -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label for="company-name" class="block text-sm font-medium text-gray-700">企业名称</label>
-                        <input id="company-name" name="company-name" type="text" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500" placeholder="请输入企业名称">
+                        <label for="company-name" class="block text-sm font-medium text-gray-700">企业名称 <span class="text-red-500">*</span></label>
+                        <input id="company-name" name="company-name" type="text" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 transition" placeholder="请输入企业名称">
                     </div>
                     <div>
-                        <label for="credit-code" class="block text-sm font-medium text-gray-700">机构代码</label>
-                        <input id="credit-code" name="credit-code" type="text" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500" placeholder="请输入证件照上的统一社会信用代码">
+                        <label for="credit-code" class="block text-sm font-medium text-gray-700">统一信用代码 <span class="text-red-500">*</span></label>
+                        <input id="credit-code" name="credit-code" type="text" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 transition" placeholder="请输入证件照上的统一社会信用代码">
                     </div>
                 </div>
 
                 <!-- Legal Person Type -->
-                <div class="flex space-x-4">
-                    <button type="button" class="px-4 py-2 text-sm font-medium text-teal-600 bg-white border border-teal-600 rounded-md">我是法人</button>
-                    <button type="button" class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md">我是法人指定联系人</button>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">申请人身份</label>
+                    <div class="flex space-x-4" id="applicant-type">
+                        <button type="button" class="type-btn px-4 py-2 text-sm font-medium text-teal-600 bg-teal-50 border border-teal-600 rounded-md" data-value="legal">我是法人</button>
+                    </div>
                 </div>
 
                 <!-- ID Photos Upload -->
-                <div class="upload-section">
-                    <label class="block text-sm font-medium text-gray-700">证件人像面</label>
-                     <div class="mt-2 flex space-x-4">
-                        <button type="button" class="scan-btn px-4 py-2 text-sm font-medium text-teal-600 bg-white border border-teal-600 rounded-md">扫码上传</button>
-                        <button type="button" class="local-btn px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md">本地上传</button>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- ID Portrait -->
+                    <div class="upload-section" data-type="id-portrait">
+                        <label class="block text-sm font-medium text-gray-700">证件人像面 <span class="text-red-500">*</span></label>
+                         <div class="mt-2 flex space-x-4">
+                            <button type="button" class="scan-btn px-4 py-2 text-sm font-medium text-teal-600 bg-teal-50 border border-teal-600 rounded-md">扫码上传</button>
+                            <button type="button" class="local-btn px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md">本地上传</button>
+                        </div>
+                        
+                        <div class="scan-content mt-4 p-6 border border-gray-200 rounded-md text-center bg-gray-50">
+                            <div class="qr-container inline-block relative">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=IDPortraitUpload" alt="QR Code" class="mx-auto rounded shadow-sm">
+                                <div class="qr-loading absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center hidden">
+                                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-teal-600"></div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-3">请使用微信扫一扫上传 <a href="#" class="refresh-qr text-teal-600 hover:underline">刷新</a></p>
+                        </div>
+
+                        <div class="local-content mt-4 hidden">
+                            <input type="file" id="file-id-portrait" name="id-portrait" accept=".jpg,.jpeg,.png" class="hidden file-input">
+                            <div class="upload-placeholder upload-area border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer" onclick="document.getElementById('file-id-portrait').click()">
+                                <svg class="mx-auto h-10 w-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                <p class="mt-1 text-sm text-gray-600">点击选择人像面</p>
+                            </div>
+                            <div class="preview-container hidden mt-2 relative border rounded-lg overflow-hidden w-full h-48 bg-gray-100">
+                                <img src="" alt="Preview" class="w-full h-full object-contain">
+                                <button type="button" class="remove-btn absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="scan-content mt-4 p-4 border rounded-md text-center">
-                        <img src="https://via.placeholder.com/150" alt="QR Code" class="mx-auto">
-                        <p class="text-sm text-gray-500 mt-2">请使用微信扫一扫上传 <a href="#" class="text-teal-600">刷新</a></p>
-                    </div>
-                    <div class="local-content mt-4 p-4 border rounded-md text-center hidden">
-                        <p>本地上传功能开发中</p>
-                    </div>
-                </div>
-                 <div class="upload-section">
-                    <label class="block text-sm font-medium text-gray-700">证件国徽面</label>
-                     <div class="mt-2 flex space-x-4">
-                        <button type="button" class="scan-btn px-4 py-2 text-sm font-medium text-teal-600 bg-white border border-teal-600 rounded-md">扫码上传</button>
-                        <button type="button" class="local-btn px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md">本地上传</button>
-                    </div>
-                    <div class="scan-content mt-4 p-4 border rounded-md text-center">
-                        <img src="https://via.placeholder.com/150" alt="QR Code" class="mx-auto">
-                        <p class="text-sm text-gray-500 mt-2">请使用微信扫一扫上传 <a href="#" class="text-teal-600">刷新</a></p>
-                    </div>
-                    <div class="local-content mt-4 p-4 border rounded-md text-center hidden">
-                        <p>本地上传功能开发中</p>
+                    
+                    <!-- ID Emblem -->
+                     <div class="upload-section" data-type="id-emblem">
+                        <label class="block text-sm font-medium text-gray-700">证件国徽面 <span class="text-red-500">*</span></label>
+                         <div class="mt-2 flex space-x-4">
+                            <button type="button" class="scan-btn px-4 py-2 text-sm font-medium text-teal-600 bg-teal-50 border border-teal-600 rounded-md">扫码上传</button>
+                            <button type="button" class="local-btn px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md">本地上传</button>
+                        </div>
+                        
+                        <div class="scan-content mt-4 p-6 border border-gray-200 rounded-md text-center bg-gray-50">
+                            <div class="qr-container inline-block relative">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=IDEmblemUpload" alt="QR Code" class="mx-auto rounded shadow-sm">
+                                <div class="qr-loading absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center hidden">
+                                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-teal-600"></div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-3">请使用微信扫一扫上传 <a href="#" class="refresh-qr text-teal-600 hover:underline">刷新</a></p>
+                        </div>
+
+                        <div class="local-content mt-4 hidden">
+                            <input type="file" id="file-id-emblem" name="id-emblem" accept=".jpg,.jpeg,.png" class="hidden file-input">
+                            <div class="upload-placeholder upload-area border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer" onclick="document.getElementById('file-id-emblem').click()">
+                                <svg class="mx-auto h-10 w-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>
+                                <p class="mt-1 text-sm text-gray-600">点击选择国徽面</p>
+                            </div>
+                            <div class="preview-container hidden mt-2 relative border rounded-lg overflow-hidden w-full h-48 bg-gray-100">
+                                <img src="" alt="Preview" class="w-full h-full object-contain">
+                                <button type="button" class="remove-btn absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Legal Person Info -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label for="legal-name" class="block text-sm font-medium text-gray-700">法人姓名</label>
-                        <input id="legal-name" name="legal-name" type="text" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500" placeholder="请输入法人证件上的真实姓名">
+                        <label for="legal-name" class="block text-sm font-medium text-gray-700">法人姓名 <span class="text-red-500">*</span></label>
+                        <input id="legal-name" name="legal-name" type="text" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 transition" placeholder="请输入法人证件上的真实姓名">
                     </div>
                     <div>
-                        <label for="legal-id" class="block text-sm font-medium text-gray-700">法人证件号</label>
-                        <input id="legal-id" name="legal-id" type="text" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500" placeholder="请输入法人身份证号或其他证件号">
+                        <label for="legal-id" class="block text-sm font-medium text-gray-700">法人证件号 <span class="text-red-500">*</span></label>
+                        <input id="legal-id" name="legal-id" type="text" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 transition" placeholder="请输入法人身份证号或其他证件号">
                     </div>
                     <div>
                         <label for="nationality" class="block text-sm font-medium text-gray-700">国籍</label>
-                        <select id="nationality" name="nationality" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
+                        <select id="nationality" name="nationality" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 bg-white">
                             <option>China (中国)</option>
+                            <option>Other (其他)</option>
                         </select>
                     </div>
                     <div>
-                        <label for="address" class="block text-sm font-medium text-gray-700">地址</label>
-                        <input id="address" name="address" type="text" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500" placeholder="请输入详细地址">
+                        <label for="address" class="block text-sm font-medium text-gray-700">地址 <span class="text-red-500">*</span></label>
+                        <input id="address" name="address" type="text" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 transition" placeholder="请输入详细地址">
                     </div>
                      <div>
                         <label for="phone" class="block text-sm font-medium text-gray-700">手机号码</label>
-                        <div class="flex items-center">
-                           <input id="phone" name="phone" type="text" value="86-13520841021" readonly class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100">
-                           <button type="button" class="ml-2 px-4 py-2 text-sm font-medium text-teal-600">修改</button>
+                        <div class="flex items-center mt-1">
+                           <input id="phone" name="phone" type="text" value="86-13520841021" readonly class="block w-full px-3 py-2 border border-gray-300 rounded-l-md shadow-sm bg-gray-100 text-gray-600">
+                           <button type="button" id="modify-phone-btn" class="ml-0 px-4 py-2 border border-l-0 border-gray-300 rounded-r-md text-sm font-medium text-teal-600 bg-white hover:bg-gray-50">修改</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Headshot Upload -->
-                <div class="upload-section">
-                    <label class="block text-sm font-medium text-gray-700">法人大头照</label>
+                <div class="upload-section" data-type="headshot">
+                    <label class="block text-sm font-medium text-gray-700">法人大头照 <span class="text-red-500">*</span></label>
                      <div class="mt-2 flex space-x-4">
-                        <button type="button" class="scan-btn px-4 py-2 text-sm font-medium text-teal-600 bg-white border border-teal-600 rounded-md">扫码上传</button>
+                        <button type="button" class="scan-btn px-4 py-2 text-sm font-medium text-teal-600 bg-teal-50 border border-teal-600 rounded-md">扫码上传</button>
                         <button type="button" class="local-btn px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md">本地上传</button>
                     </div>
-                    <div class="scan-content mt-4 p-4 border rounded-md text-center">
-                        <img src="https://via.placeholder.com/150" alt="QR Code" class="mx-auto">
-                        <p class="text-sm text-gray-500 mt-2">请使用微信扫一扫上传 <a href="#" class="text-teal-600">刷新</a></p>
+                    
+                    <div class="scan-content mt-4 p-6 border border-gray-200 rounded-md text-center bg-gray-50">
+                        <div class="qr-container inline-block relative">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=HeadshotUpload" alt="QR Code" class="mx-auto rounded shadow-sm">
+                            <div class="qr-loading absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center hidden">
+                                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-teal-600"></div>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-3">请使用微信扫一扫上传 <a href="#" class="refresh-qr text-teal-600 hover:underline">刷新</a></p>
                     </div>
-                    <div class="local-content mt-4 p-4 border rounded-md text-center hidden">
-                        <p>本地上传功能开发中</p>
+
+                    <div class="local-content mt-4 hidden">
+                        <input type="file" id="file-headshot" name="headshot" accept=".jpg,.jpeg,.png" class="hidden file-input">
+                        <div class="upload-placeholder upload-area border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer" onclick="document.getElementById('file-headshot').click()">
+                            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                            <p class="mt-1 text-sm text-gray-600">点击选择大头照</p>
+                        </div>
+                         <div class="preview-container hidden mt-2 relative border rounded-lg overflow-hidden w-64 h-64 bg-gray-100 mx-auto">
+                            <img src="" alt="Preview" class="w-full h-full object-cover">
+                            <button type="button" class="remove-btn absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Submit Button -->
-                <div class="flex justify-end">
-                    <button type="submit" class="px-6 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
-                        提交
+                <div class="flex justify-end pt-4 border-t">
+                    <button type="submit" class="px-8 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition transform hover:scale-105">
+                        提交认证
                     </button>
                 </div>
             </form>
         </div>
     </div>
+
+    <!-- Toast Notification (Hidden by default) -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-gray-800 text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+        <span id="toast-message">Message</span>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Tab switching for upload options
+            // Initialize ReturnButton
+            const returnButton = new ReturnButton({
+                text: '返回',
+                href: '../customerSystem/console/index.html'
+            });
+            document.getElementById('return-button-container').innerHTML = returnButton.render();
+
+            // Upload Section Logic
             const uploadSections = document.querySelectorAll('.upload-section');
             uploadSections.forEach(section => {
                 const scanBtn = section.querySelector('.scan-btn');
                 const localBtn = section.querySelector('.local-btn');
                 const scanContent = section.querySelector('.scan-content');
                 const localContent = section.querySelector('.local-content');
-
+                const refreshLink = section.querySelector('.refresh-qr');
+                const qrLoading = section.querySelector('.qr-loading');
+                
+                // Tab Switching
                 scanBtn.addEventListener('click', () => {
-                    scanContent.style.display = 'block';
-                    localContent.style.display = 'none';
-                    scanBtn.classList.add('bg-teal-50', 'text-teal-600');
-                    localBtn.classList.remove('bg-teal-50', 'text-teal-600');
+                    scanContent.classList.remove('hidden');
+                    localContent.classList.add('hidden');
+                    scanBtn.classList.add('bg-teal-50', 'text-teal-600', 'border-teal-600');
+                    scanBtn.classList.remove('bg-gray-100', 'text-gray-700', 'border-gray-300');
+                    localBtn.classList.remove('bg-teal-50', 'text-teal-600', 'border-teal-600');
+                    localBtn.classList.add('bg-gray-100', 'text-gray-700', 'border-gray-300');
                 });
 
                 localBtn.addEventListener('click', () => {
-                    scanContent.style.display = 'none';
-                    localContent.style.display = 'block';
-                    localBtn.classList.add('bg-teal-50', 'text-teal-600');
-                    scanBtn.classList.remove('bg-teal-50', 'text-teal-600');
+                    scanContent.classList.add('hidden');
+                    localContent.classList.remove('hidden');
+                    localBtn.classList.add('bg-teal-50', 'text-teal-600', 'border-teal-600');
+                    localBtn.classList.remove('bg-gray-100', 'text-gray-700', 'border-gray-300');
+                    scanBtn.classList.remove('bg-teal-50', 'text-teal-600', 'border-teal-600');
+                    scanBtn.classList.add('bg-gray-100', 'text-gray-700', 'border-gray-300');
+                });
+
+                // QR Refresh Simulation
+                refreshLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    qrLoading.classList.remove('hidden');
+                    setTimeout(() => {
+                        qrLoading.classList.add('hidden');
+                        showToast('二维码已刷新');
+                    }, 1000);
+                });
+
+                // File Upload & Preview
+                const fileInput = section.querySelector('.file-input');
+                const uploadPlaceholder = section.querySelector('.upload-placeholder');
+                const previewContainer = section.querySelector('.preview-container');
+                const previewImg = previewContainer.querySelector('img');
+                const removeBtn = section.querySelector('.remove-btn');
+
+                fileInput.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        if (file.size > 4 * 1024 * 1024) {
+                            alert('文件大小超过4M，请重新选择');
+                            this.value = '';
+                            return;
+                        }
+
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            previewImg.src = e.target.result;
+                            uploadPlaceholder.classList.add('hidden');
+                            previewContainer.classList.remove('hidden');
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+
+                removeBtn.addEventListener('click', () => {
+                    fileInput.value = '';
+                    previewImg.src = '';
+                    previewContainer.classList.add('hidden');
+                    uploadPlaceholder.classList.remove('hidden');
                 });
             });
 
-            // Form submission
+            // Phone Modification
+            const modifyPhoneBtn = document.getElementById('modify-phone-btn');
+            const phoneInput = document.getElementById('phone');
+            modifyPhoneBtn.addEventListener('click', () => {
+                if (phoneInput.hasAttribute('readonly')) {
+                    phoneInput.removeAttribute('readonly');
+                    phoneInput.classList.remove('bg-gray-100', 'text-gray-600');
+                    phoneInput.classList.add('bg-white', 'text-gray-900', 'focus:ring-teal-500', 'focus:border-teal-500');
+                    phoneInput.focus();
+                    modifyPhoneBtn.textContent = '保存';
+                    modifyPhoneBtn.classList.add('text-white', 'bg-teal-600');
+                    modifyPhoneBtn.classList.remove('text-teal-600', 'bg-white');
+                } else {
+                    // Basic validation
+                    if (!/^1[3-9]\d{9}$/.test(phoneInput.value)) {
+                        alert('请输入有效的手机号码');
+                        phoneInput.focus();
+                        return;
+                    }
+                    phoneInput.setAttribute('readonly', 'true');
+                    phoneInput.classList.add('bg-gray-100', 'text-gray-600');
+                    phoneInput.classList.remove('bg-white', 'text-gray-900', 'focus:ring-teal-500', 'focus:border-teal-500');
+                    modifyPhoneBtn.textContent = '修改';
+                    modifyPhoneBtn.classList.remove('text-white', 'bg-teal-600');
+                    modifyPhoneBtn.classList.add('text-teal-600', 'bg-white');
+                    showToast('手机号已更新');
+                }
+            });
+
+            // Form Submission
             const form = document.getElementById('certification-form');
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
-                // Add your form submission logic here
-                alert('表单已提交!');
+                
+                // Required field validation
+                const requiredFields = [
+                    { id: 'company-name', name: '企业名称' },
+                    { id: 'credit-code', name: '统一信用代码' },
+                    { id: 'legal-name', name: '法人姓名' },
+                    { id: 'legal-id', name: '法人证件号' },
+                    { id: 'address', name: '地址' }
+                ];
+
+                for (const field of requiredFields) {
+                    const el = document.getElementById(field.id);
+                    if (!el.value.trim()) {
+                        alert(`请输入${field.name}`);
+                        el.focus();
+                        return;
+                    }
+                }
+                
+                // Simulate verifying if files are uploaded (Checking if file input has files OR if we are in scan mode - simplifying assumption: user must upload locally for this demo or scan logic is assumed handled by backend)
+                // For this demo, we'll check if at least one file input has a value or warn the user.
+                // In a real app, you'd check server status for scan uploads.
+                
+                let filesUploaded = 0;
+                uploadSections.forEach(section => {
+                   const fileInput = section.querySelector('.file-input');
+                   if (fileInput.files.length > 0) filesUploaded++;
+                });
+
+                // Just a gentle warning for the demo if no files selected locally
+                if (filesUploaded === 0) {
+                    const confirmSubmit = confirm("您似乎没有在本地上传任何文件。如果您已通过手机扫码上传，请点击确定继续。");
+                    if (!confirmSubmit) return;
+                }
+
+                showToast('提交成功！正在审核中...');
+                
+                // Simulate redirect
+                setTimeout(() => {
+                    window.location.href = '../customerSystem/console/index.html';
+                }, 2000);
             });
 
-            const returnButton = new ReturnButton({
-                text: '返回',
-                href: '../customerSystem/console/index.html'
-            });
-            document.getElementById('return-button-container').innerHTML = returnButton.render();
+            // Toast Helper
+            function showToast(msg) {
+                const toast = document.getElementById('toast');
+                document.getElementById('toast-message').textContent = msg;
+                toast.classList.remove('translate-y-20', 'opacity-0');
+                setTimeout(() => {
+                    toast.classList.add('translate-y-20', 'opacity-0');
+                }, 3000);
+            }
         });
     </script>
 </body>

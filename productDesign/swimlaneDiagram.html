@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>算力补贴业务流程泳道图</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 30px;
+        }
+        /* Toolbar styles */
+        .toolbar {
+            max-width: 1400px;
+            margin: 0 auto 15px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .toolbar-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-edit {
+            background: #3498db;
+            color: #fff;
+        }
+        .btn-edit:hover { background: #2980b9; }
+        .btn-edit.active {
+            background: #e74c3c;
+        }
+        .btn-save {
+            background: #27ae60;
+            color: #fff;
+        }
+        .btn-save:hover { background: #219a52; }
+        .btn-reset {
+            background: #95a5a6;
+            color: #fff;
+        }
+        .btn-reset:hover { background: #7f8c8d; }
+        .btn-add-step {
+            background: #9b59b6;
+            color: #fff;
+        }
+        .btn-add-step:hover { background: #8e44ad; }
+        .status-msg {
+            margin-left: auto;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 13px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .status-msg.show {
+            opacity: 1;
+        }
+        .status-msg.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status-msg.info {
+            background: #cce5ff;
+            color: #004085;
+        }
+        /* Editable styles */
+        .editable {
+            outline: none;
+            transition: all 0.2s ease;
+        }
+        .edit-mode .editable {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px dashed #3498db !important;
+            padding: 5px 8px;
+            border-radius: 4px;
+            min-width: 50px;
+        }
+        .edit-mode .editable:focus {
+            border-color: #e74c3c !important;
+            box-shadow: 0 0 10px rgba(231, 76, 60, 0.3);
+        }
+        .edit-mode .editable:hover {
+            background: rgba(255, 255, 255, 1);
+        }
+        /* Delete button for steps */
+        .delete-step {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+        .edit-mode .delete-step {
+            display: flex;
+        }
+        .delete-step:hover {
+            background: #c0392b;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(90deg, #1e3c72, #2a5298);
+            color: #fff;
+            padding: 25px 40px;
+            text-align: center;
+        }
+        .header h1 { font-size: 28px; font-weight: 600; letter-spacing: 2px; }
+        .header p { margin-top: 8px; font-size: 14px; opacity: 0.85; }
+        .swimlane-container { display: flex; flex-direction: column; padding: 0; }
+        .swimlane { display: flex; border-bottom: 2px solid #e0e0e0; min-height: 140px; }
+        .swimlane:last-child { border-bottom: none; }
+        .lane-label {
+            width: 120px; min-width: 120px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 600; font-size: 16px; color: #fff;
+            padding: 20px 15px; text-align: center;
+        }
+        .lane-enterprise .lane-label { background: linear-gradient(180deg, #3498db, #2980b9); }
+        .lane-platform .lane-label { background: linear-gradient(180deg, #e74c3c, #c0392b); }
+        .lane-supplier .lane-label { background: linear-gradient(180deg, #27ae60, #219a52); }
+        .lane-government .lane-label { background: linear-gradient(180deg, #f39c12, #d68910); }
+        .lane-content {
+            flex: 1; display: flex; align-items: center;
+            padding: 20px 30px; position: relative; background: #fafbfc;
+        }
+        .lane-enterprise .lane-content { background: linear-gradient(90deg, rgba(52, 152, 219, 0.08), rgba(52, 152, 219, 0.02)); }
+        .lane-platform .lane-content { background: linear-gradient(90deg, rgba(231, 76, 60, 0.08), rgba(231, 76, 60, 0.02)); }
+        .lane-supplier .lane-content { background: linear-gradient(90deg, rgba(39, 174, 96, 0.08), rgba(39, 174, 96, 0.02)); }
+        .lane-government .lane-content { background: linear-gradient(90deg, rgba(243, 156, 18, 0.08), rgba(243, 156, 18, 0.02)); }
+        .process-flow { display: flex; align-items: center; gap: 15px; flex-wrap: wrap; }
+        .process-node { display: flex; flex-direction: column; align-items: center; position: relative; }
+        .step-box {
+            background: #fff; border: 2px solid; border-radius: 12px;
+            padding: 15px 20px; min-width: 130px; text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease; cursor: pointer;
+        }
+        .step-box:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); }
+        .lane-enterprise .step-box { border-color: #3498db; }
+        .lane-platform .step-box { border-color: #e74c3c; }
+        .lane-supplier .step-box { border-color: #27ae60; }
+        .lane-government .step-box { border-color: #f39c12; }
+        .step-number {
+            display: inline-block; width: 26px; height: 26px; line-height: 26px;
+            border-radius: 50%; color: #fff; font-size: 12px; font-weight: 600; margin-bottom: 8px;
+        }
+        .lane-enterprise .step-number { background: #3498db; }
+        .lane-platform .step-number { background: #e74c3c; }
+        .lane-supplier .step-number { background: #27ae60; }
+        .lane-government .step-number { background: #f39c12; }
+        .step-title { font-size: 14px; font-weight: 600; color: #2c3e50; margin-bottom: 5px; }
+        .step-desc { font-size: 11px; color: #7f8c8d; line-height: 1.4; }
+        .arrow { font-size: 24px; color: #bdc3c7; font-weight: bold; }
+        .legend {
+            display: flex; justify-content: center; gap: 40px;
+            padding: 25px; background: #f8f9fa; border-top: 1px solid #e0e0e0;
+        }
+        .legend-item { display: flex; align-items: center; gap: 10px; font-size: 14px; color: #555; }
+        .legend-color { width: 20px; height: 20px; border-radius: 4px; }
+        .legend-enterprise { background: #3498db; }
+        .legend-platform { background: #e74c3c; }
+        .legend-supplier { background: #27ae60; }
+        .legend-government { background: #f39c12; }
+        .timeline-header { display: flex; background: #ecf0f1; border-bottom: 2px solid #bdc3c7; }
+        .timeline-spacer {
+            width: 120px; min-width: 120px; background: #34495e;
+            color: #fff; display: flex; align-items: center; justify-content: center;
+            font-weight: 600; padding: 15px;
+        }
+        .timeline-phases { flex: 1; display: flex; align-items: center; padding: 15px 30px; }
+        .phase {
+            flex: 1; text-align: center; font-size: 13px; font-weight: 600;
+            color: #555; padding: 8px 15px; border-right: 1px dashed #bdc3c7;
+        }
+        .phase:last-child { border-right: none; }
+        .phase-number { display: block; font-size: 11px; color: #95a5a6; margin-bottom: 3px; }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(52, 152, 219, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(52, 152, 219, 0); }
+        }
+        .step-box.active { animation: pulse 2s infinite; }
+    </style>
+</head>
+<body>
+    <div class="toolbar">
+        <button class="toolbar-btn btn-edit" onclick="toggleEditMode()">
+            <span>✏️</span> <span id="editBtnText">编辑模式</span>
+        </button>
+        <button class="toolbar-btn btn-save" onclick="saveData()">
+            <span>💾</span> 保存
+        </button>
+        <button class="toolbar-btn btn-reset" onclick="resetData()">
+            <span>🔄</span> 重置
+        </button>
+        <div class="status-msg" id="statusMsg"></div>
+    </div>
+    <div class="container" id="mainContainer">
+        <div class="header">
+            <h1 class="editable" data-key="mainTitle">算力补贴业务流程泳道图</h1>
+            <p class="editable" data-key="mainSubtitle">用户注册 → 企业认证 → 领取优惠券 → 购买IDC → 资金分流 → 设备交付 → 正常使用 → 发票开具 → 补贴到账</p>
+        </div>
+        <div class="timeline-header">
+            <div class="timeline-spacer editable" data-key="timelineSpacer">参与方</div>
+            <div class="timeline-phases">
+                <div class="phase"><span class="phase-number editable" data-key="phase1Num">阶段一</span><span class="editable" data-key="phase1Name">注册认证</span></div>
+                <div class="phase"><span class="phase-number editable" data-key="phase2Num">阶段二</span><span class="editable" data-key="phase2Name">购买交易</span></div>
+                <div class="phase"><span class="phase-number editable" data-key="phase3Num">阶段三</span><span class="editable" data-key="phase3Name">设备交付</span></div>
+                <div class="phase"><span class="phase-number editable" data-key="phase4Num">阶段四</span><span class="editable" data-key="phase4Name">使用运营</span></div>
+                <div class="phase"><span class="phase-number editable" data-key="phase5Num">阶段五</span><span class="editable" data-key="phase5Name">补贴结算</span></div>
+            </div>
+        </div>
+        <div class="swimlane-container">
+            <div class="swimlane lane-enterprise">
+                <div class="lane-label"><span class="editable" data-key="lane1Label">企业<br>（用户）</span></div>
+                <div class="lane-content">
+                    <div class="process-flow">
+                        <div class="process-node">
+                            <div class="step-box">
+                                <button class="delete-step" onclick="deleteStep(this)">×</button>
+                                <span class="step-number editable" data-key="step1Num">1</span>
+                                <div class="step-title editable" data-key="step1Title">用户注册</div>
+                                <div class="step-desc editable" data-key="step1Desc">填写基本信息<br>创建账户</div>
+                            </div>
+                        </div>
+                        <span class="arrow">→</span>
+                        <div class="process-node">
+                            <div class="step-box">
+                                <button class="delete-step" onclick="deleteStep(this)">×</button>
+                                <span class="step-number editable" data-key="step2Num">2</span>
+                                <div class="step-title editable" data-key="step2Title">企业认证</div>
+                                <div class="step-desc editable" data-key="step2Desc">提交营业执照<br>资质审核</div>
+                            </div>
+                        </div>
+                        <span class="arrow">→</span>
+                        <div class="process-node">
+                            <div class="step-box">
+                                <button class="delete-step" onclick="deleteStep(this)">×</button>
+                                <span class="step-number editable" data-key="step3Num">3</span>
+                                <div class="step-title editable" data-key="step3Title">领取补贴优惠券</div>
+                                <div class="step-desc editable" data-key="step3Desc">查看可用优惠<br>一键领取</div>
+                            </div>
+                        </div>
+                        <span class="arrow">→</span>
+                        <div class="process-node">
+                            <div class="step-box">
+                                <button class="delete-step" onclick="deleteStep(this)">×</button>
+                                <span class="step-number editable" data-key="step4Num">4</span>
+                                <div class="step-title editable" data-key="step4Title">购买IDC</div>
+                                <div class="step-desc editable" data-key="step4Desc">选择算力产品<br>提交订单付款</div>
+                            </div>
+                        </div>
+                        <span class="arrow" style="color: #3498db;">↓</span>
+                    </div>
+                </div>
+            </div>
+            <div class="swimlane lane-platform">
+                <div class="lane-label"><span class="editable" data-key="lane2Label">福石<br>（平台）</span></div>
+                <div class="lane-content">
+                    <div class="process-flow">
+                        <div class="process-node" style="margin-left: 520px;">
+                            <div class="step-box">
+                                <button class="delete-step" onclick="deleteStep(this)">×</button>
+                                <span class="step-number editable" data-key="step5Num">5</span>
+                                <div class="step-title editable" data-key="step5Title">资金分流</div>
+                                <div class="step-desc editable" data-key="step5Desc">企业货款<br>平台服务费<br>供应商货款</div>
+                            </div>
+                        </div>
+                        <span class="arrow">→</span>
+                        <div class="process-node">
+                            <div class="step-box">
+                                <button class="delete-step" onclick="deleteStep(this)">×</button>
+                                <span class="step-number editable" data-key="step8Num">8</span>
+                                <div class="step-title editable" data-key="step8Title">设备信息绑定</div>
+                                <div class="step-desc editable" data-key="step8Desc">IDC设备入库<br>信息关联绑定</div>
+                            </div>
+                        </div>
+                        <span class="arrow" style="color: #e74c3c;">↓</span>
+                    </div>
+                </div>
+            </div>
+            <div class="swimlane lane-supplier">
+                <div class="lane-label"><span class="editable" data-key="lane3Label">供应商</span></div>
+                <div class="lane-content">
+                    <div class="process-flow">
+                        <div class="process-node" style="margin-left: 520px;">
+                            <div class="step-box">
+                                <button class="delete-step" onclick="deleteStep(this)">×</button>
+                                <span class="step-number editable" data-key="step6Num">6</span>
+                                <div class="step-title editable" data-key="step6Title">收到货款</div>
+                                <div class="step-desc editable" data-key="step6Desc">确认收款<br>准备发货</div>
+                            </div>
+                        </div>
+                        <span class="arrow">→</span>
+                        <div class="process-node">
+                            <div class="step-box">
+                                <button class="delete-step" onclick="deleteStep(this)">×</button>
+                                <span class="step-number editable" data-key="step7Num">7</span>
+                                <div class="step-title editable" data-key="step7Title">提交IDC设备</div>
+                                <div class="step-desc editable" data-key="step7Desc">设备出库<br>物流配送</div>
+                            </div>
+                        </div>
+                        <span class="arrow" style="color: #27ae60;">↑</span>
+                    </div>
+                </div>
+            </div>
+            <div class="swimlane lane-enterprise">
+                <div class="lane-label"><span class="editable" data-key="lane4Label">企业<br>（使用）</span></div>
+                <div class="lane-content">
+                    <div class="process-flow">
+                        <div class="process-node" style="margin-left: 680px;">
+                            <div class="step-box">
+                                <button class="delete-step" onclick="deleteStep(this)">×</button>
+                                <span class="step-number editable" data-key="step9Num">9</span>
+                                <div class="step-title editable" data-key="step9Title">登录正常使用</div>
+                                <div class="step-desc editable" data-key="step9Desc">管理算力资源<br>查看使用情况</div>
+                            </div>
+                        </div>
+                        <span class="arrow">→</span>
+                        <div class="process-node">
+                            <div class="step-box">
+                                <button class="delete-step" onclick="deleteStep(this)">×</button>
+                                <span class="step-number editable" data-key="step10Num">10</span>
+                                <div class="step-title editable" data-key="step10Title">发票开具</div>
+                                <div class="step-desc editable" data-key="step10Desc">申请开票<br>获取发票</div>
+                            </div>
+                        </div>
+                        <span class="arrow" style="color: #3498db;">↓</span>
+                    </div>
+                </div>
+            </div>
+            <div class="swimlane lane-government">
+                <div class="lane-label"><span class="editable" data-key="lane5Label">政府</span></div>
+                <div class="lane-content">
+                    <div class="process-flow">
+                        <div class="process-node" style="margin-left: 880px;">
+                            <div class="step-box">
+                                <button class="delete-step" onclick="deleteStep(this)">×</button>
+                                <span class="step-number editable" data-key="step11Num">11</span>
+                                <div class="step-title editable" data-key="step11Title">查看算力补贴统计</div>
+                                <div class="step-desc editable" data-key="step11Desc">审核补贴申请<br>统计补贴数据</div>
+                            </div>
+                        </div>
+                        <span class="arrow">→</span>
+                        <div class="process-node">
+                            <div class="step-box">
+                                <button class="delete-step" onclick="deleteStep(this)">×</button>
+                                <span class="step-number editable" data-key="step12Num">12</span>
+                                <div class="step-title editable" data-key="step12Title">补贴到账</div>
+                                <div class="step-desc editable" data-key="step12Desc">补贴发放<br>资金到账通知</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color legend-enterprise"></div>
+                <span>企业（用户）</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-platform"></div>
+                <span>福石（平台）</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-supplier"></div>
+                <span>供应商</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-government"></div>
+                <span>政府</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        const STORAGE_KEY = 'swimlaneDiagramData';
+        let isEditMode = false;
+
+        // Show status message
+        function showStatus(message, type = 'success') {
+            const statusMsg = document.getElementById('statusMsg');
+            statusMsg.textContent = message;
+            statusMsg.className = 'status-msg show ' + type;
+            setTimeout(() => {
+                statusMsg.classList.remove('show');
+            }, 3000);
+        }
+
+        // Toggle edit mode
+        function toggleEditMode() {
+            isEditMode = !isEditMode;
+            const container = document.getElementById('mainContainer');
+            const editBtn = document.querySelector('.btn-edit');
+            const editBtnText = document.getElementById('editBtnText');
+
+            if (isEditMode) {
+                container.classList.add('edit-mode');
+                editBtn.classList.add('active');
+                editBtnText.textContent = '退出编辑';
+                document.querySelectorAll('.editable').forEach(el => {
+                    el.setAttribute('contenteditable', 'true');
+                });
+                showStatus('编辑模式已开启，点击文字即可编辑', 'info');
+            } else {
+                container.classList.remove('edit-mode');
+                editBtn.classList.remove('active');
+                editBtnText.textContent = '编辑模式';
+                document.querySelectorAll('.editable').forEach(el => {
+                    el.setAttribute('contenteditable', 'false');
+                });
+                showStatus('已退出编辑模式', 'info');
+            }
+        }
+
+        // Save data to localStorage
+        function saveData() {
+            const data = {};
+            document.querySelectorAll('.editable[data-key]').forEach(el => {
+                data[el.dataset.key] = el.innerHTML;
+            });
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+            showStatus('保存成功！数据已存储到本地', 'success');
+        }
+
+        // Load data from localStorage
+        function loadData() {
+            const savedData = localStorage.getItem(STORAGE_KEY);
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                Object.keys(data).forEach(key => {
+                    const el = document.querySelector(`[data-key="${key}"]`);
+                    if (el) {
+                        el.innerHTML = data[key];
+                    }
+                });
+                showStatus('已加载保存的数据', 'info');
+            }
+        }
+
+        // Reset to default
+        function resetData() {
+            if (confirm('确定要重置所有内容为默认值吗？此操作不可恢复。')) {
+                localStorage.removeItem(STORAGE_KEY);
+                location.reload();
+            }
+        }
+
+        // Delete a step
+        function deleteStep(btn) {
+            if (!isEditMode) return;
+            if (confirm('确定要删除这个步骤吗？')) {
+                const processNode = btn.closest('.process-node');
+                const prevArrow = processNode.previousElementSibling;
+                const nextArrow = processNode.nextElementSibling;
+
+                if (prevArrow && prevArrow.classList.contains('arrow')) {
+                    prevArrow.remove();
+                } else if (nextArrow && nextArrow.classList.contains('arrow')) {
+                    nextArrow.remove();
+                }
+                processNode.remove();
+                showStatus('步骤已删除', 'info');
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadData();
+
+            // Hover effects for step boxes
+            document.querySelectorAll('.step-box').forEach(box => {
+                box.addEventListener('mouseenter', function() {
+                    if (!isEditMode) this.style.transform = 'translateY(-5px) scale(1.02)';
+                });
+                box.addEventListener('mouseleave', function() {
+                    if (!isEditMode) this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Active node highlight
+            let activeNode = null;
+            document.querySelectorAll('.step-box').forEach(box => {
+                box.addEventListener('click', function(e) {
+                    if (isEditMode) return;
+                    if (activeNode) activeNode.classList.remove('active');
+                    this.classList.add('active');
+                    activeNode = this;
+                });
+            });
+
+            // Auto-save on blur for editable elements
+            document.querySelectorAll('.editable').forEach(el => {
+                el.addEventListener('blur', function() {
+                    if (isEditMode) {
+                        // Auto-save on edit
+                        saveData();
+                    }
+                });
+            });
+
+            // Keyboard shortcut: Ctrl+S to save
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey && e.key === 's') {
+                    e.preventDefault();
+                    saveData();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
