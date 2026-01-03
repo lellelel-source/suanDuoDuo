@@ -53,7 +53,9 @@
       "Bash(PYTHONIOENCODING=utf-8 \"/c/Users/pc/.local/bin/claude-extract.exe\":*)",
       "Bash(printf:*)",
       "Bash(node -e:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(npm show:*)",
+      "Bash(npm update:*)"
     ],
     "deny": [],
     "ask": []

@@ -1,5 +1,5 @@
 /**
- * Toast Notification Component for 算力多多 System
+ * Toast Notification Component for 算多多 System
  * Provides reusable toast notifications with customizable messages and types
  * @class SuanduoToast
  */

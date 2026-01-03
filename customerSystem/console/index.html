@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>控制台 - 算力多多</title>
+    <title>控制台 - 算多多</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter -->
@@ -33,28 +34,34 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
+
         /* Style for the active navigation link */
         .nav-active {
-            background-color: #2979FF; /* primary */
+            background-color: #2979FF;
+            /* primary */
             color: white;
         }
+
         /* Custom scrollbar for better aesthetics */
         ::-webkit-scrollbar {
             width: 8px;
         }
+
         ::-webkit-scrollbar-track {
             background: #f1f5f9;
         }
+
         ::-webkit-scrollbar-thumb {
             background: #cbd5e1;
             border-radius: 10px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: #94a3b8;
         }
-
     </style>
 </head>
+
 <body class="bg-slate-100">
 
     <div id="app-container" class="h-screen flex flex-col bg-slate-100">
@@ -63,10 +70,10 @@
         <div class="flex flex-1 overflow-hidden">
             <!-- Content Area -->
             <main class="flex-1 overflow-x-hidden overflow-y-auto p-6">
-                
+
                 <!-- Dashboard Page -->
                 <section id="dashboard-page" class="page-content">
-                    
+
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                         <!-- Left Column -->
                         <div class="lg:col-span-2 space-y-6">
@@ -89,8 +96,10 @@
                             </div>
                             <div class="bg-white p-6 rounded-lg shadow">
                                 <h3 class="font-semibold text-slate-800">资源概览</h3>
-                                 <div class="h-48 mt-4 flex items-center justify-center text-slate-400 border-2 border-dashed border-slate-200 rounded-lg">
-                                    <p>暂无收藏资源，快去<a href="../computingPowerSupermarket/index.html" class="text-primary hover:underline">购买算力</a>吧！</p>
+                                <div
+                                    class="h-48 mt-4 flex items-center justify-center text-slate-400 border-2 border-dashed border-slate-200 rounded-lg">
+                                    <p>暂无收藏资源，快去<a href="../computingPowerSupermarket/index.html"
+                                            class="text-primary hover:underline">购买算力</a>吧！</p>
                                 </div>
                             </div>
                             <div class="bg-white p-6 rounded-lg shadow">
@@ -98,7 +107,8 @@
                                     <h3 class="font-semibold text-slate-800">消费明细</h3>
                                     <a href="#billing" class="text-sm text-primary hover:underline">更多 ></a>
                                 </div>
-                                <div class="h-64 mt-4 bg-slate-50 rounded flex items-center justify-center text-slate-500">
+                                <div
+                                    class="h-64 mt-4 bg-slate-50 rounded flex items-center justify-center text-slate-500">
                                     <!-- Placeholder for chart -->
                                     消费趋势图区域
                                 </div>
@@ -106,16 +116,20 @@
                         </div>
                         <!-- Right Column -->
                         <div class="space-y-6">
-                            
+
                             <!-- Balance Cards -->
                             <div class="space-y-4">
                                 <!-- 账户余额 Card -->
                                 <div class="bg-white p-5 rounded-lg shadow">
                                     <div class="flex items-center justify-between">
                                         <div class="flex items-center gap-3">
-                                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                                            <div
+                                                class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                                                 </svg>
                                             </div>
                                             <span class="text-slate-600 font-medium">账户余额</span>
@@ -128,9 +142,13 @@
                                 <div class="bg-white p-5 rounded-lg shadow">
                                     <div class="flex items-center justify-between">
                                         <div class="flex items-center gap-3">
-                                            <div class="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center">
-                                                <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            <div
+                                                class="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center">
+                                                <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                                 </svg>
                                             </div>
                                             <span class="text-slate-600 font-medium">储值金额</span>
@@ -143,9 +161,13 @@
                                 <div class="bg-white p-5 rounded-lg shadow">
                                     <div class="flex items-center justify-between">
                                         <div class="flex items-center gap-3">
-                                            <div class="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center">
-                                                <svg class="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/>
+                                            <div
+                                                class="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center">
+                                                <svg class="w-5 h-5 text-orange-500" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
                                                 </svg>
                                             </div>
                                             <span class="text-slate-600 font-medium">赠送金额</span>
@@ -155,11 +177,12 @@
                                 </div>
 
                                 <!-- Recharge Button -->
-                                <a href="../financialCenter/topUp.html" class="w-full block text-center bg-primary text-white font-semibold py-3 rounded-lg hover:bg-primary-dark transition-colors shadow">
+                                <a href="../financialCenter/topUp.html"
+                                    class="w-full block text-center bg-primary text-white font-semibold py-3 rounded-lg hover:bg-primary-dark transition-colors shadow">
                                     立即充值
                                 </a>
                             </div>
-                            
+
                             <!-- Recharge Promotion -->
                             <div class="bg-white p-6 rounded-lg shadow">
                                 <h3 class="font-semibold text-slate-800 border-b pb-3 mb-4">充值优惠</h3>
@@ -167,20 +190,23 @@
                                     <p class="text-slate-600">限时活动：充值越多，赠送越多！</p>
                                     <div class="flex justify-between items-center p-2 bg-primary-light rounded-md">
                                         <span class="text-primary font-semibold">充 ¥1,000</span>
-                                        <span class="text-slate-700">赠送 <span class="font-bold text-orange-500">¥100</span></span>
+                                        <span class="text-slate-700">赠送 <span
+                                                class="font-bold text-orange-500">¥100</span></span>
                                     </div>
                                     <div class="flex justify-between items-center p-2 bg-primary-light rounded-md">
                                         <span class="text-primary font-semibold">充 ¥5,000</span>
-                                        <span class="text-slate-700">赠送 <span class="font-bold text-orange-500">¥600</span></span>
+                                        <span class="text-slate-700">赠送 <span
+                                                class="font-bold text-orange-500">¥600</span></span>
                                     </div>
                                     <div class="flex justify-between items-center p-2 bg-primary-light rounded-md">
                                         <span class="text-primary font-semibold">充 ¥10,000</span>
-                                        <span class="text-slate-700">赠送 <span class="font-bold text-orange-500">¥1,500</span></span>
+                                        <span class="text-slate-700">赠送 <span
+                                                class="font-bold text-orange-500">¥1,500</span></span>
                                     </div>
-                                    <p class="text-xs text-slate-400 pt-2">* 赠送金额将发放到您的优惠券余额中。</p>
+                                    <p class="text-xs text-slate-400 pt-2">* 赠送金额将发放到您的账户中。</p>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </section>
@@ -191,4 +217,5 @@
 
     <script src="console.js"></script>
 </body>
+
 </html>

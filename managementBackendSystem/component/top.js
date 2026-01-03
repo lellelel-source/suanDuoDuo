@@ -1,5 +1,5 @@
 /**
- * TopHeader Component for 算力多多 Console
+ * TopHeader Component for 算多多 Console
  * Encapsulates the top header bar functionality.
  * @class TopHeader
  */

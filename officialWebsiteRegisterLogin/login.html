@@ -1,43 +1,59 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>登录 - 算力多多</title>
+    <title>登录 - 算多多</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter & Orbitron for Logo -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@700&display=swap"
+        rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', 'sans-serif';
         }
+
         .logo-font {
             font-family: 'Orbitron', sans-serif;
             text-shadow: 0 0 8px rgba(37, 99, 235, 0.3);
         }
+
         .login-bg {
             background: linear-gradient(-45deg, #eff6ff, #dbeafe, #bfdbfe, #93c5fd);
             background-size: 400% 400%;
             animation: moveGradient 15s ease infinite;
         }
+
         @keyframes moveGradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
     </style>
 </head>
+
 <body class="login-bg">
 
     <div class="min-h-screen flex flex-col items-center justify-center px-4">
         <div class="w-full max-w-md">
             <!-- Logo -->
             <div class="text-center mb-8">
-                <a href="index.html" class="inline-block text-4xl logo-font font-bold bg-gradient-to-r from-blue-600 to-sky-400 text-transparent bg-clip-text">
-                    算力多多
+                <a href="index.html"
+                    class="inline-block text-4xl logo-font font-bold bg-gradient-to-r from-blue-600 to-sky-400 text-transparent bg-clip-text">
+                    算多多
                 </a>
             </div>
 
@@ -53,7 +69,7 @@
                             <label for="phone" class="block text-sm font-medium text-gray-700">手机号码</label>
                             <div class="mt-1">
                                 <input id="phone" name="phone" type="tel" autocomplete="tel" required
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                             </div>
                         </div>
 
@@ -61,11 +77,13 @@
                         <div>
                             <div class="flex items-center justify-between">
                                 <label for="password" class="block text-sm font-medium text-gray-700">密码</label>
-                                <a href="forgot password.html" class="text-sm text-blue-600 hover:text-blue-500">忘记密码?</a>
+                                <a href="forgot password.html"
+                                    class="text-sm text-blue-600 hover:text-blue-500">忘记密码?</a>
                             </div>
                             <div class="mt-1">
-                                <input id="password" name="password" type="password" autocomplete="current-password" required
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                                <input id="password" name="password" type="password" autocomplete="current-password"
+                                    required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                             </div>
                         </div>
 
@@ -74,9 +92,9 @@
                             <label for="sms-code" class="block text-sm font-medium text-gray-700">短信验证码</label>
                             <div class="mt-1 flex items-center space-x-2">
                                 <input id="sms-code" name="sms-code" type="text" required
-                                       class="flex-grow w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                                    class="flex-grow w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                                 <button type="button" id="send-code-btn"
-                                        class="px-4 py-3 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gray-500 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 transition whitespace-nowrap">
+                                    class="px-4 py-3 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gray-500 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 transition whitespace-nowrap">
                                     获取验证码
                                 </button>
                             </div>
@@ -85,7 +103,7 @@
                         <!-- Submit Button -->
                         <div>
                             <button type="submit"
-                                    class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 font-semibold transition-transform transform hover:scale-105">
+                                class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 font-semibold transition-transform transform hover:scale-105">
                                 登 录
                             </button>
                         </div>
@@ -129,12 +147,12 @@
                 phoneInput.focus();
                 return;
             }
-            
+
             // Disable button and start countdown
             sendCodeBtn.disabled = true;
             sendCodeBtn.classList.add('bg-gray-400', 'cursor-not-allowed');
             sendCodeBtn.classList.remove('bg-gray-500', 'hover:bg-gray-600');
-            
+
             let countdown = 60;
             sendCodeBtn.textContent = `重新发送 (${countdown}s)`;
 
@@ -150,23 +168,23 @@
                     sendCodeBtn.classList.add('bg-gray-500', 'hover:bg-gray-600');
                 }
             }, 1000);
-            
+
             // Here you would typically make an API call to send the SMS code.
             // For this example, we'll just log to console.
             console.log(`Sending verification code to ${phone}`);
             alert('验证码已发送（模拟）');
         });
- 
+
         form.addEventListener('submit', (e) => {
             e.preventDefault();
- 
+
             // Basic validation
             if (!phoneInput.value.trim()) {
                 alert('请输入手机号码');
                 phoneInput.focus();
                 return;
             }
- 
+
             if (!passwordInput.value) {
                 alert('请输入密码');
                 passwordInput.focus();
@@ -178,11 +196,12 @@
                 smsCodeInput.focus();
                 return;
             }
- 
+
             // If all validations pass, redirect to enterprise certification
             window.location.href = './enterpriseCertification.html';
         });
     </script>
 
 </body>
+
 </html>

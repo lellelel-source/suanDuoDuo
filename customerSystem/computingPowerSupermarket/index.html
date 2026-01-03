@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>算力超市 - 算力多多</title>
+    <title>算力超市 - 算多多</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter -->
@@ -237,17 +237,23 @@
                                             <div class="space-y-4">
                                                 <!-- Option 1: New Entity - Direct Registration -->
                                                 <div class="invitation-option" data-option="direct">
-                                                    <label class="flex items-start cursor-pointer p-4 border-2 border-primary bg-blue-50 rounded-lg transition-all">
-                                                        <input type="radio" name="invitation-type" value="direct" class="mt-1 mr-3 w-4 h-4 text-primary" checked>
+                                                    <label
+                                                        class="flex items-start cursor-pointer p-4 border-2 border-primary bg-blue-50 rounded-lg transition-all">
+                                                        <input type="radio" name="invitation-type" value="direct"
+                                                            class="mt-1 mr-3 w-4 h-4 text-primary" checked>
                                                         <div class="flex-1">
-                                                            <span class="font-medium text-slate-800">我确认是新主体，点击后直接注册</span>
+                                                            <span
+                                                                class="font-medium text-slate-800">我确认是新主体，点击后直接注册</span>
                                                         </div>
                                                     </label>
                                                     <!-- Direct Registration Content -->
                                                     <div class="option-content mt-3 pl-7" id="direct-content">
                                                         <div class="flex items-start text-sm text-primary mb-4">
-                                                            <svg class="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                                                            <svg class="w-4 h-4 mr-2 mt-0.5 flex-shrink-0"
+                                                                fill="currentColor" viewBox="0 0 20 20">
+                                                                <path fill-rule="evenodd"
+                                                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                                                    clip-rule="evenodd"></path>
                                                             </svg>
                                                             <span>跳转页面后，直接完成注册并正常购买即可获得返佣</span>
                                                         </div>
@@ -260,10 +266,13 @@
 
                                                 <!-- Option 2: Need Verification -->
                                                 <div class="invitation-option" data-option="verify">
-                                                    <label class="flex items-start cursor-pointer p-4 border-2 border-slate-200 rounded-lg transition-all hover:border-slate-300">
-                                                        <input type="radio" name="invitation-type" value="verify" class="mt-1 mr-3 w-4 h-4 text-primary">
+                                                    <label
+                                                        class="flex items-start cursor-pointer p-4 border-2 border-slate-200 rounded-lg transition-all hover:border-slate-300">
+                                                        <input type="radio" name="invitation-type" value="verify"
+                                                            class="mt-1 mr-3 w-4 h-4 text-primary">
                                                         <div class="flex-1">
-                                                            <span class="font-medium text-slate-800">我需要帮忙确认是否为新主体</span>
+                                                            <span
+                                                                class="font-medium text-slate-800">我需要帮忙确认是否为新主体</span>
                                                         </div>
                                                     </label>
                                                     <!-- Verification Form Content -->
@@ -272,35 +281,52 @@
 
                                                         <div class="space-y-4">
                                                             <div>
-                                                                <label for="company-name" class="block text-sm font-medium text-slate-700 mb-2">
+                                                                <label for="company-name"
+                                                                    class="block text-sm font-medium text-slate-700 mb-2">
                                                                     选择您的企业 <span class="text-red-500">*</span>
                                                                 </label>
                                                                 <div class="relative" id="company-dropdown-container">
                                                                     <button type="button" id="company-dropdown-btn"
                                                                         class="w-full px-3 py-2 border border-slate-300 rounded-md bg-white text-left flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
-                                                                        <span id="company-selected-text" class="text-slate-400">请选择企业</span>
-                                                                        <svg class="w-5 h-5 text-slate-400 transition-transform" id="dropdown-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                                                        <span id="company-selected-text"
+                                                                            class="text-slate-400">请选择企业</span>
+                                                                        <svg class="w-5 h-5 text-slate-400 transition-transform"
+                                                                            id="dropdown-arrow" fill="none"
+                                                                            stroke="currentColor" viewBox="0 0 24 24">
+                                                                            <path stroke-linecap="round"
+                                                                                stroke-linejoin="round" stroke-width="2"
+                                                                                d="M19 9l-7 7-7-7"></path>
                                                                         </svg>
                                                                     </button>
-                                                                    <input type="hidden" id="company-name" name="company-name">
+                                                                    <input type="hidden" id="company-name"
+                                                                        name="company-name">
 
                                                                     <!-- Dropdown Panel -->
-                                                                    <div id="company-dropdown-panel" class="absolute z-50 w-full mt-1 bg-white border border-slate-300 rounded-md shadow-lg hidden">
+                                                                    <div id="company-dropdown-panel"
+                                                                        class="absolute z-50 w-full mt-1 bg-white border border-slate-300 rounded-md shadow-lg hidden">
                                                                         <!-- Search Input -->
                                                                         <div class="p-3 border-b border-slate-200">
                                                                             <div class="relative">
-                                                                                <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                                                                <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"
+                                                                                    fill="none" stroke="currentColor"
+                                                                                    viewBox="0 0 24 24">
+                                                                                    <path stroke-linecap="round"
+                                                                                        stroke-linejoin="round"
+                                                                                        stroke-width="2"
+                                                                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z">
+                                                                                    </path>
                                                                                 </svg>
-                                                                                <input type="text" id="company-search-input"
+                                                                                <input type="text"
+                                                                                    id="company-search-input"
                                                                                     placeholder="请输入企业名称(2字及以上)"
                                                                                     class="w-full pl-9 pr-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
                                                                             </div>
                                                                         </div>
                                                                         <!-- Options List -->
-                                                                        <div id="company-options-list" class="max-h-48 overflow-y-auto">
-                                                                            <div id="company-no-result" class="py-6 text-center text-slate-500 text-sm">
+                                                                        <div id="company-options-list"
+                                                                            class="max-h-48 overflow-y-auto">
+                                                                            <div id="company-no-result"
+                                                                                class="py-6 text-center text-slate-500 text-sm">
                                                                                 未找到企业
                                                                             </div>
                                                                         </div>
@@ -309,7 +335,8 @@
                                                             </div>
 
                                                             <div>
-                                                                <label for="credit-code" class="block text-sm font-medium text-slate-700 mb-2">
+                                                                <label for="credit-code"
+                                                                    class="block text-sm font-medium text-slate-700 mb-2">
                                                                     统一信用代码 <span class="text-red-500">*</span>
                                                                 </label>
                                                                 <input type="text" id="credit-code" name="credit-code"
@@ -317,9 +344,11 @@
                                                                     class="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
                                                             </div>
 
-                                                            <div class="bg-amber-50 border border-amber-200 rounded-md p-3">
+                                                            <div
+                                                                class="bg-amber-50 border border-amber-200 rounded-md p-3">
                                                                 <div class="flex">
-                                                                    <svg class="w-5 h-5 text-amber-500 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                                                    <svg class="w-5 h-5 text-amber-500 mt-0.5 mr-2 flex-shrink-0"
+                                                                        fill="currentColor" viewBox="0 0 20 20">
                                                                         <path fill-rule="evenodd"
                                                                             d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
                                                                             clip-rule="evenodd"></path>
@@ -347,22 +376,29 @@
                                     <div class="w-full max-w-sm space-y-4">
                                         <div class="bg-green-50 border border-green-200 rounded-lg p-4">
                                             <div class="flex">
-                                                <svg class="w-6 h-6 text-green-500 mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                                <svg class="w-6 h-6 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                                                    fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd"
+                                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                        clip-rule="evenodd"></path>
                                                 </svg>
                                                 <div>
-                                                    <h4 class="text-base font-semibold text-green-800 mb-2">新用户专属优惠通道</h4>
+                                                    <h4 class="text-base font-semibold text-green-800 mb-2">新用户专属优惠通道
+                                                    </h4>
                                                     <p class="text-sm text-green-700 mb-3">
-                                                        建议您使用<span class="text-primary font-medium">全新的企业主体</span>进行注册，以享受云厂商新用户专属优惠：
+                                                        建议您使用<span
+                                                            class="text-primary font-medium">全新的企业主体</span>进行注册，以享受云厂商新用户专属优惠：
                                                     </p>
                                                     <ul class="text-sm text-green-700 space-y-1.5">
                                                         <li class="flex items-start">
                                                             <span class="mr-2">•</span>
-                                                            <span>首购算力资源可享<strong class="text-primary">最高5折</strong>优惠</span>
+                                                            <span>首购算力资源可享<strong
+                                                                    class="text-primary">最高5折</strong>优惠</span>
                                                         </li>
                                                         <li class="flex items-start">
                                                             <span class="mr-2">•</span>
-                                                            <span>赠送价值<strong class="text-primary">5000元</strong>的免费算力体验金</span>
+                                                            <span>赠送价值<strong
+                                                                    class="text-primary">5000元</strong>的免费算力体验金</span>
                                                         </li>
                                                         <li class="flex items-start">
                                                             <span class="mr-2">•</span>
@@ -380,18 +416,25 @@
                                         <!-- Commission Payment Account Notice -->
                                         <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
                                             <div class="flex">
-                                                <svg class="w-6 h-6 text-primary mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                                                <svg class="w-6 h-6 text-primary mt-0.5 mr-3 flex-shrink-0"
+                                                    fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd"
+                                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                                        clip-rule="evenodd"></path>
                                                 </svg>
                                                 <div>
                                                     <h4 class="text-base font-semibold text-primary mb-2">返佣账户设置提醒</h4>
                                                     <p class="text-sm text-slate-600 mb-3">
-                                                        请确保您已添加<strong class="text-primary">返佣收款账户</strong>，否则将影响返佣款项的正常发放。
+                                                        请确保您已添加<strong
+                                                            class="text-primary">返佣收款账户</strong>，否则将影响返佣款项的正常发放。
                                                     </p>
-                                                    <a href="../accountManagement/index.html" class="inline-flex items-center text-sm text-primary hover:text-primary-dark font-medium">
+                                                    <a href="../accountManagement/index.html"
+                                                        class="inline-flex items-center text-sm text-primary hover:text-primary-dark font-medium">
                                                         前往设置收款账户
-                                                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor"
+                                                            viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2" d="M9 5l7 7-7 7"></path>
                                                         </svg>
                                                     </a>
                                                 </div>
@@ -408,9 +451,12 @@
                             <div class="fixed inset-0 flex items-center justify-center p-4">
                                 <div class="bg-white rounded-lg shadow-xl max-w-sm w-full p-6 text-center relative">
                                     <!-- Success Icon -->
-                                    <div class="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center">
-                                        <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    <div
+                                        class="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center">
+                                        <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M5 13l4 4L19 7"></path>
                                         </svg>
                                     </div>
                                     <h3 class="text-xl font-semibold text-slate-800 mb-3">提交成功</h3>
@@ -434,41 +480,41 @@
     <script src="supermarket.js"></script>
     <script src="../component/productcard.js"></script>
     <script>
-        // Invitation Type Radio Toggle
-        (function() {
-            const radioInputs = document.querySelectorAll('input[name="invitation-type"]');
-            const directContent = document.getElementById('direct-content');
-            const verifyContent = document.getElementById('verify-content');
-            const directOption = document.querySelector('.invitation-option[data-option="direct"] label');
-            const verifyOption = document.querySelector('.invitation-option[data-option="verify"] label');
+            // Invitation Type Radio Toggle
+            (function () {
+                const radioInputs = document.querySelectorAll('input[name="invitation-type"]');
+                const directContent = document.getElementById('direct-content');
+                const verifyContent = document.getElementById('verify-content');
+                const directOption = document.querySelector('.invitation-option[data-option="direct"] label');
+                const verifyOption = document.querySelector('.invitation-option[data-option="verify"] label');
 
-            function updateUI(selectedValue) {
-                if (selectedValue === 'direct') {
-                    directContent.classList.remove('hidden');
-                    verifyContent.classList.add('hidden');
-                    directOption.classList.add('border-primary', 'bg-blue-50');
-                    directOption.classList.remove('border-slate-200');
-                    verifyOption.classList.remove('border-primary', 'bg-blue-50');
-                    verifyOption.classList.add('border-slate-200');
-                } else {
-                    directContent.classList.add('hidden');
-                    verifyContent.classList.remove('hidden');
-                    verifyOption.classList.add('border-primary', 'bg-blue-50');
-                    verifyOption.classList.remove('border-slate-200');
-                    directOption.classList.remove('border-primary', 'bg-blue-50');
-                    directOption.classList.add('border-slate-200');
+                function updateUI(selectedValue) {
+                    if (selectedValue === 'direct') {
+                        directContent.classList.remove('hidden');
+                        verifyContent.classList.add('hidden');
+                        directOption.classList.add('border-primary', 'bg-blue-50');
+                        directOption.classList.remove('border-slate-200');
+                        verifyOption.classList.remove('border-primary', 'bg-blue-50');
+                        verifyOption.classList.add('border-slate-200');
+                    } else {
+                        directContent.classList.add('hidden');
+                        verifyContent.classList.remove('hidden');
+                        verifyOption.classList.add('border-primary', 'bg-blue-50');
+                        verifyOption.classList.remove('border-slate-200');
+                        directOption.classList.remove('border-primary', 'bg-blue-50');
+                        directOption.classList.add('border-slate-200');
+                    }
                 }
-            }
 
-            radioInputs.forEach(radio => {
-                radio.addEventListener('change', (e) => {
-                    updateUI(e.target.value);
+                radioInputs.forEach(radio => {
+                    radio.addEventListener('change', (e) => {
+                        updateUI(e.target.value);
+                    });
                 });
-            });
-        })();
+            })();
 
         // Company Dropdown with Search Suggestion
-        (function() {
+        (function () {
             const dropdownBtn = document.getElementById('company-dropdown-btn');
             const dropdownPanel = document.getElementById('company-dropdown-panel');
             const dropdownArrow = document.getElementById('dropdown-arrow');
@@ -549,7 +595,7 @@
         })();
 
         // Success Modal
-        (function() {
+        (function () {
             const modal = document.getElementById('success-modal');
             const submitBtn = document.getElementById('submit-verification');
             const confirmBtn = document.getElementById('modal-confirm-btn');
@@ -592,7 +638,7 @@
         })();
 
         // Direct Registration Button
-        (function() {
+        (function () {
             const directRegisterBtn = document.getElementById('btn-direct-register');
             if (directRegisterBtn) {
                 directRegisterBtn.addEventListener('click', () => {

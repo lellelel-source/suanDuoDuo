@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>订单详情 - 算力多多</title>
+    <title>订单详情 - 算多多</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter -->
@@ -32,6 +33,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="flex h-screen bg-slate-100">
@@ -42,7 +44,7 @@
             <!-- Content Area -->
             <main class="flex-1 overflow-x-hidden overflow-y-auto p-6">
                 <div id="return-btn-container"></div>
-                
+
                 <div class="bg-white rounded-lg shadow p-8 max-w-4xl mx-auto">
                     <!-- Order Header -->
                     <div class="flex justify-between items-center pb-4 border-b">
@@ -58,7 +60,8 @@
 
                     <!-- Payment Countdown -->
                     <div class="mt-6 text-center bg-yellow-50 p-4 rounded-lg">
-                        <p class="text-sm text-yellow-800">请在 <span id="countdown" class="font-bold text-lg text-red-600">29:59</span> 内完成支付，超时订单将自动取消。</p>
+                        <p class="text-sm text-yellow-800">请在 <span id="countdown"
+                                class="font-bold text-lg text-red-600">29:59</span> 内完成支付，超时订单将自动取消。</p>
                     </div>
 
                     <!-- Order Summary -->
@@ -92,37 +95,43 @@
                     <div class="mt-8">
                         <h3 class="font-semibold text-slate-800 mb-4">支付方式</h3>
                         <div class="space-y-3">
-                            <label class="flex items-center p-4 border rounded-lg cursor-pointer border-primary bg-primary-light">
-                                <input type="radio" name="payment" class="h-4 w-4 text-primary border-slate-300 focus:ring-primary" checked>
+                            <label
+                                class="flex items-center p-4 border rounded-lg cursor-pointer border-primary bg-primary-light">
+                                <input type="radio" name="payment"
+                                    class="h-4 w-4 text-primary border-slate-300 focus:ring-primary" checked>
                                 <span class="ml-3 font-semibold text-slate-800">支付宝</span>
                             </label>
                             <label class="flex items-center p-4 border rounded-lg cursor-pointer hover:border-primary">
-                                <input type="radio" name="payment" class="h-4 w-4 text-primary border-slate-300 focus:ring-primary">
+                                <input type="radio" name="payment"
+                                    class="h-4 w-4 text-primary border-slate-300 focus:ring-primary">
                                 <span class="ml-3 font-semibold text-slate-800">微信支付</span>
                             </label>
                             <label class="flex items-center p-4 border rounded-lg cursor-pointer hover:border-primary">
-                                <input type="radio" name="payment" class="h-4 w-4 text-primary border-slate-300 focus:ring-primary">
+                                <input type="radio" name="payment"
+                                    class="h-4 w-4 text-primary border-slate-300 focus:ring-primary">
                                 <span class="ml-3 font-semibold text-slate-800">余额支付 (可用: ¥0.00)</span>
                             </label>
                         </div>
                     </div>
                 </div>
             </main>
-            
+
             <!-- Sticky Footer -->
             <footer class="bg-white shadow-[0_-2px_5px_rgba(0,0,0,0.05)] sticky bottom-0 z-20 border-t">
                 <div class="px-6 h-20 flex items-center justify-end max-w-4xl mx-auto">
                     <div class="flex items-center space-x-4">
-                        <p class="text-slate-600">应付金额: <span id="footer-price" class="text-2xl font-bold text-red-600">¥ 1200.00</span></p>
-                        <a href="../successfully.html" class="bg-primary text-white font-semibold px-8 py-3 rounded-lg hover:bg-primary-dark transition-colors">立即支付</a>
+                        <p class="text-slate-600">应付金额: <span id="footer-price"
+                                class="text-2xl font-bold text-red-600">¥ 1200.00</span></p>
+                        <a href="../successfully.html"
+                            class="bg-primary text-white font-semibold px-8 py-3 rounded-lg hover:bg-primary-dark transition-colors">立即支付</a>
                     </div>
                 </div>
             </footer>
         </div>
     </div>
-    
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // --- Top Header Initialization ---
             const mainContentContainer = document.getElementById('main-content-container');
             if (window.TopHeader && mainContentContainer) {
@@ -142,7 +151,7 @@
 
             // --- Countdown Timer ---
             const countdownEl = document.getElementById('countdown');
-            if(countdownEl) {
+            if (countdownEl) {
                 let time = 30 * 60; // 30 minutes in seconds
                 setInterval(() => {
                     if (time <= 0) {
@@ -159,4 +168,5 @@
     </script>
 
 </body>
+
 </html>

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>厂商链接 - 算力多多</title>
+    <title>厂商链接 - 算多多</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter -->
@@ -34,27 +35,34 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
+
         /* Style for the active navigation link */
         .nav-active {
-            background-color: #2979FF; /* primary */
+            background-color: #2979FF;
+            /* primary */
             color: white;
         }
+
         /* Custom scrollbar for better aesthetics */
         ::-webkit-scrollbar {
             width: 8px;
         }
+
         ::-webkit-scrollbar-track {
             background: #f1f5f9;
         }
+
         ::-webkit-scrollbar-thumb {
             background: #cbd5e1;
             border-radius: 10px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: #94a3b8;
         }
     </style>
 </head>
+
 <body class="bg-slate-100">
 
     <div id="app-container" class="h-screen flex flex-col bg-slate-100">
@@ -71,13 +79,17 @@
                             <div>
                                 <h4 class="text-lg font-semibold text-slate-800">提交记录</h4>
                                 <div class="flex flex-wrap gap-4 mt-4">
-                                    <input type="text" placeholder="搜索企业名称" class="border border-slate-300 rounded-md px-3 py-2 text-sm">
-                                    <input type="text" placeholder="搜索厂商名称" class="border border-slate-300 rounded-md px-3 py-2 text-sm">
-                                    <button class="bg-slate-200 text-slate-700 font-semibold px-4 py-2 rounded-lg text-sm hover:bg-slate-300">查询</button>
+                                    <input type="text" placeholder="搜索企业名称"
+                                        class="border border-slate-300 rounded-md px-3 py-2 text-sm">
+                                    <input type="text" placeholder="搜索厂商名称"
+                                        class="border border-slate-300 rounded-md px-3 py-2 text-sm">
+                                    <button
+                                        class="bg-slate-200 text-slate-700 font-semibold px-4 py-2 rounded-lg text-sm hover:bg-slate-300">查询</button>
                                 </div>
                             </div>
                             <div>
-                                <button id="add-record-btn" class="bg-primary text-white font-semibold px-4 py-2 rounded-lg text-sm hover:bg-primary-dark transition-colors">
+                                <button id="add-record-btn"
+                                    class="bg-primary text-white font-semibold px-4 py-2 rounded-lg text-sm hover:bg-primary-dark transition-colors">
                                     新增记录
                                 </button>
                             </div>
@@ -104,11 +116,13 @@
                                         <td class="px-6 py-4">contact@beijingtech.com</td>
                                         <td class="px-6 py-4">华为云</td>
                                         <td class="px-6 py-4">
-                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">已发送</span>
+                                            <span
+                                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">已发送</span>
                                         </td>
                                         <td class="px-6 py-4">
                                             <div class="flex space-x-2">
-                                                <button class="text-primary hover:underline text-sm copy-link-btn">复制链接</button>
+                                                <button
+                                                    class="text-primary hover:underline text-sm copy-link-btn">复制链接</button>
                                             </div>
                                         </td>
                                     </tr>
@@ -119,7 +133,8 @@
                                         <td class="px-6 py-4">info@shanghaitech.com</td>
                                         <td class="px-6 py-4">阿里云</td>
                                         <td class="px-6 py-4">
-                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">待发送</span>
+                                            <span
+                                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">待发送</span>
                                         </td>
                                         <td class="px-6 py-4">
                                             <div class="flex space-x-2">
@@ -134,11 +149,13 @@
                                         <td class="px-6 py-4">admin@shenzhencloud.com</td>
                                         <td class="px-6 py-4">腾讯云</td>
                                         <td class="px-6 py-4">
-                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">已发送</span>
+                                            <span
+                                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">已发送</span>
                                         </td>
                                         <td class="px-6 py-4">
                                             <div class="flex space-x-2">
-                                                <button class="text-primary hover:underline text-sm copy-link-btn">复制链接</button>
+                                                <button
+                                                    class="text-primary hover:underline text-sm copy-link-btn">复制链接</button>
                                             </div>
                                         </td>
                                     </tr>
@@ -149,7 +166,8 @@
                                         <td class="px-6 py-4">service@guangzhoudata.com</td>
                                         <td class="px-6 py-4">火山云</td>
                                         <td class="px-6 py-4">
-                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">待发送</span>
+                                            <span
+                                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">待发送</span>
                                         </td>
                                         <td class="px-6 py-4">
                                             <div class="flex space-x-2">
@@ -164,26 +182,33 @@
                                         <td class="px-6 py-4">support@chendutech.com</td>
                                         <td class="px-6 py-4">阿里云</td>
                                         <td class="px-6 py-4">
-                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">已发送</span>
+                                            <span
+                                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">已发送</span>
                                         </td>
                                         <td class="px-6 py-4">
                                             <div class="flex space-x-2">
-                                                <button class="text-primary hover:underline text-sm copy-link-btn">复制链接</button>
+                                                <button
+                                                    class="text-primary hover:underline text-sm copy-link-btn">复制链接</button>
                                             </div>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                        
+
                         <!-- Pagination -->
                         <div class="mt-6 flex items-center justify-between">
                             <div class="text-sm text-slate-600">
-                                显示 <span class="font-medium">1</span> 到 <span class="font-medium">5</span> of <span class="font-medium">5</span> 条结果
+                                显示 <span class="font-medium">1</span> 到 <span class="font-medium">5</span> of <span
+                                    class="font-medium">5</span> 条结果
                             </div>
                             <div class="flex items-center space-x-2">
-                                <button class="px-3 py-1 border border-slate-300 rounded-md text-sm text-slate-600 hover:bg-slate-50 disabled:opacity-50" disabled>上一页</button>
-                                <button class="px-3 py-1 border border-slate-300 rounded-md text-sm text-slate-600 hover:bg-slate-50 disabled:opacity-50" disabled>下一页</button>
+                                <button
+                                    class="px-3 py-1 border border-slate-300 rounded-md text-sm text-slate-600 hover:bg-slate-50 disabled:opacity-50"
+                                    disabled>上一页</button>
+                                <button
+                                    class="px-3 py-1 border border-slate-300 rounded-md text-sm text-slate-600 hover:bg-slate-50 disabled:opacity-50"
+                                    disabled>下一页</button>
                             </div>
                         </div>
                     </div>
@@ -200,7 +225,8 @@
                 <h4 class="text-lg font-semibold text-slate-800">新增记录</h4>
                 <button id="close-modal-btn" class="text-slate-400 hover:text-slate-600">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
                     </svg>
                 </button>
             </div>
@@ -210,61 +236,36 @@
                         <label class="block text-sm font-medium text-slate-700 mb-1">
                             企业名称 <span class="text-red-500">*</span>
                         </label>
-                        <input 
-                            type="text" 
-                            id="modal-company-name" 
-                            required 
-                            placeholder="请输入企业名称"
-                            class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                        >
+                        <input type="text" id="modal-company-name" required placeholder="请输入企业名称"
+                            class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-slate-700 mb-1">
                             统一信用代码 <span class="text-red-500">*</span>
                         </label>
-                        <input 
-                            type="text" 
-                            id="modal-credit-code" 
-                            required 
-                            placeholder="请输入18位统一信用代码"
-                            maxlength="18"
-                            class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                        >
+                        <input type="text" id="modal-credit-code" required placeholder="请输入18位统一信用代码" maxlength="18"
+                            class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-slate-700 mb-1">
                             手机号 <span class="text-red-500">*</span>
                         </label>
-                        <input 
-                            type="tel" 
-                            id="modal-phone" 
-                            required 
-                            placeholder="请输入手机号"
-                            maxlength="11"
-                            class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                        >
+                        <input type="tel" id="modal-phone" required placeholder="请输入手机号" maxlength="11"
+                            class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-slate-700 mb-1">
                             邮箱 <span class="text-red-500">*</span>
                         </label>
-                        <input 
-                            type="email" 
-                            id="modal-email" 
-                            required 
-                            placeholder="请输入邮箱地址"
-                            class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                        >
+                        <input type="email" id="modal-email" required placeholder="请输入邮箱地址"
+                            class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-slate-700 mb-1">
                             云厂商 <span class="text-red-500">*</span>
                         </label>
-                        <select 
-                            id="modal-cloud-provider" 
-                            required 
-                            class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                        >
+                        <select id="modal-cloud-provider" required
+                            class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
                             <option value="">请选择云厂商</option>
                             <option value="阿里云">阿里云</option>
                             <option value="华为云">华为云</option>
@@ -274,8 +275,10 @@
                     </div>
                 </div>
                 <div class="flex justify-end space-x-2 mt-6">
-                    <button type="button" id="cancel-btn" class="px-4 py-2 border border-slate-300 rounded-md text-sm text-slate-700 hover:bg-slate-50 transition-colors">取消</button>
-                    <button type="submit" class="px-4 py-2 bg-primary text-white rounded-md text-sm hover:bg-primary-dark transition-colors">保存</button>
+                    <button type="button" id="cancel-btn"
+                        class="px-4 py-2 border border-slate-300 rounded-md text-sm text-slate-700 hover:bg-slate-50 transition-colors">取消</button>
+                    <button type="submit"
+                        class="px-4 py-2 bg-primary text-white rounded-md text-sm hover:bg-primary-dark transition-colors">保存</button>
                 </div>
             </form>
         </div>
@@ -315,25 +318,25 @@
         });
 
         // Copy link functionality with toast notification
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const copyButtons = document.querySelectorAll('.copy-link-btn');
-            
+
             copyButtons.forEach(button => {
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function () {
                     // Generate a sample link (you can modify this to use actual data)
                     const link = 'https://suanduoduo.com/vendor-link/' + Math.random().toString(36).substr(2, 9);
-                    
+
                     // Copy to clipboard
-                    navigator.clipboard.writeText(link).then(function() {
+                    navigator.clipboard.writeText(link).then(function () {
                         // Show success toast notification
                         window.suanduoToast.success('复制成功');
-                    }).catch(function(err) {
+                    }).catch(function (err) {
                         // Fallback for older browsers
                         const textArea = document.createElement('textarea');
                         textArea.value = link;
                         document.body.appendChild(textArea);
                         textArea.select();
-                        
+
                         try {
                             const successful = document.execCommand('copy');
                             if (successful) {
@@ -344,7 +347,7 @@
                         } catch (err) {
                             window.suanduoToast.error('复制失败');
                         }
-                        
+
                         document.body.removeChild(textArea);
                     });
                 });
@@ -352,7 +355,7 @@
         });
 
         // Add Record Modal functionality
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const addRecordBtn = document.getElementById('add-record-btn');
             const modal = document.getElementById('add-record-modal');
             const closeModalBtn = document.getElementById('close-modal-btn');
@@ -361,7 +364,7 @@
 
             // Open modal
             if (addRecordBtn) {
-                addRecordBtn.addEventListener('click', function() {
+                addRecordBtn.addEventListener('click', function () {
                     modal.classList.remove('hidden');
                     modal.classList.add('flex');
                     // Clear form when opening
@@ -385,7 +388,7 @@
             }
 
             // Close modal when clicking outside
-            modal.addEventListener('click', function(e) {
+            modal.addEventListener('click', function (e) {
                 if (e.target === modal) {
                     closeModal();
                 }
@@ -393,7 +396,7 @@
 
             // Handle form submission with validation
             if (recordForm) {
-                recordForm.addEventListener('submit', function(e) {
+                recordForm.addEventListener('submit', function (e) {
                     e.preventDefault();
 
                     // Get form values
@@ -465,4 +468,5 @@
         });
     </script>
 </body>
+
 </html>

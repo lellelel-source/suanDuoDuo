@@ -1,31 +1,35 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>算力多多 | 一站式"低门槛、省钱、省心"的算力超市</title>
-    <meta name="description" content="算力多多为中小企业提供一站式算力服务，包括云算力、IDC算力等，价格透明、性能稳定，帮助企业降低20%以上算力成本。">
+    <title>算多多 | 一站式"低门槛、省钱、省心"的算力超市</title>
+    <meta name="description" content="算多多为中小企业提供一站式算力服务，包括云算力、IDC算力等，价格透明、性能稳定，帮助企业降低20%以上算力成本。">
     <meta name="keywords" content="算力超市,云计算,GPU服务器,AI训练,IDC托管,云服务,算力租赁">
-    <meta name="author" content="算力多多">
+    <meta name="author" content="算多多">
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.suanduoduo.com/">
-    <meta property="og:title" content="算力多多 | 一站式算力超市">
+    <meta property="og:title" content="算多多 | 一站式算力超市">
     <meta property="og:description" content="为中小企业提供低门槛、省钱、省心的算力服务，帮助企业降低20%以上算力成本。">
     <meta property="og:image" content="https://www.suanduoduo.com/og-image.png">
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://www.suanduoduo.com/">
-    <meta property="twitter:title" content="算力多多 | 一站式算力超市">
+    <meta property="twitter:title" content="算多多 | 一站式算力超市">
     <meta property="twitter:description" content="为中小企业提供低门槛、省钱、省心的算力服务。">
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter & Orbitron for Logo -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@700&display=swap"
+        rel="stylesheet">
     <style>
         /* Custom styles to extend Tailwind */
         body {
@@ -33,22 +37,28 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
+
         /* Custom class for the new logo font */
         .logo-font {
             font-family: 'Orbitron', sans-serif;
             /* Add a subtle glow effect to the logo */
             text-shadow: 0 0 8px rgba(37, 99, 235, 0.3);
         }
+
         /* Style for active tab */
         .tab-active {
-            border-color: #2563eb; /* blue-600 */
+            border-color: #2563eb;
+            /* blue-600 */
             color: #2563eb;
-            background-color: #eff6ff; /* blue-50 */
+            background-color: #eff6ff;
+            /* blue-50 */
         }
+
         /* Smooth scrolling behavior */
         html {
             scroll-behavior: smooth;
         }
+
         /* New animated background for hero section */
         .hero-animated-bg {
             background: linear-gradient(-45deg, #eff6ff, #dbeafe, #bfdbfe, #93c5fd);
@@ -60,88 +70,124 @@
             0% {
                 background-position: 0% 50%;
             }
+
             50% {
                 background-position: 100% 50%;
             }
+
             100% {
                 background-position: 0% 50%;
             }
         }
+
         /* Custom card shadow */
         .custom-shadow {
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
         }
+
         .custom-shadow:hover {
             box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -4px rgb(0 0 0 / 0.07);
         }
+
         /* Scroll animation classes */
         .fade-in-up {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
+
         .fade-in-up.visible {
             opacity: 1;
             transform: translateY(0);
         }
+
         /* Counter animation */
         .counter {
             font-variant-numeric: tabular-nums;
         }
+
         /* Floating animation for decorative elements */
         .float-animation {
             animation: float 6s ease-in-out infinite;
         }
+
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
         }
+
         /* Scroll to top button */
         .scroll-to-top {
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s, visibility 0.3s;
         }
+
         .scroll-to-top.show {
             opacity: 1;
             visibility: visible;
         }
+
         /* FAQ accordion */
         .faq-answer {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease-out;
         }
+
         .faq-item.active .faq-answer {
             max-height: 200px;
         }
+
         .faq-item.active .faq-icon {
             transform: rotate(180deg);
         }
+
         .faq-icon {
             transition: transform 0.3s ease;
         }
+
         /* Testimonial card hover */
         .testimonial-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
         .testimonial-card:hover {
             transform: translateY(-5px);
         }
+
         /* Pulse animation for CTA */
         .pulse-ring {
             animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
         }
+
         @keyframes pulse-ring {
-            0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(37, 99, 235, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(37, 99, 235, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+            }
         }
+
         /* Particle canvas styles */
         .hero-section {
             position: relative;
             overflow: hidden;
         }
+
         #particle-canvas {
             position: absolute;
             top: 0;
@@ -151,20 +197,24 @@
             pointer-events: none;
             z-index: 1;
         }
+
         .hero-content {
             position: relative;
             z-index: 2;
         }
     </style>
 </head>
+
 <body class="bg-white text-gray-800">
 
     <!-- Header -->
     <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 border-b border-gray-200" role="banner">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <!-- Updated Logo with artistic font and gradient -->
-            <a href="#" class="text-3xl logo-font font-bold bg-gradient-to-r from-blue-600 to-sky-400 text-transparent bg-clip-text" aria-label="算力多多首页">
-                算力多多
+            <a href="#"
+                class="text-3xl logo-font font-bold bg-gradient-to-r from-blue-600 to-sky-400 text-transparent bg-clip-text"
+                aria-label="算多多首页">
+                算多多
             </a>
             <nav class="hidden md:flex space-x-8 items-center" role="navigation" aria-label="主导航">
                 <a href="#why-us" class="text-gray-600 hover:text-blue-600 transition-colors">为什么选择我们</a>
@@ -173,19 +223,24 @@
                 <a href="#testimonials" class="text-gray-600 hover:text-blue-600 transition-colors">客户评价</a>
                 <a href="#faq" class="text-gray-600 hover:text-blue-600 transition-colors">常见问题</a>
             </nav>
-                            <div class="hidden md:flex space-x-3">
-                                <a href="../index.html" class="bg-gray-100 text-gray-700 font-semibold px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-200 transition-transform transform hover:scale-105">
-                                    重新选择系统
-                                </a>
-                                <a href="login.html" class="bg-blue-600 text-white font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105">
-                                    登录
-                                </a>
-                                <a href="register.html" class="bg-white text-blue-600 font-semibold px-4 py-2 rounded-lg border border-blue-600 hover:bg-blue-50 transition-transform transform hover:scale-105">
-                                    注册
-                                </a>
-                            </div>
-            <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-gray-600 hover:bg-gray-100" aria-label="打开菜单" aria-expanded="false" aria-controls="mobile-menu">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <div class="hidden md:flex space-x-3">
+                <a href="../index.html"
+                    class="bg-gray-100 text-gray-700 font-semibold px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-200 transition-transform transform hover:scale-105">
+                    重新选择系统
+                </a>
+                <a href="login.html"
+                    class="bg-blue-600 text-white font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105">
+                    登录
+                </a>
+                <a href="register.html"
+                    class="bg-white text-blue-600 font-semibold px-4 py-2 rounded-lg border border-blue-600 hover:bg-blue-50 transition-transform transform hover:scale-105">
+                    注册
+                </a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-gray-600 hover:bg-gray-100"
+                aria-label="打开菜单" aria-expanded="false" aria-controls="mobile-menu">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
             </button>
@@ -198,13 +253,16 @@
             <a href="#testimonials" class="block py-2 text-gray-600 hover:text-blue-600">客户评价</a>
             <a href="#faq" class="block py-2 text-gray-600 hover:text-blue-600">常见问题</a>
             <div class="mt-4 flex flex-col space-y-2">
-                <a href="../index.html" class="block w-full text-center bg-gray-100 text-gray-700 font-semibold px-5 py-2 rounded-lg border border-gray-300 hover:bg-gray-200">
+                <a href="../index.html"
+                    class="block w-full text-center bg-gray-100 text-gray-700 font-semibold px-5 py-2 rounded-lg border border-gray-300 hover:bg-gray-200">
                     重新选择系统
                 </a>
-                <a href="login.html" class="block w-full text-center bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-700">
+                <a href="login.html"
+                    class="block w-full text-center bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-700">
                     登录
                 </a>
-                <a href="register.html" class="block w-full text-center bg-white text-blue-600 font-semibold px-5 py-2 rounded-lg border border-blue-600 hover:bg-blue-50">
+                <a href="register.html"
+                    class="block w-full text-center bg-white text-blue-600 font-semibold px-5 py-2 rounded-lg border border-blue-600 hover:bg-blue-50">
                     注册
                 </a>
             </div>
@@ -224,7 +282,8 @@
                     为中小企业提供"低门槛、省钱、省心"的算力服务。无需理解复杂底层资源，即可获得价格透明、性能稳定的算力与全方位托管服务。
                 </p>
                 <div class="mt-10">
-                    <a href="#products" class="bg-blue-600 text-white font-semibold px-8 py-4 rounded-lg text-lg hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-lg">
+                    <a href="#products"
+                        class="bg-blue-600 text-white font-semibold px-8 py-4 rounded-lg text-lg hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-lg">
                         探索产品
                     </a>
                 </div>
@@ -277,25 +336,50 @@
                 </div>
                 <div class="grid md:grid-cols-3 gap-8">
                     <!-- Feature 1 -->
-                    <div class="bg-white p-8 rounded-xl border border-gray-200 custom-shadow transition-shadow duration-300">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 mb-5">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>
+                    <div
+                        class="bg-white p-8 rounded-xl border border-gray-200 custom-shadow transition-shadow duration-300">
+                        <div
+                            class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 mb-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4" />
+                                <path d="M3 5v14a2 2 0 0 0 2 2h16v-5" />
+                                <path d="M18 12a2 2 0 0 0 0 4h4v-4Z" />
+                            </svg>
                         </div>
                         <h3 class="text-xl font-semibold mb-3">统一门户，统一账单</h3>
                         <p class="text-gray-600">告别多账户、多账单的混乱。在一个平台管理和支付所有云资源、IDC与自建算力，享受统一技术支持和SLA承诺。</p>
                     </div>
                     <!-- Feature 2 -->
-                    <div class="bg-white p-8 rounded-xl border border-gray-200 custom-shadow transition-shadow duration-300">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 mb-5">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M16.2 7.8 11.4 12l4.8 4.2"/><path d="M8 12h3"/></svg>
+                    <div
+                        class="bg-white p-8 rounded-xl border border-gray-200 custom-shadow transition-shadow duration-300">
+                        <div
+                            class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 mb-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+                                <path d="M16.2 7.8 11.4 12l4.8 4.2" />
+                                <path d="M8 12h3" />
+                            </svg>
                         </div>
                         <h3 class="text-xl font-semibold mb-3">智能省钱引擎</h3>
                         <p class="text-gray-600">我们的核心技术能跨云、跨资源池智能调度任务，结合FinOps优化，可帮助您的算力总成本降低20%以上。</p>
                     </div>
                     <!-- Feature 3 -->
-                    <div class="bg-white p-8 rounded-xl border border-gray-200 custom-shadow transition-shadow duration-300">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 mb-5">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12v-2a4 4 0 0 0-4-4H4"/><path d="M12 12v2a4 4 0 0 1-4 4H4"/><path d="M12 12h2a4 4 0 0 1 4 4v2"/><path d="M12 12h2a4 4 0 0 0 4-4v-2"/></svg>
+                    <div
+                        class="bg-white p-8 rounded-xl border border-gray-200 custom-shadow transition-shadow duration-300">
+                        <div
+                            class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 mb-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M12 12v-2a4 4 0 0 0-4-4H4" />
+                                <path d="M12 12v2a4 4 0 0 1-4 4H4" />
+                                <path d="M12 12h2a4 4 0 0 1 4 4v2" />
+                                <path d="M12 12h2a4 4 0 0 0 4-4v-2" />
+                            </svg>
                         </div>
                         <h3 class="text-xl font-semibold mb-3">全能增值托管</h3>
                         <p class="text-gray-600">我们不仅提供资源，更提供从运维、MLOps到渲染环境的全托管服务，显著降低您的技术团队门槛和人力成本。</p>
@@ -315,10 +399,14 @@
                 <!-- Tabs -->
                 <div class="flex justify-center mb-10 border-b border-gray-200">
                     <div class="flex flex-wrap justify-center -mb-px space-x-2 sm:space-x-4">
-                        <button class="product-tab tab-active px-4 py-3 font-semibold text-gray-500 border-b-2 border-transparent rounded-t-lg hover:text-gray-700 hover:border-gray-300" data-tab="cloud">
+                        <button
+                            class="product-tab tab-active px-4 py-3 font-semibold text-gray-500 border-b-2 border-transparent rounded-t-lg hover:text-gray-700 hover:border-gray-300"
+                            data-tab="cloud">
                             A. 云算力
                         </button>
-                        <button class="product-tab px-4 py-3 font-semibold text-gray-500 border-b-2 border-transparent rounded-t-lg hover:text-gray-700 hover:border-gray-300" data-tab="idc">
+                        <button
+                            class="product-tab px-4 py-3 font-semibold text-gray-500 border-b-2 border-transparent rounded-t-lg hover:text-gray-700 hover:border-gray-300"
+                            data-tab="idc">
                             B. IDC算力
                         </button>
                     </div>
@@ -337,60 +425,83 @@
                                 <h4 class="text-lg font-bold text-blue-700">基础邀请服务</h4>
                                 <p class="mt-2 text-sm text-gray-500 flex-grow">初次接触云服务，希望通过官方渠道获得新客户优惠的企业。</p>
                                 <div class="mt-4 mb-4">
-                                    <div class="text-2xl font-bold text-orange-500">15%<span class="text-sm font-normal text-gray-500"> 返现比例</span></div>
+                                    <div class="text-2xl font-bold text-orange-500">15%<span
+                                            class="text-sm font-normal text-gray-500"> 返现比例</span></div>
                                     <div class="text-sm text-gray-600 mt-1">主流云厂商通用配置</div>
                                 </div>
                                 <ul class="mt-4 space-y-2 text-gray-700 text-sm">
-                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 企业资质验证</li>
-                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 专属邀请链接</li>
-                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 新客户返现</li>
-                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 基础技术支持</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 企业资质验证
+                                    </li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 专属邀请链接
+                                    </li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 新客户返现
+                                    </li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 基础技术支持
+                                    </li>
                                 </ul>
                                 <div class="mt-6">
-                                    <button onclick="window.location.href='register.html'" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                                    <button onclick="window.location.href='register.html'"
+                                        class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
                                         申请邀请链接
                                     </button>
                                 </div>
                             </div>
                             <div class="bg-white p-6 rounded-lg border-2 border-blue-600 flex flex-col relative">
-                                <span class="absolute top-0 right-4 -mt-3 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">推荐</span>
+                                <span
+                                    class="absolute top-0 right-4 -mt-3 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">推荐</span>
                                 <h4 class="text-lg font-bold text-blue-700">企业专享服务</h4>
                                 <p class="mt-2 text-sm text-gray-500 flex-grow">需要更高返现比例和专业云服务咨询的企业客户。</p>
                                 <div class="mt-4 mb-4">
-                                    <div class="text-2xl font-bold text-orange-500">30%<span class="text-sm font-normal text-gray-500"> 返现比例</span></div>
+                                    <div class="text-2xl font-bold text-orange-500">30%<span
+                                            class="text-sm font-normal text-gray-500"> 返现比例</span></div>
                                     <div class="text-sm text-gray-600 mt-1">多云厂商+GPU资源</div>
                                 </div>
                                 <ul class="mt-4 space-y-2 text-gray-700 text-sm">
-                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 企业快速认证</li>
-                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 多云厂商邀请链接</li>
-                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 架构优化建议</li>
-                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 成本管理咨询</li>
-                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 专属客户经理</li>
-                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 优先返现处理</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 企业快速认证
+                                    </li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 多云厂商邀请链接
+                                    </li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 架构优化建议
+                                    </li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 成本管理咨询
+                                    </li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 专属客户经理
+                                    </li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 优先返现处理
+                                    </li>
                                 </ul>
                                 <div class="mt-6">
-                                    <button onclick="window.location.href='register.html'" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                                    <button onclick="window.location.href='register.html'"
+                                        class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
                                         申请专享服务
                                     </button>
                                 </div>
                             </div>
                             <div class="bg-white p-6 rounded-lg border border-gray-200 flex flex-col relative">
-                                <span class="absolute top-0 right-4 -mt-3 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full">最高</span>
+                                <span
+                                    class="absolute top-0 right-4 -mt-3 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full">最高</span>
                                 <h4 class="text-lg font-bold text-blue-700">集团企业定制</h4>
                                 <p class="mt-2 text-sm text-gray-500 flex-grow">大型集团企业，需要定制化返现方案和全方位云服务支持。</p>
                                 <div class="mt-4 mb-4">
-                                    <div class="text-2xl font-bold text-orange-500">49%<span class="text-sm font-normal text-gray-500"> 返现比例</span></div>
+                                    <div class="text-2xl font-bold text-orange-500">49%<span
+                                            class="text-sm font-normal text-gray-500"> 返现比例</span></div>
                                     <div class="text-sm text-gray-600 mt-1">全云厂商+定制方案</div>
                                 </div>
                                 <ul class="mt-4 space-y-2 text-gray-700 text-sm">
-                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> VIP企业认证通道</li>
-                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 定制返现方案</li>
-                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 7×24专属支持</li>
-                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 合规与安全顾问</li>
-                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 季度返现结算</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span>
+                                        VIP企业认证通道</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 定制返现方案
+                                    </li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 7×24专属支持
+                                    </li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 合规与安全顾问
+                                    </li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 季度返现结算
+                                    </li>
                                 </ul>
                                 <div class="mt-6">
-                                    <button onclick="window.location.href='register.html'" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                                    <button onclick="window.location.href='register.html'"
+                                        class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
                                         申请定制方案
                                     </button>
                                 </div>
@@ -399,45 +510,57 @@
                     </div>
                     <!-- IDC Content -->
                     <div class="tab-pane hidden" id="idc">
-                         <div class="text-center mb-8">
+                        <div class="text-center mb-8">
                             <p class="text-lg text-gray-600">获取来自顶级数据中心的高性价比物理服务器和网络资源。</p>
                             <p class="mt-2 text-blue-600 font-semibold">增值服务：提供DDoS防护、CDN、数据库代运维、对象存储等一系列配套服务。</p>
                         </div>
                         <div class="grid lg:grid-cols-3 gap-8 mt-8">
-                           <div class="bg-white p-6 rounded-lg border border-gray-200 flex flex-col">
+                            <div class="bg-white p-6 rounded-lg border border-gray-200 flex flex-col">
                                 <h4 class="text-lg font-bold text-blue-700">裸金属快交付</h4>
                                 <p class="mt-2 text-sm text-gray-500 flex-grow">需要稳定、高性能物理机进行数据计算或应用托管的客户。</p>
                                 <div class="mt-4 mb-4">
-                                    <div class="text-2xl font-bold text-orange-500">¥0.8<span class="text-sm font-normal text-gray-500">/小时起</span></div>
+                                    <div class="text-2xl font-bold text-orange-500">¥0.8<span
+                                            class="text-sm font-normal text-gray-500">/小时起</span></div>
                                     <div class="text-sm text-gray-600 mt-1">Intel 8核 32G 配置</div>
                                 </div>
                                 <ul class="mt-4 space-y-2 text-gray-700 text-sm">
-                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 标准配置CPU/GPU物理服务器</li>
-                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 48小时内快速交付</li>
-                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 专属节点</li>
-                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 包年包月优惠</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span>
+                                        标准配置CPU/GPU物理服务器</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span>
+                                        48小时内快速交付</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 专属节点
+                                    </li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 包年包月优惠
+                                    </li>
                                 </ul>
                                 <div class="mt-6">
-                                    <button onclick="window.location.href='register.html'" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                                    <button onclick="window.location.href='register.html'"
+                                        class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
                                         立即购买
                                     </button>
                                 </div>
                             </div>
-                             <div class="bg-white p-6 rounded-lg border-2 border-blue-600 flex flex-col">
+                            <div class="bg-white p-6 rounded-lg border-2 border-blue-600 flex flex-col">
                                 <h4 class="text-lg font-bold text-blue-700">高性能GPU专机</h4>
                                 <p class="mt-2 text-sm text-gray-500 flex-grow">进行AI训练、深度学习等GPU密集型计算的团队。</p>
                                 <div class="mt-4 mb-4">
-                                    <div class="text-2xl font-bold text-orange-500">¥2.5<span class="text-sm font-normal text-gray-500">/小时起</span></div>
+                                    <div class="text-2xl font-bold text-orange-500">¥2.5<span
+                                            class="text-sm font-normal text-gray-500">/小时起</span></div>
                                     <div class="text-sm text-gray-600 mt-1">Intel 16核 64G + RTX-4090-D GPU</div>
                                 </div>
                                 <ul class="mt-4 space-y-2 text-gray-700 text-sm">
-                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 独享高端GPU服务器</li>
-                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 提供基础容器环境</li>
-                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> NVIDIA-RTX-4090-D GPU</li>
-                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 按量计费</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span>
+                                        独享高端GPU服务器</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 提供基础容器环境
+                                    </li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span>
+                                        NVIDIA-RTX-4090-D GPU</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 按量计费
+                                    </li>
                                 </ul>
                                 <div class="mt-6">
-                                    <button onclick="window.location.href='register.html'" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                                    <button onclick="window.location.href='register.html'"
+                                        class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
                                         立即购买
                                     </button>
                                 </div>
@@ -446,18 +569,25 @@
                                 <h4 class="text-lg font-bold text-blue-700">托管旗舰</h4>
                                 <p class="mt-2 text-sm text-gray-500 flex-grow">对硬件、网络、安全有全面托管需求，希望"拎包入住"的客户。</p>
                                 <div class="mt-4 mb-4">
-                                    <div class="text-2xl font-bold text-orange-500">¥4.5<span class="text-sm font-normal text-gray-500">/小时起</span></div>
+                                    <div class="text-2xl font-bold text-orange-500">¥4.5<span
+                                            class="text-sm font-normal text-gray-500">/小时起</span></div>
                                     <div class="text-sm text-gray-600 mt-1">Intel 32核 128G + 2x RTX-4090-D GPU</div>
                                 </div>
                                 <ul class="mt-4 space-y-2 text-gray-700 text-sm">
-                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 7×24远程支持</li>
-                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 4小时备件更换SLA</li>
-                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 等保合规咨询</li>
-                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 2x NVIDIA-RTX-4090-D GPU</li>
-                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 包年包月优惠</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 7×24远程支持
+                                    </li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span>
+                                        4小时备件更换SLA</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 等保合规咨询
+                                    </li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 2x
+                                        NVIDIA-RTX-4090-D GPU</li>
+                                    <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">✔</span> 包年包月优惠
+                                    </li>
                                 </ul>
                                 <div class="mt-6">
-                                    <button onclick="window.location.href='register.html'" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                                    <button onclick="window.location.href='register.html'"
+                                        class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
                                         立即购买
                                     </button>
                                 </div>
@@ -477,29 +607,53 @@
                 </div>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                     <div class="p-4">
-                        <div class="flex items-center justify-center h-16 w-16 mx-auto rounded-full bg-blue-100 text-blue-600 mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/><path d="M12 20a4 4 0 0 0 4-4h-8a4 4 0 0 0 4 4Z"/></svg>
+                        <div
+                            class="flex items-center justify-center h-16 w-16 mx-auto rounded-full bg-blue-100 text-blue-600 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="m12 14 4-4" />
+                                <path d="M3.34 19a10 10 0 1 1 17.32 0" />
+                                <path d="M12 20a4 4 0 0 0 4-4h-8a4 4 0 0 0 4 4Z" />
+                            </svg>
                         </div>
                         <h4 class="font-semibold">AI训练与推理</h4>
                         <p class="text-sm text-gray-500 mt-1">AIGC, 教育科研</p>
                     </div>
                     <div class="p-4">
-                        <div class="flex items-center justify-center h-16 w-16 mx-auto rounded-full bg-blue-100 text-blue-600 mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.3 5.4a2 2 0 0 1-2.4 0L2 7"/></svg>
+                        <div
+                            class="flex items-center justify-center h-16 w-16 mx-auto rounded-full bg-blue-100 text-blue-600 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect width="20" height="16" x="2" y="4" rx="2" />
+                                <path d="m22 7-8.3 5.4a2 2 0 0 1-2.4 0L2 7" />
+                            </svg>
                         </div>
                         <h4 class="font-semibold">渲染与多媒体</h4>
                         <p class="text-sm text-gray-500 mt-1">影视后期, 游戏美术</p>
                     </div>
                     <div class="p-4">
-                        <div class="flex items-center justify-center h-16 w-16 mx-auto rounded-full bg-blue-100 text-blue-600 mb-4">
-                           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>
+                        <div
+                            class="flex items-center justify-center h-16 w-16 mx-auto rounded-full bg-blue-100 text-blue-600 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
+                            </svg>
                         </div>
                         <h4 class="font-semibold">数据计算/HPC</h4>
                         <p class="text-sm text-gray-500 mt-1">基因计算, 金融风控</p>
                     </div>
                     <div class="p-4">
-                        <div class="flex items-center justify-center h-16 w-16 mx-auto rounded-full bg-blue-100 text-blue-600 mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
+                        <div
+                            class="flex items-center justify-center h-16 w-16 mx-auto rounded-full bg-blue-100 text-blue-600 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                                <rect width="20" height="14" x="2" y="6" rx="2" />
+                            </svg>
                         </div>
                         <h4 class="font-semibold">通用计算</h4>
                         <p class="text-sm text-gray-500 mt-1">SaaS初创, 中小团队</p>
@@ -516,57 +670,126 @@
                     <p class="mt-4 max-w-2xl mx-auto text-gray-600">听听我们的客户怎么说</p>
                 </div>
                 <div class="grid md:grid-cols-3 gap-8">
-                    <div class="testimonial-card bg-gray-50 p-8 rounded-xl border border-gray-200 custom-shadow fade-in-up">
+                    <div
+                        class="testimonial-card bg-gray-50 p-8 rounded-xl border border-gray-200 custom-shadow fade-in-up">
                         <div class="flex items-center mb-4">
                             <div class="flex text-yellow-400">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
                             </div>
                         </div>
-                        <p class="text-gray-600 italic mb-6">"通过算力多多的智能调度，我们的GPU训练成本降低了35%，而且服务非常稳定，技术支持响应迅速。"</p>
+                        <p class="text-gray-600 italic mb-6">"通过算多多的智能调度，我们的GPU训练成本降低了35%，而且服务非常稳定，技术支持响应迅速。"</p>
                         <div class="flex items-center">
-                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-lg">李</div>
+                            <div
+                                class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-lg">
+                                李</div>
                             <div class="ml-4">
                                 <div class="font-semibold text-gray-900">李明</div>
                                 <div class="text-sm text-gray-500">某AI科技公司 CTO</div>
                             </div>
                         </div>
                     </div>
-                    <div class="testimonial-card bg-gray-50 p-8 rounded-xl border border-gray-200 custom-shadow fade-in-up" style="transition-delay: 0.1s;">
+                    <div class="testimonial-card bg-gray-50 p-8 rounded-xl border border-gray-200 custom-shadow fade-in-up"
+                        style="transition-delay: 0.1s;">
                         <div class="flex items-center mb-4">
                             <div class="flex text-yellow-400">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
                             </div>
                         </div>
                         <p class="text-gray-600 italic mb-6">"统一账单功能太方便了！以前管理多个云账户头疼不已，现在一个平台搞定所有，财务对账效率提升了80%。"</p>
                         <div class="flex items-center">
-                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold text-lg">王</div>
+                            <div
+                                class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold text-lg">
+                                王</div>
                             <div class="ml-4">
                                 <div class="font-semibold text-gray-900">王芳</div>
                                 <div class="text-sm text-gray-500">某电商平台 运维总监</div>
                             </div>
                         </div>
                     </div>
-                    <div class="testimonial-card bg-gray-50 p-8 rounded-xl border border-gray-200 custom-shadow fade-in-up" style="transition-delay: 0.2s;">
+                    <div class="testimonial-card bg-gray-50 p-8 rounded-xl border border-gray-200 custom-shadow fade-in-up"
+                        style="transition-delay: 0.2s;">
                         <div class="flex items-center mb-4">
                             <div class="flex text-yellow-400">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
                             </div>
                         </div>
-                        <p class="text-gray-600 italic mb-6">"作为创业公司，我们资源有限。算力多多的托管服务让我们无需组建专业运维团队，专注于核心业务开发。"</p>
+                        <p class="text-gray-600 italic mb-6">"作为创业公司，我们资源有限。算多多的托管服务让我们无需组建专业运维团队，专注于核心业务开发。"</p>
                         <div class="flex items-center">
-                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-bold text-lg">张</div>
+                            <div
+                                class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-bold text-lg">
+                                张</div>
                             <div class="ml-4">
                                 <div class="font-semibold text-gray-900">张伟</div>
                                 <div class="text-sm text-gray-500">某SaaS创业公司 创始人</div>
@@ -585,13 +808,27 @@
                     <p class="mt-4 max-w-2xl mx-auto text-gray-600">与云厂商、IDC与软硬件伙伴共同打造开放生态。</p>
                 </div>
                 <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 items-center">
-                    <img src="https://logo.clearbit.com/vnet.com" alt="世纪互联" class="mx-auto grayscale hover:grayscale-0 transition h-12 object-contain" onerror="this.src='https://placehold.co/140x60/f0f0f0/333333?text=21Vianet'" />
-                    <img src="https://logo.clearbit.com/hanhoukeji.com" alt="憨猴" class="mx-auto grayscale hover:grayscale-0 transition h-12 object-contain" onerror="this.src='https://placehold.co/140x60/f0f0f0/333333?text=Hanhou'" />
-                    <img src="https://logo.clearbit.com/netnic.com.cn" alt="企商在线" class="mx-auto grayscale hover:grayscale-0 transition h-12 object-contain" onerror="this.src='https://placehold.co/140x60/f0f0f0/333333?text=Qishang'" />
-                    <img src="https://logo.clearbit.com/aliyun.com" alt="阿里云" class="mx-auto grayscale hover:grayscale-0 transition h-12 object-contain" onerror="this.src='https://placehold.co/140x60/f0f0f0/ff6a00?text=Alibaba'" />
-                    <img src="https://logo.clearbit.com/tencentcloud.com" alt="腾讯云" class="mx-auto grayscale hover:grayscale-0 transition h-12 object-contain" onerror="this.src='https://placehold.co/140x60/f0f0f0/0066cc?text=Tencent'" />
-                    <img src="https://logo.clearbit.com/cloudxy.net" alt="祥云科技" class="mx-auto grayscale hover:grayscale-0 transition h-12 object-contain" onerror="this.src='https://placehold.co/140x60/f0f0f0/333333?text=Xiangyun'" />
-                    <img src="https://logo.clearbit.com/huaweicloud.com" alt="华为云" class="mx-auto grayscale hover:grayscale-0 transition h-12 object-contain" onerror="this.src='https://placehold.co/140x60/f0f0f0/cc0000?text=Huawei'" />
+                    <img src="https://logo.clearbit.com/vnet.com" alt="世纪互联"
+                        class="mx-auto grayscale hover:grayscale-0 transition h-12 object-contain"
+                        onerror="this.src='https://placehold.co/140x60/f0f0f0/333333?text=21Vianet'" />
+                    <img src="https://logo.clearbit.com/hanhoukeji.com" alt="憨猴"
+                        class="mx-auto grayscale hover:grayscale-0 transition h-12 object-contain"
+                        onerror="this.src='https://placehold.co/140x60/f0f0f0/333333?text=Hanhou'" />
+                    <img src="https://logo.clearbit.com/netnic.com.cn" alt="企商在线"
+                        class="mx-auto grayscale hover:grayscale-0 transition h-12 object-contain"
+                        onerror="this.src='https://placehold.co/140x60/f0f0f0/333333?text=Qishang'" />
+                    <img src="https://logo.clearbit.com/aliyun.com" alt="阿里云"
+                        class="mx-auto grayscale hover:grayscale-0 transition h-12 object-contain"
+                        onerror="this.src='https://placehold.co/140x60/f0f0f0/ff6a00?text=Alibaba'" />
+                    <img src="https://logo.clearbit.com/tencentcloud.com" alt="腾讯云"
+                        class="mx-auto grayscale hover:grayscale-0 transition h-12 object-contain"
+                        onerror="this.src='https://placehold.co/140x60/f0f0f0/0066cc?text=Tencent'" />
+                    <img src="https://logo.clearbit.com/cloudxy.net" alt="祥云科技"
+                        class="mx-auto grayscale hover:grayscale-0 transition h-12 object-contain"
+                        onerror="this.src='https://placehold.co/140x60/f0f0f0/333333?text=Xiangyun'" />
+                    <img src="https://logo.clearbit.com/huaweicloud.com" alt="华为云"
+                        class="mx-auto grayscale hover:grayscale-0 transition h-12 object-contain"
+                        onerror="this.src='https://placehold.co/140x60/f0f0f0/cc0000?text=Huawei'" />
                 </div>
             </div>
         </section>
@@ -601,40 +838,67 @@
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12 fade-in-up">
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-900">常见问题</h2>
-                    <p class="mt-4 max-w-2xl mx-auto text-gray-600">快速了解算力多多的服务细节</p>
+                    <p class="mt-4 max-w-2xl mx-auto text-gray-600">快速了解算多多的服务细节</p>
                 </div>
                 <div class="max-w-3xl mx-auto space-y-4">
                     <div class="faq-item bg-white rounded-xl border border-gray-200 overflow-hidden fade-in-up">
-                        <button class="faq-toggle w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-50 transition-colors" aria-expanded="false">
-                            <span class="font-semibold text-gray-900">算力多多适合什么规模的企业？</span>
-                            <svg class="faq-icon w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        <button
+                            class="faq-toggle w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
+                            aria-expanded="false">
+                            <span class="font-semibold text-gray-900">算多多适合什么规模的企业？</span>
+                            <svg class="faq-icon w-5 h-5 text-gray-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
                         </button>
                         <div class="faq-answer px-6 text-gray-600">
                             <p class="pb-5">我们的服务面向各种规模的企业，从初创公司到大型集团企业。无论您是刚开始使用云服务的小团队，还是需要管理多云资源的大型企业，我们都有适合您的方案。</p>
                         </div>
                     </div>
-                    <div class="faq-item bg-white rounded-xl border border-gray-200 overflow-hidden fade-in-up" style="transition-delay: 0.1s;">
-                        <button class="faq-toggle w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-50 transition-colors" aria-expanded="false">
+                    <div class="faq-item bg-white rounded-xl border border-gray-200 overflow-hidden fade-in-up"
+                        style="transition-delay: 0.1s;">
+                        <button
+                            class="faq-toggle w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
+                            aria-expanded="false">
                             <span class="font-semibold text-gray-900">如何保证数据安全？</span>
-                            <svg class="faq-icon w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <svg class="faq-icon w-5 h-5 text-gray-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
                         </button>
                         <div class="faq-answer px-6 text-gray-600">
                             <p class="pb-5">我们采用行业领先的安全标准，包括数据加密传输和存储、多因素身份验证、访问控制等。同时，我们的数据中心均通过等保三级认证，确保您的数据安全。</p>
                         </div>
                     </div>
-                    <div class="faq-item bg-white rounded-xl border border-gray-200 overflow-hidden fade-in-up" style="transition-delay: 0.2s;">
-                        <button class="faq-toggle w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-50 transition-colors" aria-expanded="false">
+                    <div class="faq-item bg-white rounded-xl border border-gray-200 overflow-hidden fade-in-up"
+                        style="transition-delay: 0.2s;">
+                        <button
+                            class="faq-toggle w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
+                            aria-expanded="false">
                             <span class="font-semibold text-gray-900">返现是如何计算和发放的？</span>
-                            <svg class="faq-icon w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <svg class="faq-icon w-5 h-5 text-gray-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
                         </button>
                         <div class="faq-answer px-6 text-gray-600">
                             <p class="pb-5">云算力返现根据您通过我们链接产生的实际消费金额计算，按月统计并在次月发放至您的账户余额。您可以选择提现或直接用于抵扣后续消费。</p>
                         </div>
                     </div>
-                    <div class="faq-item bg-white rounded-xl border border-gray-200 overflow-hidden fade-in-up" style="transition-delay: 0.3s;">
-                        <button class="faq-toggle w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-50 transition-colors" aria-expanded="false">
+                    <div class="faq-item bg-white rounded-xl border border-gray-200 overflow-hidden fade-in-up"
+                        style="transition-delay: 0.3s;">
+                        <button
+                            class="faq-toggle w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
+                            aria-expanded="false">
                             <span class="font-semibold text-gray-900">是否支持按需扩容和缩容？</span>
-                            <svg class="faq-icon w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <svg class="faq-icon w-5 h-5 text-gray-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
                         </button>
                         <div class="faq-answer px-6 text-gray-600">
                             <p class="pb-5">是的，我们支持灵活的资源伸缩。云算力可即时调整，IDC算力支持48小时内快速扩容。您可以根据业务需求随时调整资源配置。</p>
@@ -651,10 +915,12 @@
                     <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">准备好降低您的算力成本了吗？</h2>
                     <p class="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">立即注册，享受专属优惠，让您的业务更上一层楼</p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="register.html" class="pulse-ring inline-block bg-white text-blue-600 font-semibold px-8 py-4 rounded-lg text-lg hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg">
+                        <a href="register.html"
+                            class="pulse-ring inline-block bg-white text-blue-600 font-semibold px-8 py-4 rounded-lg text-lg hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg">
                             免费注册
                         </a>
-                        <a href="#products" class="inline-block bg-transparent text-white font-semibold px-8 py-4 rounded-lg text-lg border-2 border-white hover:bg-white/10 transition-all">
+                        <a href="#products"
+                            class="inline-block bg-transparent text-white font-semibold px-8 py-4 rounded-lg text-lg border-2 border-white hover:bg-white/10 transition-all">
                             了解更多
                         </a>
                     </div>
@@ -665,7 +931,9 @@
     </main>
 
     <!-- Scroll to Top Button -->
-    <button id="scroll-to-top" class="scroll-to-top fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-all z-50" aria-label="返回顶部">
+    <button id="scroll-to-top"
+        class="scroll-to-top fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-all z-50"
+        aria-label="返回顶部">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
         </svg>
@@ -676,7 +944,7 @@
         <div class="container mx-auto px-6 py-12">
             <div class="grid md:grid-cols-4 gap-8">
                 <div>
-                    <h3 class="text-xl font-bold">算力多多</h3>
+                    <h3 class="text-xl font-bold">算多多</h3>
                     <p class="mt-4 text-gray-400">您的一站式算力超市。</p>
                 </div>
                 <div>
@@ -707,7 +975,7 @@
                 </div>
             </div>
             <div class="mt-12 border-t border-gray-800 pt-8 text-center text-gray-500">
-                &copy; 2025 算力多多. All Rights Reserved.
+                &copy; 2025 算多多. All Rights Reserved.
             </div>
         </div>
     </footer>
@@ -738,7 +1006,7 @@
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
-        
+
         // Close mobile menu when a link is clicked
         mobileMenu.addEventListener('click', (e) => {
             if (e.target.tagName === 'A') {
@@ -827,7 +1095,7 @@
         }
 
         // Particle Animation
-        (function() {
+        (function () {
             const canvas = document.getElementById('particle-canvas');
             const ctx = canvas.getContext('2d');
             const heroSection = document.querySelector('.hero-section');
@@ -980,4 +1248,5 @@
 
     </script>
 </body>
+
 </html>

@@ -1,5 +1,5 @@
 /**
- * Navigation Component for 算力多多 Console
+ * Navigation Component for 算多多 Console
  * Encapsulates the left sidebar navigation functionality
  * @class SuanduoNavigation
  */
@@ -163,7 +163,7 @@ class SuanduoNavigation {
             <aside id="sidebar" class="w-64 flex-shrink-0 bg-white border-r border-slate-200 flex-col justify-between hidden sm:flex">
                 <div>
                      <div class="h-16 flex items-center px-4 border-b border-slate-200">
-                        <h1 class="text-xl font-bold text-primary">算力多多 | 管理后台</h1>
+                        <h1 class="text-xl font-bold text-primary">算多多 | 管理后台</h1>
                     </div>
                     <!-- Navigation Links -->
                     <nav class="py-4 px-4 space-y-1">

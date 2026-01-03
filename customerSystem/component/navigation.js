@@ -1,5 +1,5 @@
 /**
- * Navigation Component for 算力多多 Console
+ * Navigation Component for 算多多 Console
  * Encapsulates the left sidebar navigation functionality
  * @class SuanduoNavigation
  */

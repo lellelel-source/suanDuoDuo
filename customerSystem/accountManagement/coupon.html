@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的优惠券 - 算力多多</title>
+    <title>我的优惠券 - 算多多</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter -->
@@ -33,25 +34,32 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
+
         /* Style for the active navigation link */
         .nav-active {
-            background-color: #2979FF; /* primary */
+            background-color: #2979FF;
+            /* primary */
             color: white;
         }
+
         /* Custom scrollbar for better aesthetics */
         ::-webkit-scrollbar {
             width: 8px;
         }
+
         ::-webkit-scrollbar-track {
             background: #f1f5f9;
         }
+
         ::-webkit-scrollbar-thumb {
             background: #cbd5e1;
             border-radius: 10px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: #94a3b8;
         }
+
         /* Coupon card styles */
         .coupon-card {
             background: linear-gradient(135deg, #2979FF 0%, #1e66e6 100%);
@@ -59,6 +67,7 @@
             overflow: hidden;
             position: relative;
         }
+
         .coupon-card::before {
             content: '';
             position: absolute;
@@ -68,25 +77,30 @@
             width: 4px;
             background: rgba(255, 255, 255, 0.3);
         }
+
         .coupon-card-content {
             padding: 24px;
             color: white;
         }
+
         .coupon-amount {
             font-size: 32px;
             font-weight: 700;
             line-height: 1;
         }
+
         .coupon-amount-unit {
             font-size: 16px;
             font-weight: 500;
             opacity: 0.9;
         }
+
         .coupon-description {
             font-size: 14px;
             opacity: 0.9;
             margin-top: 12px;
         }
+
         .coupon-footer {
             font-size: 12px;
             opacity: 0.8;
@@ -94,9 +108,11 @@
             border-top: 1px solid rgba(255, 255, 255, 0.2);
             padding-top: 12px;
         }
+
         .coupon-expired {
             background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%);
         }
+
         .coupon-status-badge {
             position: absolute;
             top: 12px;
@@ -110,6 +126,7 @@
         }
     </style>
 </head>
+
 <body class="bg-slate-100">
 
     <div id="app-container" class="h-screen flex flex-col bg-slate-100">
@@ -126,9 +143,11 @@
                                 <h1 class="text-3xl font-bold text-slate-800">我的优惠券</h1>
                                 <p class="text-slate-500 mt-2">管理和使用您的优惠券</p>
                             </div>
-                            <button id="back-btn" class="flex items-center text-primary hover:text-primary-dark transition-colors font-semibold">
+                            <button id="back-btn"
+                                class="flex items-center text-primary hover:text-primary-dark transition-colors font-semibold">
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 19l-7-7 7-7"></path>
                                 </svg>
                                 返回
                             </button>
@@ -136,16 +155,24 @@
 
                         <!-- Filter Tabs -->
                         <div class="bg-white p-4 rounded-lg shadow flex gap-4 overflow-x-auto">
-                            <button class="filter-tab active whitespace-nowrap px-6 py-2 rounded-lg font-semibold text-sm transition-colors" data-filter="all">
+                            <button
+                                class="filter-tab active whitespace-nowrap px-6 py-2 rounded-lg font-semibold text-sm transition-colors"
+                                data-filter="all">
                                 全部
                             </button>
-                            <button class="filter-tab whitespace-nowrap px-6 py-2 rounded-lg font-semibold text-sm transition-colors" data-filter="available">
+                            <button
+                                class="filter-tab whitespace-nowrap px-6 py-2 rounded-lg font-semibold text-sm transition-colors"
+                                data-filter="available">
                                 可用
                             </button>
-                            <button class="filter-tab whitespace-nowrap px-6 py-2 rounded-lg font-semibold text-sm transition-colors" data-filter="expired">
+                            <button
+                                class="filter-tab whitespace-nowrap px-6 py-2 rounded-lg font-semibold text-sm transition-colors"
+                                data-filter="expired">
                                 已过期
                             </button>
-                            <button class="filter-tab whitespace-nowrap px-6 py-2 rounded-lg font-semibold text-sm transition-colors" data-filter="used">
+                            <button
+                                class="filter-tab whitespace-nowrap px-6 py-2 rounded-lg font-semibold text-sm transition-colors"
+                                data-filter="used">
                                 已使用
                             </button>
                         </div>
@@ -159,7 +186,9 @@
                         <div id="empty-state" class="bg-white p-12 rounded-lg shadow text-center hidden">
                             <div class="text-slate-400 mb-4">
                                 <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                                        d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z">
+                                    </path>
                                 </svg>
                             </div>
                             <p class="text-slate-500 text-lg font-medium">暂无优惠券</p>
@@ -182,7 +211,8 @@
                 </div>
                 <button id="close-coupon-modal-btn" class="text-slate-400 hover:text-slate-600">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
                     </svg>
                 </button>
             </div>
@@ -194,9 +224,11 @@
                 <ul id="modal-coupon-rules" class="space-y-2"></ul>
             </div>
 
-            <div id="modal-coupon-info" class="text-sm text-slate-600 space-y-2 mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200"></div>
+            <div id="modal-coupon-info"
+                class="text-sm text-slate-600 space-y-2 mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200"></div>
 
-            <button id="use-coupon-btn" class="w-full bg-primary text-white font-bold py-3 rounded-lg hover:bg-primary-dark transition-colors text-lg">
+            <button id="use-coupon-btn"
+                class="w-full bg-primary text-white font-bold py-3 rounded-lg hover:bg-primary-dark transition-colors text-lg">
                 立即使用
             </button>
         </div>
@@ -306,17 +338,17 @@
         let currentFilter = 'all';
         let coupons = sampleCoupons;
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Back button
             const backBtn = document.getElementById('back-btn');
-            backBtn.addEventListener('click', function() {
+            backBtn.addEventListener('click', function () {
                 window.history.back();
             });
 
             // Filter tabs
             const filterTabs = document.querySelectorAll('.filter-tab');
             filterTabs.forEach(tab => {
-                tab.addEventListener('click', function() {
+                tab.addEventListener('click', function () {
                     filterTabs.forEach(t => {
                         t.classList.remove('active', 'bg-primary', 'text-white');
                         t.classList.add('text-slate-700', 'hover:bg-slate-50');
@@ -341,7 +373,7 @@
             }
 
             if (useCouponBtn) {
-                useCouponBtn.addEventListener('click', function() {
+                useCouponBtn.addEventListener('click', function () {
                     alert('优惠券使用成功');
                     closeCouponModal();
                 });
@@ -349,7 +381,7 @@
 
             // Close modal when clicking outside
             if (couponDetailsModal) {
-                couponDetailsModal.addEventListener('click', function(e) {
+                couponDetailsModal.addEventListener('click', function (e) {
                     if (e.target === couponDetailsModal) {
                         closeCouponModal();
                     }
@@ -413,18 +445,18 @@
                     `;
 
                     // Add click event to open modal
-                    couponCard.addEventListener('click', function() {
+                    couponCard.addEventListener('click', function () {
                         openCouponModal(coupon);
                     });
 
                     // Add hover effect for available coupons
                     if (coupon.status === 'available') {
-                        couponCard.addEventListener('mouseenter', function() {
+                        couponCard.addEventListener('mouseenter', function () {
                             this.style.transform = 'translateY(-4px)';
                             this.style.boxShadow = '0 12px 24px rgba(41, 121, 255, 0.2)';
                             this.style.transition = 'all 0.3s ease';
                         });
-                        couponCard.addEventListener('mouseleave', function() {
+                        couponCard.addEventListener('mouseleave', function () {
                             this.style.transform = 'translateY(0)';
                             this.style.boxShadow = 'none';
                         });
@@ -482,4 +514,5 @@
         }
     </script>
 </body>
+
 </html>

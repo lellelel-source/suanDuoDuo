@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>资源管理 - 算力多多</title>
+    <title>IDC设备管理 - 算多多</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter -->
@@ -27,157 +28,85 @@
     <!-- Include the navigation component -->
     <script src="../component/navigation.js"></script>
     <script src="../component/top.js"></script>
+    <script src="../component/productcard.js"></script>
     <style>
         body {
             font-family: 'Inter', 'sans-serif';
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
+
         .nav-active {
-            background-color: #2979FF; /* primary */
+            background-color: #2979FF;
+            /* primary */
             color: white;
         }
+
         /* Custom scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f5f9; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
     </style>
 </head>
+
 <body class="bg-slate-100">
     <div id="app-container" class="h-screen flex flex-col bg-slate-100">
         <!-- Header and Navigation will be populated by JavaScript -->
-        <div class="flex flex-1 overflow-hidden">
+        <div id="nav-container" class="flex flex-1 overflow-hidden">
+            <!-- Sidebar will be inserted here by JavaScript -->
             <!-- Main Content -->
             <main class="flex-1 overflow-x-hidden overflow-y-auto p-6">
                 <div class="space-y-6">
                     <!-- Summary Cards -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                         <div class="bg-white p-5 rounded-lg shadow">
-                            <p class="text-sm text-slate-500">云厂商</p>
-                            <p class="text-2xl font-bold text-slate-800 mt-1">2</p>
+                            <p class="text-sm text-slate-500">总金额</p>
+                            <p class="text-2xl font-bold text-slate-800 mt-1">¥ 12,580.00</p>
                         </div>
                         <div class="bg-white p-5 rounded-lg shadow">
-                            <p class="text-sm text-slate-500">IDC</p>
-                            <p class="text-2xl font-bold text-slate-800 mt-1">1</p>
+                            <p class="text-sm text-slate-500">支付金额</p>
+                            <p class="text-2xl font-bold text-primary mt-1">¥ 8,200.00</p>
                         </div>
                         <div class="bg-white p-5 rounded-lg shadow">
-                            <p class="text-sm text-slate-500">园区服务器</p>
-                            <p class="text-2xl font-bold text-slate-800 mt-1">1</p>
+                            <p class="text-sm text-slate-500">补贴金额</p>
+                            <p class="text-2xl font-bold text-green-600 mt-1">¥ 2,380.00</p>
                         </div>
                         <div class="bg-white p-5 rounded-lg shadow">
-                            <p class="text-sm text-slate-500">总预估费用 (本月)</p>
-                            <p class="text-2xl font-bold text-slate-800 mt-1">¥ 1,234.56</p>
+                            <p class="text-sm text-slate-500">佣金返还</p>
+                            <p class="text-2xl font-bold text-orange-500 mt-1">¥ 2,000.00</p>
+                        </div>
+                        <div class="bg-white p-5 rounded-lg shadow">
+                            <p class="text-sm text-slate-500">实际折扣</p>
+                            <p class="text-2xl font-bold text-slate-800 mt-1">65.2%</p>
                         </div>
                     </div>
 
-                    <!-- Resource List -->
+                    <!-- IDC Device List -->
                     <div class="bg-white p-6 rounded-lg shadow">
-                        <div class="flex justify-between items-center mb-4">
-                            <h3 class="text-lg font-semibold text-slate-800">我的资源</h3>
-                            <a href="../computingPowerSupermarket/index.html" class="bg-primary text-white font-semibold px-4 py-2 rounded-lg text-sm hover:bg-primary-dark transition-colors">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-lg font-semibold text-slate-800">IDC设备</h3>
+                            <a href="../computingPowerSupermarket/index.html"
+                                class="bg-primary text-white font-semibold px-4 py-2 rounded-lg text-sm hover:bg-primary-dark transition-colors">
                                 购买算力
                             </a>
                         </div>
-                        
-                        <!-- Tabs -->
-                        <div class="border-b border-gray-200">
-                            <nav class="-mb-px flex space-x-6" aria-label="Tabs">
-                                <a href="#" data-tab="all" class="border-primary text-primary whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm">
-                                    全部资源 <span class="bg-primary-light text-primary ml-2 px-2 py-0.5 rounded-full text-xs font-semibold">4</span>
-                                </a>
-                                <a href="#" data-tab="cloud" class="border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm">
-                                    云厂商 <span class="bg-slate-100 text-slate-600 ml-2 px-2 py-0.5 rounded-full text-xs font-semibold">2</span>
-                                </a>
-                                <a href="#" data-tab="idc" class="border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm">
-                                    IDC <span class="bg-slate-100 text-slate-600 ml-2 px-2 py-0.5 rounded-full text-xs font-semibold">1</span>
-                                </a>
-                                <a href="#" data-tab="server" class="border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm">
-                                    园区服务器 <span class="bg-slate-100 text-slate-600 ml-2 px-2 py-0.5 rounded-full text-xs font-semibold">1</span>
-                                </a>
-                            </nav>
-                        </div>
 
-                        <!-- Resource Table -->
-                        <div class="mt-4">
-                            <table class="min-w-full divide-y divide-slate-200">
-                                <thead class="bg-slate-50">
-                                    <tr>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">实例ID</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">状态</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">区域</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">配置</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">计费模式</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">操作</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="resource-table-body" class="bg-white divide-y divide-slate-200">
-                                    <!-- GPU Instance 1 -->
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm font-semibold text-slate-900">prod-model-trainer-01</div>
-    
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">运行中</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">西北三区</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">1 * NVIDIA-RTX-4090-D</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">按量计费</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm">
-                                            <a href="http://js1.blockelite.cn:25582/#/" target="_blank" class="bg-primary text-white font-semibold px-3 py-1 rounded text-xs hover:bg-primary-dark transition-colors">调度</a>
-                                        </td>
-                                    </tr>
-                                    <!-- GPU Instance 2 -->
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm font-semibold text-slate-900">dev-notebook-server</div>
-      
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">已停止</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">华北一区</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">1 * NVIDIA-RTX-4090-D</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">按量计费</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm">
-                                            <a href="http://js1.blockelite.cn:25582/#/" target="_blank" class="bg-primary text-white font-semibold px-3 py-1 rounded text-xs hover:bg-primary-dark transition-colors">调度</a>
-                                        </td>
-                                    </tr>
-                                    <!-- Object Storage -->
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm font-semibold text-slate-900">backup-storage-01</div>
-  
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">可用</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">华北一区</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">100 GB / 1 TB</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">包年包月</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm">
-                                            <a href="http://js1.blockelite.cn:25582/#/" target="_blank" class="bg-primary text-white font-semibold px-3 py-1 rounded text-xs hover:bg-primary-dark transition-colors">调度</a>
-                                        </td>
-                                    </tr>
-                                     <!-- Campus Server -->
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm font-semibold text-slate-900">campus-server-01</div>
-        
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">维护中</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">园区A-机房2</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">8 vCPU / 32 GB RAM</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">包年包月</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm">
-                                            <a href="http://js1.blockelite.cn:25582/#/" target="_blank" class="bg-primary text-white font-semibold px-3 py-1 rounded text-xs hover:bg-primary-dark transition-colors">调度</a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <!-- Device Cards Grid -->
+                        <div id="device-cards-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                            <!-- Cards will be rendered by JavaScript -->
                         </div>
                     </div>
                 </div>
@@ -185,6 +114,145 @@
         </div>
     </div>
 
-    <script src="resource.js"></script>
+    <script>
+        // IDC Device data
+        const idcDevices = [
+            {
+                title: 'prod-model-trainer-01',
+                vendorName: '西北数据中心',
+                vendorBadgeLabel: 'IDC',
+                thumbnailUrl: 'https://placehold.co/120x120/eff6ff/1e40af?text=GPU',
+                introItems: [
+                    { label: 'GPU', value: '1 * NVIDIA-RTX-4090-D' },
+                    { label: '状态', value: '运行中' },
+                    { label: '区域', value: '西北三区' }
+                ],
+                scopeText: '适用范围: 深度学习模型训练、推理服务',
+                deliveryForm: '物理机',
+                billing: '按量计费',
+                region: '西北三区',
+                priceText: '¥3.5/小时',
+                status: 'running',
+                buy: { label: '调度', href: 'http://js1.blockelite.cn:25582/#/' }
+            },
+            {
+                title: 'dev-notebook-server',
+                vendorName: '华北数据中心',
+                vendorBadgeLabel: 'IDC',
+                thumbnailUrl: 'https://placehold.co/120x120/fef3c7/92400e?text=GPU',
+                introItems: [
+                    { label: 'GPU', value: '1 * NVIDIA-RTX-4090-D' },
+                    { label: '状态', value: '已停止' },
+                    { label: '区域', value: '华北一区' }
+                ],
+                scopeText: '适用范围: 开发测试、Jupyter Notebook环境',
+                deliveryForm: '物理机',
+                billing: '按量计费',
+                region: '华北一区',
+                priceText: '¥3.5/小时',
+                status: 'stopped',
+                buy: { label: '调度', href: 'http://js1.blockelite.cn:25582/#/' }
+            },
+            {
+                title: 'backup-storage-01',
+                vendorName: '华北数据中心',
+                vendorBadgeLabel: 'IDC',
+                thumbnailUrl: 'https://placehold.co/120x120/dcfce7/166534?text=存储',
+                introItems: [
+                    { label: '存储', value: '100 GB / 1 TB' },
+                    { label: '状态', value: '可用' },
+                    { label: '区域', value: '华北一区' }
+                ],
+                scopeText: '适用范围: 数据备份、模型存储、训练数据集存放',
+                deliveryForm: '对象存储',
+                billing: '包年包月',
+                region: '华北一区',
+                priceText: '¥99/月',
+                status: 'running',
+                buy: { label: '调度', href: 'http://js1.blockelite.cn:25582/#/' }
+            }
+        ];
+
+        // Custom card renderer for device management (based on ProductCard style)
+        function renderDeviceCard(device) {
+            const statusColors = {
+                'running': 'bg-green-100 text-green-800',
+                'stopped': 'bg-yellow-100 text-yellow-800',
+                'maintenance': 'bg-blue-100 text-blue-800'
+            };
+
+            const statusLabels = {
+                'running': '运行中',
+                'stopped': '已停止',
+                'maintenance': '维护中'
+            };
+
+            const introText = device.introItems.map(it => `【${it.label}】 ${it.value}`).join('\n');
+
+            return `
+            <div class="device-card h-full flex flex-col border rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow">
+                <div class="p-5 flex items-start">
+                    <div class="w-24 h-24 rounded overflow-hidden border bg-slate-50 flex items-center justify-center mr-4 flex-shrink-0">
+                        <img src="${device.thumbnailUrl}" alt="thumb" class="w-full h-full object-cover"/>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h3 class="text-base font-bold text-slate-900 truncate">${device.title}</h3>
+                        <div class="mt-2 text-slate-600 text-sm flex items-center">
+                            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-primary-light text-primary mr-2">${device.vendorBadgeLabel}</span>
+                            <span class="font-medium text-slate-700 truncate">${device.vendorName}</span>
+                        </div>
+                        <div class="mt-2">
+                            <span class="px-2 py-0.5 inline-flex text-xs leading-5 font-semibold rounded-full ${statusColors[device.status]}">${statusLabels[device.status]}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-5 pb-5 flex-1 flex flex-col">
+                    <div class="text-sm text-slate-700 whitespace-pre-line">${introText}</div>
+                    ${device.scopeText ? `<div class="mt-3 text-sm text-slate-500">${device.scopeText}</div>` : ''}
+                    <div class="mt-auto">
+                        <div class="border-t border-slate-200 mt-4"></div>
+                        <div class="mt-4 grid grid-cols-3 gap-2 text-xs text-slate-600">
+                            <div class="truncate"><span class="text-slate-400">供应形态：</span><span>${device.deliveryForm || '-'}</span></div>
+                            <div class="text-center truncate"><span class="text-slate-400">计费方式：</span><span>${device.billing || '-'}</span></div>
+                            <div class="text-right truncate"><span class="text-slate-400">地区：</span><span>${device.region || '-'}</span></div>
+                        </div>
+                        <div class="pt-4 flex items-center justify-between">
+                            <div class="text-slate-900 font-semibold">${device.priceText}</div>
+                            ${device.buy ? `<a href="${device.buy.href}" target="_blank" class="inline-flex items-center bg-primary hover:bg-primary-dark text-white text-sm font-semibold px-4 py-2 rounded transition-colors">
+                                <svg class="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                ${device.buy.label}
+                            </a>` : ''}
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        // Render all device cards
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize Top Header
+            const appContainer = document.getElementById('app-container');
+            if (appContainer && window.TopHeader) {
+                const topHeader = new TopHeader();
+                topHeader.init(appContainer);
+            }
+
+            // Initialize Navigation
+            const navContainer = document.getElementById('nav-container');
+            if (navContainer && window.SuanduoNavigation) {
+                const navigation = new SuanduoNavigation({
+                    activePage: 'resources'
+                });
+                navigation.init(navContainer);
+            }
+
+            // Render device cards
+            const container = document.getElementById('device-cards-container');
+            if (container) {
+                container.innerHTML = idcDevices.map(device => renderDeviceCard(device)).join('');
+            }
+        });
+    </script>
 </body>
+
 </html>
